@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Size - Text -->
+    <dimen name="smallText">12sp</dimen>
+    <dimen name="normalText">14sp</dimen>
+    <dimen name="bigText">16sp</dimen>
+    <dimen name="largerText">18sp</dimen>
+    <dimen name="sizeTitle">24sp</dimen>
+    
+    <!-- Size - Corners -->
+    <dimen name="cornerRadiusBackground">20dp</dimen>
+    <dimen name="cornerRadiusButton">10dp</dimen>
+    <dimen name="cornerRadiusSmall">6dp</dimen>
+
+    <!-- Size - Margin or Padding -->
+    <dimen name="marginOrPaddingDefault">16dp</dimen>
+</resources>
