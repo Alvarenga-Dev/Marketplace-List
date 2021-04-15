@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.cart.CartFragment">
+
+    <TextView
+        android:id="@+id/tvTitleCart"
+        style="@style/TitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/marginOrPadding24dp"
+        android:layout_marginTop="@dimen/marginOrPaddingDefault"
+        android:layout_marginEnd="@dimen/marginOrPadding24dp"
+        android:layout_marginBottom="@dimen/marginOrPaddingDefault"
+        android:text="@string/fragment_title_cart" />
+
+    <com.alvarengadev.marketplacelist.ui.components.Container
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.alvarengadev.marketplacelist.ui.components.Footer
+            android:id="@+id/footerCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/footerCart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.alvarengadev.marketplacelist.ui.components.Container>
+
+</LinearLayout>

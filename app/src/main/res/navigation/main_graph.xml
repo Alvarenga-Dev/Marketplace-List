@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/cartFragment">
 
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.alvarengadev.marketplacelist.ui.fragments.cart.CartFragment"
+        android:label="@string/fragment_title_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

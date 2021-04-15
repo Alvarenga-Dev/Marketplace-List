@@ -14,4 +14,5 @@
 
     <!-- Size - Margin or Padding -->
     <dimen name="marginOrPaddingDefault">16dp</dimen>
+    <dimen name="marginOrPadding24dp">24dp</dimen>
 </resources>

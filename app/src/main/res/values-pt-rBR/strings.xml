@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_title_cart">Carrinho</string>
+    <string name="fragment_add_item">Adicionar item</string>
+    <string name="message_cart_empty">Sua lista está vazia :( \\n Comece clicando no botão abaixo!</string>
+</resources>
