@@ -2,10 +2,9 @@ package com.alvarengadev.marketplacelist.ui.fragments.cart
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
 
@@ -26,11 +25,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     }
 
     private fun initComponents() {
-        val footer = binding.footerCart
-        footer
+        binding.footerCart
             .setTextButton("Novo produto")
             .setActionButton {
-                Toast.makeText(context, "Mensagem", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
     }
 

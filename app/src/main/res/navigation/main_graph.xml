@@ -9,5 +9,14 @@
         android:id="@+id/cartFragment"
         android:name="com.alvarengadev.marketplacelist.ui.fragments.cart.CartFragment"
         android:label="@string/fragment_title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.alvarengadev.marketplacelist.ui.fragments.add.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
 </navigation>
