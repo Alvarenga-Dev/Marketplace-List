@@ -3,7 +3,11 @@
     <string name="fragment_title_cart">Cart</string>
     <string name="fragment_title_add_item">Add item</string>
     <string name="text_total_cart" translatable="false">Total: $s</string>
-    <string name="message_cart_empty">Your list is empty :( \\n Start by clicking the button below!</string>
+    <string name="message_cart_empty">
+        Your list is empty :(
+        \n\n
+        Start by clicking the button below!
+    </string>
     <string name="button_text_add">Add in to list</string>
     <string name="title_name_item">Name</string>
     <string name="title_value_item">Value</string>

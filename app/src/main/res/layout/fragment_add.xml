@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/ibBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/tvTitleAddItem"
-            style="@style/TitleStyle"
+            style="@style/TitleFragmentStyle"
             android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -115,7 +115,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvTitleQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -125,7 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tfValueItem" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/ibMinus"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginStart="32dp"
@@ -133,14 +133,14 @@
                 android:background="?attr/colorPrimaryVariant"
                 android:src="@drawable/ic_minus"
                 android:padding="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintEnd_toStartOf="@+id/textView2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvValueQuantity"
+                app:layout_constraintEnd_toStartOf="@+id/tvValueQuantity"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
+                app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/ibPlus"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginStart="32dp"
@@ -148,21 +148,21 @@
                 android:background="?attr/colorPrimaryVariant"
                 android:padding="8dp"
                 android:src="@drawable/ic_plus"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvValueQuantity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
+                app:layout_constraintStart_toEndOf="@+id/tvValueQuantity"
+                app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvValueQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="100"
+                android:text="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

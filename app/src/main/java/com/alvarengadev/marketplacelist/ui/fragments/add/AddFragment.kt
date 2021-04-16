@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
 
@@ -40,6 +41,10 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             .setActionButton {
 
             }
+
+        binding.ibBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }

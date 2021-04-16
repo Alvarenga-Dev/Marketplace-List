@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
+import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
 
@@ -39,6 +41,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             .setActionButton {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
+
+        binding.rcyCartItem.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = CartAdapter()
+        }
     }
 
 }
