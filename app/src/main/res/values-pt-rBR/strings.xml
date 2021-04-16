@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="fragment_title_cart">Carrinho</string>
-    <string name="fragment_add_item">Adicionar item</string>
+    <string name="fragment_title_add_item">Adicionar item</string>
     <string name="message_cart_empty">Sua lista está vazia :( \\n Comece clicando no botão abaixo!</string>
+    <string name="button_text_add">Adicionar</string>
+    <string name="title_name_item">Nome</string>
+    <string name="title_value_item">Valor do produto</string>
+    <string name="title_quantity_item">Quantidade:</string>
+    <string name="text_value_details">Valor: $s</string>
 </resources>

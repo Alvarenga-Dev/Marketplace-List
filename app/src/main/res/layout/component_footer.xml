@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Total: R$ 10,00" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnActionFooter"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"

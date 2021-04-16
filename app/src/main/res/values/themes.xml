@@ -36,4 +36,17 @@
         <item name="android:textColor">@color/grey_500</item>
         <item name="android:textSize">@dimen/sizeTitle</item>
     </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">?attr/colorOnSecondary</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadiusButton</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadiusButton</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadiusButton</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadiusButton</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="TextInputEditTextStyle">
+        <item name="android:padding">@dimen/marginOrPaddingDefault</item>
+    </style>
 </resources>

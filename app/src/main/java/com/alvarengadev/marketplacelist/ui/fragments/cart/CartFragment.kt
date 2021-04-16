@@ -1,9 +1,10 @@
 package com.alvarengadev.marketplacelist.ui.fragments.cart
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
@@ -13,9 +14,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentCartBinding.bind(view)
         initComponents()
     }
 
