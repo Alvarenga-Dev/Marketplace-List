@@ -83,6 +83,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/title_name_item"
+                app:hintEnabled="true"
+                app:expandedHintEnabled="false"
                 app:layout_constraintBottom_toBottomOf="@+id/ivCooking"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivCooking"
@@ -91,6 +93,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextInputEditTextStyle"
+                    android:hint="Ex.: Banana"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -105,12 +108,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/title_value_item"
+                app:hintEnabled="true"
+                app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tfNameItem">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextInputEditTextStyle"
+                    android:hint="R$ 0,00"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberSigned" />
