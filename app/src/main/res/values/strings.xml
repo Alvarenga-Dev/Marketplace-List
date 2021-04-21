@@ -13,4 +13,5 @@
     <string name="title_value_item">Value</string>
     <string name="title_quantity_item">Quantity:</string>
     <string name="text_value_details">Value: $s</string>
+    <string name="value_default_quantity" translatable="false">1</string>
 </resources>

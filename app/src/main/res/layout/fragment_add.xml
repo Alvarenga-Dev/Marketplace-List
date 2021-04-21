@@ -17,12 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:padding="@dimen/marginOrPadding24dp"
+            android:contentDescription="Descrição do botão"
+            android:padding="@dimen/marginOrPaddingDefault"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="@+id/tvTitleAddItem"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTitleAddItem"
-            android:contentDescription="Descrição do botão" />
+            app:layout_constraintTop_toTopOf="@+id/tvTitleAddItem" />
 
         <TextView
             android:id="@+id/tvTitleAddItem"
@@ -30,6 +30,7 @@
             android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
             android:text="@string/fragment_title_add_item"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +112,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextInputEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -128,13 +130,10 @@
                 android:id="@+id/ibMinus"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
                 android:background="?attr/colorPrimaryVariant"
-                android:src="@drawable/ic_minus"
                 android:padding="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvValueQuantity"
-                app:layout_constraintEnd_toStartOf="@+id/tvValueQuantity"
+                android:src="@drawable/ic_minus"
+                app:layout_constraintEnd_toStartOf="@+id/tvTitleQuantity"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
@@ -143,25 +142,24 @@
                 android:id="@+id/ibPlus"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="?attr/colorPrimaryVariant"
                 android:padding="8dp"
                 android:src="@drawable/ic_plus"
-                app:layout_constraintBottom_toBottomOf="@+id/tvValueQuantity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/tvValueQuantity"
+                app:layout_constraintStart_toEndOf="@+id/tvTitleQuantity"
                 app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
 
             <TextView
                 android:id="@+id/tvValueQuantity"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/value_default_quantity"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@+id/ibPlus"
+                app:layout_constraintStart_toEndOf="@+id/ibMinus"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

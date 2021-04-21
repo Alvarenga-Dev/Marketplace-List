@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.utils.TextFormatter
 import com.google.android.material.button.MaterialButton
 
 class Footer(
@@ -46,7 +47,8 @@ class Footer(
         btnActionFooter?.setOnClickListener(viewOnClickListener)
     }
 
-    fun setCartValue() {
-
+    fun setCartValue(value: Double): Footer {
+        tvCartValue?.text = TextFormatter.setCurrency(value)
+        return this
     }
 }
