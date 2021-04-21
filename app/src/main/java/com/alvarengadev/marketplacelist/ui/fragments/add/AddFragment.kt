@@ -41,6 +41,11 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         _binding = null
     }
 
+    override fun getExitTransition(): Any? {
+        clearFragment()
+        return super.getExitTransition()
+    }
+
     private fun initComponents() {
         binding.apply {
             root.setOnClickListener {
@@ -52,6 +57,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
 
             ibBack.setOnClickListener {
                 findNavController().popBackStack()
+                clearFragment()
             }
 
             footerAddItem
@@ -80,7 +86,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 valueItem.observeForever { valueItem ->
                     val quantity = quantity.value
                     footerAddItem.setCartValue(
-                        if(quantity != null) {
+                        if (quantity != null) {
                             valueItem * quantity
                         } else {
                             valueItem
@@ -95,19 +101,24 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private fun initQuantity() {
         binding.apply {
             addViewModel.quantity.apply {
-                var quantity = 1
+                value = value ?: 1
+
                 ibMinus.setOnClickListener {
-                    if (quantity > 1) {
-                        quantity -= 1
-                        value = quantity
+                    if (value!! > 1) {
+                        value = value?.minus(1)
                     }
                 }
                 ibPlus.setOnClickListener {
-                    quantity += 1
-                    value = quantity
+                    value = value?.plus(1)
                 }
             }
         }
+    }
+
+    private fun clearFragment() = addViewModel.apply {
+        _binding = null
+        valueItem.postValue(0.0)
+        quantity.postValue(1)
     }
 
 }
