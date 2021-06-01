@@ -13,7 +13,7 @@ data class ItemEntity(
     val id: Int? = null
 )
 
-fun toItem(listItemsEntity: List<ItemEntity>): ArrayList<Item> {
+fun toArrayListItem(listItemsEntity: List<ItemEntity>): ArrayList<Item> {
     val listItems = ArrayList<Item>()
     for (item in listItemsEntity) {
         val itemConverter = Item(
@@ -25,3 +25,9 @@ fun toItem(listItemsEntity: List<ItemEntity>): ArrayList<Item> {
     }
     return listItems
 }
+
+fun toEntity(item: Item): ItemEntity = ItemEntity(
+    item.name,
+    item.value,
+    item.quantity
+)

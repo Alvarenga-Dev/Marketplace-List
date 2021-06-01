@@ -6,20 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddFragment : Fragment(R.layout.fragment_add) {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
-    private val addViewModel: AddViewModel by activityViewModels()
+    private val addViewModel: AddViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,7 +69,17 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 .setTextButton(getString(R.string.button_text_add))
                 .setIconButton(R.drawable.ic_shopping_cart)
                 .setActionButton {
-
+                    val valueItem = addViewModel.valueItem.value
+                    val quantity = addViewModel.quantity.value
+                    if (valueItem != null && quantity != null) {
+                       addNewItemInDatabase(Item(
+                           tfNameItem.editText?.text.toString(),
+                           valueItem,
+                           quantity
+                       ))
+                    } else {
+                        Toast.makeText(context, "Value or Quantity is empty!", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
             initQuantity()
@@ -95,6 +109,13 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 }
             }
 
+        }
+    }
+
+    private fun addNewItemInDatabase(item: Item) {
+        addViewModel.addNewItem(item)
+        addViewModel.isAdd.observeForever { isAdded ->
+         Toast.makeText(context, if (isAdded) "Add :D" else "Erro :(", Toast.LENGTH_SHORT).show()
         }
     }
 
