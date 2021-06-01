@@ -10,5 +10,5 @@ import com.alvarengadev.marketplacelist.data.database.entities.ItemEntity
     version = 1
 )
 abstract class MarketplaceDatabase : RoomDatabase() {
-    abstract val itemDao: ItemDao
+    abstract fun itemDao() : ItemDao
 }

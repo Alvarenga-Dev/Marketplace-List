@@ -12,5 +12,5 @@ interface ItemDao {
     suspend fun delete(itemEntity: ItemEntity)
 
     @Query("SELECT * FROM marketplace_item")
-    suspend fun getAll(): List<ItemEntity>
+    suspend fun getAllItems(): List<ItemEntity>
 }
