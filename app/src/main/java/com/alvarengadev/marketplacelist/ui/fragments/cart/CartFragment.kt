@@ -5,16 +5,20 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
+    private val cartViewModel: CartViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +31,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cartViewModel.getListItems()
         initComponents()
     }
 
@@ -43,8 +48,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
 
         binding.rcyCartItem.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = CartAdapter()
+            cartViewModel.listItems.observeForever { listItems ->
+                layoutManager = LinearLayoutManager(context)
+                adapter = CartAdapter(listItems)
+            }
         }
     }
 

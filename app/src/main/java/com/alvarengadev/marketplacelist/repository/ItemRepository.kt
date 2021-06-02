@@ -1,6 +1,7 @@
 package com.alvarengadev.marketplacelist.repository
 
 import com.alvarengadev.marketplacelist.data.database.dao.ItemDao
+import com.alvarengadev.marketplacelist.data.database.entities.toArrayListItem
 import com.alvarengadev.marketplacelist.data.database.entities.toEntity
 import com.alvarengadev.marketplacelist.data.models.Item
 import java.lang.Exception
@@ -17,4 +18,10 @@ class ItemRepository @Inject constructor(
             false
         }
 
+    suspend fun getAll(): ArrayList<Item> =
+        try {
+            toArrayListItem(itemDao.getAllItems())
+        } catch (ex: Exception) {
+            arrayListOf()
+        }
 }

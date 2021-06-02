@@ -1,12 +1,20 @@
 package com.alvarengadev.marketplacelist.ui.fragments.cart.adapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.data.models.Item
+import com.alvarengadev.marketplacelist.databinding.MyItemCartBinding
+import com.alvarengadev.marketplacelist.utils.TextFormatter
 
 class CartViewHolder(
-    itemView: View
-) : RecyclerView.ViewHolder(itemView) {
-    fun bind() {
+    private val binding: MyItemCartBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
+    fun bind(item: Item) = binding.apply {
+        item.apply {
+            tvNameItem.text = name
+            tvQuantityItem.text = itemView.context.getString(R.string.title_quantity_item_with_value, quantity.toString())
+            tvValueItem.text = TextFormatter.setCurrency(value)
+        }
     }
 }

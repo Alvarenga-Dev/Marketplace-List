@@ -11,5 +11,6 @@
     <string name="title_name_item">Nome</string>
     <string name="title_value_item">Valor do produto</string>
     <string name="title_quantity_item">Quantidade:</string>
-    <string name="text_value_details">Valor: $s</string>
+    <string name="text_value_details">Valor: %s</string>
+    <string name="title_quantity_item_with_value">Quantidade: %s</string>
 </resources>
