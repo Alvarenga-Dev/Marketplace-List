@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,7 +55,8 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             root.setOnClickListener {
                 this.tfNameItem.editText?.clearFocus()
                 this.tfValueItem.editText?.clearFocus()
-                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                val imm =
+                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(view?.windowToken, 0)
             }
 
@@ -72,13 +73,19 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                     val valueItem = addViewModel.valueItem.value
                     val quantity = addViewModel.quantity.value
                     if (valueItem != null && quantity != null) {
-                       addNewItemInDatabase(Item(
-                           tfNameItem.editText?.text.toString(),
-                           valueItem,
-                           quantity
-                       ))
+                        addNewItemInDatabase(
+                            Item(
+                                tfNameItem.editText?.text.toString(),
+                                valueItem,
+                                quantity
+                            )
+                        )
                     } else {
-                        Toast.makeText(context, "Value or Quantity is empty!", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            binding.container,
+                            "Value or Quantity is empty!",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
@@ -115,7 +122,16 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private fun addNewItemInDatabase(item: Item) {
         addViewModel.addNewItem(item)
         addViewModel.isAdd.observeForever { isAdded ->
-         Toast.makeText(context, if (isAdded) "Add :D" else "Erro :(", Toast.LENGTH_SHORT).show()
+            if (isAdded) {
+                findNavController().popBackStack()
+                clearFragment()
+            } else {
+                Snackbar.make(
+                    binding.container,
+                    "Error add...",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

@@ -47,11 +47,35 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
 
-        binding.rcyCartItem.apply {
+        binding.apply {
             cartViewModel.listItems.observeForever { listItems ->
-                layoutManager = LinearLayoutManager(context)
-                adapter = CartAdapter(listItems)
+                if (listItems.isEmpty()) {
+                    showList(false)
+                } else {
+                    showList(true)
+                    rcyCartItem.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = CartAdapter(listItems)
+                    }
+                }
+
+                var totalValue = 0.0
+
+                for (item in listItems) {
+                    totalValue += (item.value * item.quantity)
+                }
+                footerCart.setCartValue(totalValue)
             }
+        }
+    }
+
+    private fun showList(isShow: Boolean) = binding.apply {
+        if (isShow) {
+            rcyCartItem.visibility = View.VISIBLE
+            containerListEmpty.visibility = View.GONE
+        } else {
+            rcyCartItem.visibility = View.GONE
+            containerListEmpty.visibility = View.VISIBLE
         }
     }
 
