@@ -4,6 +4,7 @@
 
     <string name="fragment_title_add_item">Adicionar item</string>
     <string name="fragment_title_cart">Carrinho</string>
+    <string name="fragment_title_details">Detalhes</string>
 
     <string name="message_cart_empty">
         Sua lista está vazia :(
@@ -17,4 +18,5 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+    <string name="footer_button_text">Novo Produto</string>
 </resources>

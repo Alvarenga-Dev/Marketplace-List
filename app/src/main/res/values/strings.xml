@@ -6,6 +6,7 @@
 
     <string name="fragment_title_add_item">Add item</string>
     <string name="fragment_title_cart">Cart</string>
+    <string name="fragment_title_details">Details</string>
 
     <string name="message_cart_empty">
         Your list is empty :(
@@ -22,4 +23,5 @@
     <string name="title_value_item">Value</string>
 
     <string name="value_default_quantity" translatable="false">1</string>
+    <string name="footer_button_text">New item</string>
 </resources>

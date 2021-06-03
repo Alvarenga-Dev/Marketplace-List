@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
+import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +44,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private fun initComponents() {
         binding.footerCart
-            .setTextButton("Novo produto")
+            .setTextButton(getString(R.string.footer_button_text))
             .setActionButton {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
@@ -53,9 +55,18 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     showList(false)
                 } else {
                     showList(true)
+                    val adapterListCart = CartAdapter(listItems)
+
+                    adapterListCart.setOnClickItemListener(object : OnClickItemListener {
+                        override fun setOnClickItemListener(item: Item) {
+                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
+                            findNavController().navigate(directions)
+                        }
+                    })
+
                     rcyCartItem.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = CartAdapter(listItems)
+                        adapter = adapterListCart
                     }
                 }
 

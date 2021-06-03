@@ -7,8 +7,19 @@ import com.alvarengadev.marketplacelist.databinding.MyItemCartBinding
 import com.alvarengadev.marketplacelist.utils.TextFormatter
 
 class CartViewHolder(
-    private val binding: MyItemCartBinding
+    private val binding: MyItemCartBinding,
+    private val listItems: ArrayList<Item>,
+    private val onClickItemListener: OnClickItemListener?
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        itemView.setOnClickListener {
+            val positionRcy = adapterPosition
+            if (positionRcy != RecyclerView.NO_POSITION) {
+                onClickItemListener?.setOnClickItemListener(listItems[positionRcy])
+            }
+        }
+    }
 
     fun bind(item: Item) = binding.apply {
         item.apply {

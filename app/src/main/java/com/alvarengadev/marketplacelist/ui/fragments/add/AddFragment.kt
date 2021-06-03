@@ -34,7 +34,6 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initComponents()
@@ -55,8 +54,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             root.setOnClickListener {
                 this.tfNameItem.editText?.clearFocus()
                 this.tfValueItem.editText?.clearFocus()
-                val imm =
-                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(view?.windowToken, 0)
             }
 
@@ -72,12 +70,12 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 .setActionButton {
                     val valueItem = addViewModel.valueItem.value
                     val quantity = addViewModel.quantity.value
-                    if (valueItem != null && quantity != null) {
+                    if (valueItem != null) {
                         addNewItemInDatabase(
                             Item(
                                 tfNameItem.editText?.text.toString(),
                                 valueItem,
-                                quantity
+                                quantity ?: 1
                             )
                         )
                     } else {
