@@ -9,7 +9,7 @@ class Parses {
         fun parseToCurrency(value: String): String {
             val replaceable = String.format(
                 "[%s,.\\s]",
-                NumberFormat.getCurrencyInstance(Locale("pt", "br")).currency?.symbol
+                NumberFormat.getCurrencyInstance(parseLocale()).currency?.symbol
             )
             var cleanString = value.replace(replaceable.toRegex(), "")
             if (cleanString.isEmpty()) cleanString = "0"
@@ -21,11 +21,17 @@ class Parses {
             )
 
             return NumberFormat
-                .getCurrencyInstance(Locale("pt", "br"))
+                .getCurrencyInstance(parseLocale())
                 .format(parsed)
         }
         fun parseToDouble(value: String): Double {
-            return if (value.isNotEmpty()) value.replace("R$", "").replace(".", "").replace(",", ".").trim().toDouble() else 0.0
+            return if (value.isNotEmpty()) value.replace(if (Locale.getDefault().displayName == Locale("pt", "BR").displayName) "R$" else "$", "").replace(".", "").replace(",", ".").trim().toDouble() else 0.0
+        }
+        fun parseLocale(): Locale {
+            val getLocaleBR = Locale("pt", "BR")
+            val getLocalEN = Locale.US
+
+            return if (Locale.getDefault().displayName == getLocaleBR.displayName) getLocaleBR else getLocalEN
         }
     }
 }

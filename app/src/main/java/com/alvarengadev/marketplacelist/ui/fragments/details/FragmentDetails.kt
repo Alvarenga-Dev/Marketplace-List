@@ -41,10 +41,10 @@ class FragmentDetails : Fragment(R.layout.fragment_details) {
             ibBack.setOnClickListener {
                 findNavController().popBackStack()
             }
-            
+
             args.item.apply {
                 tvNameItemDetails.text = name
-                tvValueDetails.text = TextFormatter.setCurrency(value)
+                tvValueDetails.text = getString(R.string.text_value_details, TextFormatter.setCurrency(value))
                 tvQuantityDetails.text = getString(R.string.title_quantity_item_with_value, quantity.toString())
             }
         }

@@ -25,7 +25,7 @@ class CartViewHolder(
         item.apply {
             tvNameItem.text = name
             tvQuantityItem.text = itemView.context.getString(R.string.title_quantity_item_with_value, quantity.toString())
-            tvValueItem.text = TextFormatter.setCurrency(value)
+            tvValueItem.text = itemView.context.getString(R.string.text_value_details, TextFormatter.setCurrency(value))
         }
     }
 }

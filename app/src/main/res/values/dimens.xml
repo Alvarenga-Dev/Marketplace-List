@@ -13,6 +13,7 @@
     <dimen name="cornerRadiusSmall">6dp</dimen>
 
     <!-- Size - Margin or Padding -->
+    <dimen name="marginOrPadding8dp">8dp</dimen>
     <dimen name="marginOrPaddingDefault">16dp</dimen>
     <dimen name="marginOrPadding24dp">24dp</dimen>
 </resources>

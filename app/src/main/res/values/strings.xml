@@ -24,4 +24,9 @@
 
     <string name="value_default_quantity" translatable="false">1</string>
     <string name="footer_button_text">New item</string>
+    <string name="hint_value">$0.00</string>
+    <string name="hint_name_item" translatable="false">Ex.: Banana</string>
+    <string name="content_description_back_button">Button Back for cart list</string>
+    <string name="content_description_iv_cooking">Ilustration</string>
+    <string name="content_description_button_minus">Button minus</string>
 </resources>

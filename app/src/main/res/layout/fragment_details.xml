@@ -10,7 +10,7 @@
         android:id="@+id/ibBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="?attr/selectableItemBackground"
         android:contentDescription="Descrição do botão"
         android:padding="@dimen/marginOrPaddingDefault"
         android:src="@drawable/ic_arrow_left"
