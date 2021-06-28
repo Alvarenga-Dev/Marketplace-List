@@ -24,9 +24,22 @@ class Parses {
                 .getCurrencyInstance(parseLocale())
                 .format(parsed)
         }
+
         fun parseToDouble(value: String): Double {
-            return if (value.isNotEmpty()) value.replace(if (Locale.getDefault().displayName == Locale("pt", "BR").displayName) "R$" else "$", "").replace(".", "").replace(",", ".").trim().toDouble() else 0.0
+            return if (value.isNotEmpty()) {
+                if (Locale.getDefault().displayName == Locale("pt", "BR").displayName) {
+                    value.replace("R$", "")
+                        .replace(".", "")
+                        .replace(",", ".")
+                } else {
+                    value.replace("$", "")
+                        .replace(",", "")
+                }.trim().toDouble()
+            } else {
+                0.0
+            }
         }
+
         fun parseLocale(): Locale {
             val getLocaleBR = Locale("pt", "BR")
             val getLocalEN = Locale.US

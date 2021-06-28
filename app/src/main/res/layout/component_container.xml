@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_grey_transparent"
@@ -10,14 +9,15 @@
     android:paddingTop="@dimen/marginOrPaddingDefault"
     android:paddingEnd="@dimen/marginOrPaddingDefault">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_grey"
-        android:orientation="vertical" >
+        app:cardBackgroundColor="@color/grey_500"
+        app:cardCornerRadius="@dimen/cornerRadiusBackground"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
