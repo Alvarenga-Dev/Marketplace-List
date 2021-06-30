@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.MarketplaceList" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_700</item>
-        <item name="colorPrimaryVariant">@color/blue_700</item>
-        <item name="colorOnPrimary">@color/grey_500</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue_200</item>
-        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorSecondary">@color/primary_light</item>
+        <item name="colorSecondaryVariant">@color/primary</item>
         <item name="colorOnSecondary">@color/dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -31,9 +31,13 @@
         <item name="cornerRadius">@dimen/cornerRadiusButton</item>
     </style>
 
+    <style name="ButtonErrorStyle" parent="ButtonStyle">
+        <item name="backgroundTint">@color/error</item>
+    </style>
+
     <style name="TitleFragmentStyle">
         <item name="android:fontFamily">@font/montserrat_bold</item>
-        <item name="android:textColor">@color/grey_500</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sizeTitle</item>
     </style>
 
