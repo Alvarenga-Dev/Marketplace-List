@@ -42,41 +42,40 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         _binding = null
     }
 
-    private fun initComponents() {
-        binding.footerCart
+    private fun initComponents() = binding.apply {
+        footerCart
             .setTextButton(getString(R.string.footer_button_text))
             .setActionButton {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
 
-        binding.apply {
-            cartViewModel.listItems.observeForever { listItems ->
-                if (listItems.isEmpty()) {
-                    showList(false)
-                } else {
-                    showList(true)
-                    val adapterListCart = CartAdapter(listItems)
+        cartViewModel.listItems.observeForever { listItems ->
+            if (listItems.isEmpty()) {
+                showList(false)
+            } else {
+                showList(true)
+                val adapterListCart = CartAdapter(listItems, parentFragmentManager)
 
-                    adapterListCart.setOnClickItemListener(object : OnClickItemListener {
-                        override fun setOnClickItemListener(item: Item) {
-                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
-                            findNavController().navigate(directions)
-                        }
-                    })
-
-                    rcyCartItem.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = adapterListCart
+                adapterListCart.setOnClickItemListener(object : OnClickItemListener {
+                    override fun setOnClickItemListener(item: Item) {
+                        val directions =
+                            CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
+                        findNavController().navigate(directions)
                     }
-                }
+                })
 
-                var totalValue = 0.0
-
-                for (item in listItems) {
-                    totalValue += (item.value * item.quantity)
+                rcyCartItem.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = adapterListCart
                 }
-                footerCart.setCartValue(totalValue)
             }
+
+            var totalValue = 0.0
+
+            for (item in listItems) {
+                totalValue += (item.value * item.quantity)
+            }
+            footerCart.setCartValue(totalValue)
         }
     }
 

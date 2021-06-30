@@ -2,18 +2,63 @@ package com.alvarengadev.marketplacelist.ui.fragments.cart.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.MyItemCartBinding
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemDialog
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemInterface
+import com.alvarengadev.marketplacelist.utils.TextFormatter
 
 class CartAdapter(
-   private val listItems: ArrayList<Item>
-) : RecyclerView.Adapter<CartViewHolder>() {
+   private val listItems: ArrayList<Item>,
+   private val supportFragmentManager: FragmentManager
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     private var onClickItemListener: OnClickItemListener? = null
 
     fun setOnClickItemListener(onClickItemListener: OnClickItemListener) {
         this.onClickItemListener = onClickItemListener
+    }
+
+    inner class CartViewHolder(
+        private val binding: MyItemCartBinding,
+        private val listItems: ArrayList<Item>,
+        private val onClickItemListener: OnClickItemListener?
+    ) : RecyclerView.ViewHolder(binding.root), DeleteItemInterface {
+
+        init {
+            itemView.setOnClickListener {
+                val positionRcy = adapterPosition
+                if (positionRcy != RecyclerView.NO_POSITION) {
+                    onClickItemListener?.setOnClickItemListener(listItems[positionRcy])
+                }
+            }
+        }
+
+        fun bind(
+            item: Item,
+            supportFragmentManager: FragmentManager
+        ) = binding.apply {
+            item.apply {
+                tvNameItem.text = name
+                tvQuantityItem.text = itemView.context.getString(R.string.title_quantity_item_with_value, quantity.toString())
+                tvValueItem.text = itemView.context.getString(R.string.text_value_details, TextFormatter.setCurrency(value))
+                ibDeleteItem.setOnClickListener {
+                    val deleteItemDialog = DeleteItemDialog()
+                    deleteItemDialog.setInstance(item, this@CartViewHolder)
+                    deleteItemDialog.show(
+                        supportFragmentManager,
+                        ""
+                    )
+                }
+            }
+        }
+
+        override fun notifyItemDelete(item: Item) {
+            deleteItem(item)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -26,10 +71,15 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(listItems[position])
+        holder.bind(listItems[position], supportFragmentManager)
     }
 
     override fun getItemCount(): Int {
         return listItems.size
+    }
+
+    fun deleteItem(item: Item) {
+        notifyItemRemoved(listItems.indexOf(item))
+        listItems.remove(item)
     }
 }

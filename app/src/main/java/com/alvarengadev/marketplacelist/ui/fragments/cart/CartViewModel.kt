@@ -15,9 +15,8 @@ class CartViewModel @Inject constructor(
 ) : ViewModel() {
     val listItems = MutableLiveData<ArrayList<Item>>()
 
-    fun getListItems() {
+    fun getListItems() =
         viewModelScope.launch {
             listItems.value = repository.getAll()
         }
-    }
 }

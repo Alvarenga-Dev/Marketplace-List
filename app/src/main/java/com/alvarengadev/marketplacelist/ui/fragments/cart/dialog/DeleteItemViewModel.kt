@@ -1,4 +1,4 @@
-package com.alvarengadev.marketplacelist.ui.fragments.add
+package com.alvarengadev.marketplacelist.ui.fragments.cart.dialog
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,15 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddViewModel @Inject constructor(
+class DeleteItemViewModel @Inject constructor(
     private val repository: ItemRepository
 ) : ViewModel() {
-    val valueItem = MutableLiveData<Double>()
-    val quantity = MutableLiveData<Int>()
-    val isAdd = MutableLiveData<Boolean>()
+    val isDelete = MutableLiveData<Boolean>()
 
-    fun addNewItem(item: Item) =
+    fun deleteItem(item: Item) =
         viewModelScope.launch {
-            isAdd.value = repository.insert(item)
+            isDelete.value = repository.delete(item)
         }
 }

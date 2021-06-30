@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -18,7 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvTitleDialogDelete"
                 style="@style/TitleStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -32,28 +33,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnConfirmDialogDelete"
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:text="@string/message_confirm"
-                app:layout_constraintBottom_toBottomOf="@+id/button2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button2" />
+                app:layout_constraintBottom_toBottomOf="@+id/btnCancelDialogDelete"
+                app:layout_constraintStart_toStartOf="@+id/tvTitleDialogDelete"
+                app:layout_constraintTop_toTopOf="@+id/btnCancelDialogDelete" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnCancelDialogDelete"
                 style="@style/ButtonErrorStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/message_negative"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="@+id/tvTitleDialogDelete"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleDialogDelete"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

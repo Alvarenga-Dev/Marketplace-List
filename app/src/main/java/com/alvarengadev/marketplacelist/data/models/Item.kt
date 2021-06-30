@@ -6,11 +6,13 @@ import android.os.Parcelable
 data class Item(
     val name: String,
     val value: Double,
-    val quantity: Int
+    val quantity: Int,
+    val id: Int? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readDouble(),
+        parcel.readInt(),
         parcel.readInt()
     ) {
     }
@@ -19,6 +21,9 @@ data class Item(
         parcel.writeString(name)
         parcel.writeDouble(value)
         parcel.writeInt(quantity)
+        if (id != null) {
+            parcel.writeInt(id)
+        }
     }
 
     override fun describeContents(): Int {

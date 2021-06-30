@@ -53,7 +53,7 @@
         tools:text="Valor: R$ 12,00" />
 
     <ImageButton
-        android:id="@+id/ivDeleteItem"
+        android:id="@+id/ibDeleteItem"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
