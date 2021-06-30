@@ -29,4 +29,7 @@
     <string name="content_description_back_button">Button Back for cart list</string>
     <string name="content_description_iv_cooking">Ilustration</string>
     <string name="content_description_button_minus">Button minus</string>
+    <string name="message_confirm">Yes</string>
+    <string name="message_negative">No</string>
+    <string name="dialog_message_delete">Do you want delete item?</string>
 </resources>

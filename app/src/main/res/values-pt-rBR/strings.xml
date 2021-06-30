@@ -23,4 +23,7 @@
     <string name="content_description_back_button">Botão para retornar para a tela da listagem de itens</string>
     <string name="content_description_iv_cooking">Ilustração</string>
     <string name="content_description_button_minus">Botão diminuir</string>
+    <string name="message_confirm">Sim</string>
+    <string name="message_negative">Não</string>
+    <string name="dialog_message_delete">Deseja realmente excluir esse item?</string>
 </resources>

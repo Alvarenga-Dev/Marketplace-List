@@ -24,4 +24,11 @@ class ItemRepository @Inject constructor(
         } catch (ex: Exception) {
             arrayListOf()
         }
+
+    suspend fun delete(item: Item): Boolean = try {
+        itemDao.delete(toEntity(item))
+        true
+    } catch (ex: Exception) {
+        false
+    }
 }
