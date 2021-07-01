@@ -12,11 +12,15 @@ import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
+import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
+import com.alvarengadev.marketplacelist.utils.Parses
+import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
+import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment : Fragment(R.layout.fragment_cart) {
+class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
@@ -55,11 +59,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             } else {
                 showList(true)
                 val adapterListCart = CartAdapter(listItems, parentFragmentManager)
-
+                adapterListCart.observerListEmpty(this@CartFragment)
                 adapterListCart.setOnClickItemListener(object : OnClickItemListener {
                     override fun setOnClickItemListener(item: Item) {
-                        val directions =
-                            CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
+                        val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
                         findNavController().navigate(directions)
                     }
                 })
@@ -70,23 +73,28 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 }
             }
 
-            var totalValue = 0.0
-
-            for (item in listItems) {
-                totalValue += (item.value * item.quantity)
-            }
-            footerCart.setCartValue(totalValue)
+            footerCart.setCartValue(Parses.parseValueTotal(listItems))
         }
     }
 
     private fun showList(isShow: Boolean) = binding.apply {
         if (isShow) {
-            rcyCartItem.visibility = View.VISIBLE
-            containerListEmpty.visibility = View.GONE
+            rcyCartItem.visibilityWithoutAnimation()
+            containerListEmpty.goneWithoutAnimation()
         } else {
-            rcyCartItem.visibility = View.GONE
-            containerListEmpty.visibility = View.VISIBLE
+            rcyCartItem.goneWithoutAnimation()
+            containerListEmpty.visibilityWithoutAnimation()
         }
     }
 
+    override fun observer(listItems: ArrayList<Item>) {
+       binding.footerCart.apply {
+            if (listItems.isNotEmpty()) {
+                setCartValue(Parses.parseValueTotal(listItems))
+            } else {
+                showList(false)
+                setCartValue(0.0)
+            }
+       }
+    }
 }

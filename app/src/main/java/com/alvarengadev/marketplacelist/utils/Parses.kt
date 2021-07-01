@@ -1,5 +1,6 @@
 package com.alvarengadev.marketplacelist.utils
 
+import com.alvarengadev.marketplacelist.data.models.Item
 import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.*
@@ -45,6 +46,16 @@ class Parses {
             val getLocalEN = Locale.US
 
             return if (Locale.getDefault().displayName == getLocaleBR.displayName) getLocaleBR else getLocalEN
+        }
+
+        fun parseValueTotal(listItems: ArrayList<Item>): Double {
+            var totalValue = 0.0
+
+            for (item in listItems) {
+                totalValue += (item.value * item.quantity)
+            }
+
+            return totalValue
         }
     }
 }

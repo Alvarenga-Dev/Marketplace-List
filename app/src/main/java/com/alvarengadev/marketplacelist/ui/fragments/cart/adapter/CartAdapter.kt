@@ -12,14 +12,19 @@ import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemInter
 import com.alvarengadev.marketplacelist.utils.TextFormatter
 
 class CartAdapter(
-   private val listItems: ArrayList<Item>,
-   private val supportFragmentManager: FragmentManager
+    private val listItems: ArrayList<Item>,
+    private val supportFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     private var onClickItemListener: OnClickItemListener? = null
+    private var observerListEmpty: ObserverListEmpty? = null
 
     fun setOnClickItemListener(onClickItemListener: OnClickItemListener) {
         this.onClickItemListener = onClickItemListener
+    }
+
+    fun observerListEmpty(observerListEmpty: ObserverListEmpty) {
+        this.observerListEmpty = observerListEmpty
     }
 
     inner class CartViewHolder(
@@ -81,5 +86,6 @@ class CartAdapter(
     fun deleteItem(item: Item) {
         notifyItemRemoved(listItems.indexOf(item))
         listItems.remove(item)
+        observerListEmpty?.observer(listItems)
     }
 }
