@@ -26,4 +26,7 @@
     <string name="message_confirm">Sim</string>
     <string name="message_negative">Não</string>
     <string name="dialog_message_delete">Deseja realmente excluir esse item?</string>
+    <string name="alert_text_value_empty">O valor está vazio!</string>
+    <string name="alert_error_add_item">Ops... algo de errado aconteceu!</string>
+    <string name="alert_text_name_empty">O nome do produto está vazio!</string>
 </resources>

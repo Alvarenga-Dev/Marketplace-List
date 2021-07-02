@@ -15,7 +15,7 @@ import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
-import com.google.android.material.snackbar.Snackbar
+import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +67,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 .setCartValue(0.0)
                 .setTextButton(getString(R.string.button_text_add))
                 .setIconButton(R.drawable.ic_shopping_cart)
-                .setActionButton {
+                .setActionButton { view ->
                     val valueItem = addViewModel.valueItem.value
                     val quantity = addViewModel.quantity.value
                     if (valueItem != null) {
@@ -79,11 +79,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                             )
                         )
                     } else {
-                        Snackbar.make(
-                            binding.container,
-                            "Value or Quantity is empty!",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                        view.createSnack(R.string.alert_text_value_empty, binding.root)
                     }
                 }
 
@@ -124,11 +120,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 findNavController().popBackStack()
                 clearFragment()
             } else {
-                Snackbar.make(
-                    binding.container,
-                    "Error add...",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                binding.root.createSnack(R.string.alert_error_add_item)
             }
         }
     }

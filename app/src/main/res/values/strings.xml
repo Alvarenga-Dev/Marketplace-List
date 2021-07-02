@@ -32,4 +32,7 @@
     <string name="message_confirm">Yes</string>
     <string name="message_negative">No</string>
     <string name="dialog_message_delete">Do you really want to delete this item?</string>
+    <string name="alert_text_value_empty">Value is empty!</string>
+    <string name="alert_error_add_item">Ops... error add item</string>
+    <string name="alert_text_name_empty">Name the product is empty!</string>
 </resources>
