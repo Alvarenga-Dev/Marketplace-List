@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.repository.ItemRepository
+import com.alvarengadev.marketplacelist.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,40 +19,52 @@ class AddViewModel @Inject constructor(
 
     sealed class AddingState {
         object CollectItem : AddingState()
-        class InvalidAddData(val fields: List<Pair<String, Int>>) : AddingState()
+        object CollectTotal : AddingState()
+        object SuccessfulAdd : AddingState()
+        class InvalidAddData(val messageError: List<Pair<String, Int>>) : AddingState()
     }
 
     private val _registrationStateEvent = MutableLiveData<AddingState>(AddingState.CollectItem)
     val registrationStateEvent: LiveData<AddingState> get() = _registrationStateEvent
 
-    val valueItem = MutableLiveData<Double>()
-    val quantity = MutableLiveData<Int>()
-    val isAdd = MutableLiveData<Boolean>()
+    fun setCollectTotal() {
+        _registrationStateEvent.postValue(AddingState.CollectTotal)
+    }
 
-    fun addNewItem(item: Item) =
-        viewModelScope.launch {
-            isAdd.postValue(if (item.name.isEmpty()) false else repository.insert(item))
-        }
-
-    fun addItem(item: Item) {
-        if (isValidItem(item.name, item.value)) {
+    fun addItem(
+        name: String,
+        value: Double,
+        quantity: Int
+    ) {
+        if (isValidItem(name, value)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
+            createItem(name, value, quantity)
+        }
+    }
+
+    private fun createItem(
+        name: String,
+        value: Double,
+        quantity: Int
+    ) = viewModelScope.launch {
+        val isAdd = repository.insert(Item(name, value, quantity))
+        if (isAdd) {
+            _registrationStateEvent.postValue(AddingState.SuccessfulAdd)
         }
     }
 
     private fun isValidItem(name: String, value: Double): Boolean {
-        val invalidFields = arrayListOf<Pair<String, Int>>()
+        val messageForError = arrayListOf<Pair<String, Int>>()
         if (name.isEmpty()) {
-            invalidFields.add(INPUT_NAME_ITEM)
+            messageForError.add(INPUT_NAME_ITEM)
         }
 
-        if (value != 0.0) {
-            invalidFields.add(INPUT_VALUE_ITEM)
+        if (value == 0.0) {
+            messageForError.add(INPUT_VALUE_ITEM)
         }
 
-        if (invalidFields.isNotEmpty()) {
-            isAdd.postValue(false)
-            _registrationStateEvent.postValue(AddingState.InvalidAddData(invalidFields))
+        if (messageForError.isNotEmpty()) {
+            _registrationStateEvent.postValue(AddingState.InvalidAddData(messageForError))
             return false
         }
 
@@ -59,7 +72,7 @@ class AddViewModel @Inject constructor(
     }
 
     companion object {
-        val INPUT_NAME_ITEM = "INPUT_NAME_ITEM" to R.string.alert_text_name_empty
-        val INPUT_VALUE_ITEM = "INPUT_VALUE_ITEM" to R.string.alert_text_value_empty
+        val INPUT_NAME_ITEM = Constants.INPUT_NAME_ITEM to R.string.alert_text_name_empty
+        val INPUT_VALUE_ITEM = Constants.INPUT_VALUE_ITEM to R.string.alert_text_value_empty
     }
 }
