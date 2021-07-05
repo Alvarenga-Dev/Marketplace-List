@@ -6,27 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
-import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import com.alvarengadev.marketplacelist.utils.extensions.dismiss
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddFragment : Fragment(R.layout.fragment_add) {
+class AddOrEditFragment : Fragment(R.layout.fragment_add) {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
-    private val addViewModel: AddViewModel by viewModels()
-    private var quantity: Int = 1
-    private var value: Double = 0.0
+
+    private val addOrEditViewModel: AddOrEditViewModel by viewModels()
+   // private val args: AddOrEditFragmentArgs? by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +53,14 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         return super.getExitTransition()
     }
 
+//    private fun initializerEditItem(item: Item) = binding.apply {
+//        with(item) {
+//            tfNameItem.editText?.setText(name)
+//            tfValueItem.editText?.setText(TextFormatter.setCurrency(item.value))
+//            tvValueQuantity.text = quantity.toString()
+//        }
+//    }
+
     private fun initComponents() {
         binding.apply {
             root.setOnClickListener {
@@ -72,20 +80,14 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 .setTextButton(getString(R.string.button_text_add))
                 .setIconButton(R.drawable.ic_shopping_cart)
                 .setActionButton {
-                    addViewModel.addItem(
-                        tfNameItem.editText?.text.toString(),
-                        value,
-                        quantity
-                    )
+                    addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
                 }
 
-            ibMinus.setOnClickListenerWithObserver {
-                if (quantity > 1) {
-                    quantity -= 1
-                }
+            ibMinus.setOnClickListener {
+                addOrEditViewModel.minusQuantity()
             }
-            ibPlus.setOnClickListenerWithObserver {
-                quantity += 1
+            ibPlus.setOnClickListener {
+                addOrEditViewModel.plusQuantity()
             }
 
             tfNameItem.editText?.addTextChangedListener {
@@ -96,35 +98,25 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 addTextChangedListener(MoneyTextWatcher(tfValueItem.editText))
                 addTextChangedListener { editableText ->
                     tfValueItem.dismiss()
-                    value = Parses.parseToDouble(editableText.toString())
-                    addViewModel.setCollectTotal()
+                    addOrEditViewModel.setValue(editableText.toString())
                 }
-            }
-        }
-    }
-
-    private fun ImageButton.setOnClickListenerWithObserver(onClickListener: View.OnClickListener) {
-        this.apply {
-            setOnClickListener {
-                onClickListener.onClick(this)
-                addViewModel.setCollectTotal()
             }
         }
     }
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
-        with(addViewModel) {
+        with(addOrEditViewModel) {
             registrationStateEvent.observeForever { registrationState ->
-                if (registrationState is AddViewModel.AddingState.CollectTotal) {
-                    footerAddItem.setCartValue(quantity * value)
-                    tvValueQuantity.text = quantity.toString()
+                if (registrationState is AddOrEditViewModel.AddingState.CollectItemInformation) {
+                    footerAddItem.setCartValue(registrationState.total)
+                    tvValueQuantity.text = registrationState.quantity.toString()
                 }
-                if (registrationState is AddViewModel.AddingState.InvalidAddData) {
+                if (registrationState is AddOrEditViewModel.AddingState.InvalidAddData) {
                     registrationState.messageError.forEach { fieldError ->
                         binding.root.createSnack(fieldError.second)
                     }
                 }
-                if (registrationState is AddViewModel.AddingState.SuccessfulAdd) {
+                if (registrationState is AddOrEditViewModel.AddingState.SuccessfulAdd) {
                     findNavController().popBackStack()
                     clearFragment()
                 }
@@ -134,8 +126,5 @@ class AddFragment : Fragment(R.layout.fragment_add) {
 
     private fun clearFragment() {
         _binding = null
-        quantity = 0
-        value = 0.0
     }
-
 }

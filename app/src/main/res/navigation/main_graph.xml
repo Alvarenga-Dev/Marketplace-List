@@ -19,9 +19,14 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.add.AddFragment"
+        android:name="com.alvarengadev.marketplacelist.ui.fragments.add.AddOrEditFragment"
         android:label="@string/fragment_title_add_item"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+        <argument
+            android:name="ItemId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.alvarengadev.marketplacelist.ui.fragments.details.FragmentDetails"
@@ -30,5 +35,8 @@
         <argument
             android:name="Item"
             app:argType="com.alvarengadev.marketplacelist.data.models.Item" />
+        <action
+            android:id="@+id/action_detailsFragment_to_addFragment"
+            app:destination="@id/addFragment" />
     </fragment>
 </navigation>

@@ -42,6 +42,17 @@ class FragmentDetails : Fragment(R.layout.fragment_details) {
                 findNavController().popBackStack()
             }
 
+            btnEditDetails.setOnClickListener {
+                val directions = args.item.id?.let { it1 ->
+                    FragmentDetailsDirections.actionDetailsFragmentToAddFragment().setItemId(
+                        it1
+                    )
+                }
+                if (directions != null) {
+                    findNavController().navigate(directions)
+                }
+            }
+
             args.item.apply {
                 tvNameItemDetails.text = name
                 tvValueDetails.text = getString(R.string.text_value_details, TextFormatter.setCurrency(value))

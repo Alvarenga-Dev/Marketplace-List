@@ -8,18 +8,19 @@ import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.repository.ItemRepository
 import com.alvarengadev.marketplacelist.utils.Constants
+import com.alvarengadev.marketplacelist.utils.Parses
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddViewModel @Inject constructor(
+class AddOrEditViewModel @Inject constructor(
     private val repository: ItemRepository
 ) : ViewModel() {
 
     sealed class AddingState {
         object CollectItem : AddingState()
-        object CollectTotal : AddingState()
+        class CollectItemInformation(val total: Double, val quantity: Int) : AddingState()
         object SuccessfulAdd : AddingState()
         class InvalidAddData(val messageError: List<Pair<String, Int>>) : AddingState()
     }
@@ -27,18 +28,41 @@ class AddViewModel @Inject constructor(
     private val _registrationStateEvent = MutableLiveData<AddingState>(AddingState.CollectItem)
     val registrationStateEvent: LiveData<AddingState> get() = _registrationStateEvent
 
-    fun setCollectTotal() {
-        _registrationStateEvent.postValue(AddingState.CollectTotal)
+    private var quantityA = 1
+    private var valueA = 0.0
+
+    private fun setCollectTotal() {
+        _registrationStateEvent.postValue(AddingState.CollectItemInformation(quantityA * valueA, quantityA))
     }
 
-    fun addItem(
-        name: String,
-        value: Double,
-        quantity: Int
-    ) {
-        if (isValidItem(name, value)) {
+    fun plusQuantity() {
+        quantityA += 1
+        setCollectTotal()
+    }
+
+    fun minusQuantity() {
+        if (quantityA > 1) {
+            quantityA -= 1
+            setCollectTotal()
+        }
+    }
+
+    fun setValue(value: String) {
+        valueA = Parses.parseToDouble(value)
+        setCollectTotal()
+    }
+
+    fun addItem(name: String) {
+        if (isValidItem(name, valueA)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            createItem(name, value, quantity)
+            createItem(name, valueA, quantityA)
+        }
+    }
+
+    fun editItem(item: Item) {
+        if (isValidItem(item.name, item.value)) {
+            _registrationStateEvent.postValue(AddingState.CollectItem)
+            updateItem(item)
         }
     }
 
@@ -49,6 +73,13 @@ class AddViewModel @Inject constructor(
     ) = viewModelScope.launch {
         val isAdd = repository.insert(Item(name, value, quantity))
         if (isAdd) {
+            _registrationStateEvent.postValue(AddingState.SuccessfulAdd)
+        }
+    }
+
+    private fun updateItem(item: Item) = viewModelScope.launch {
+        val isEdit = repository.update(item)
+        if (isEdit) {
             _registrationStateEvent.postValue(AddingState.SuccessfulAdd)
         }
     }

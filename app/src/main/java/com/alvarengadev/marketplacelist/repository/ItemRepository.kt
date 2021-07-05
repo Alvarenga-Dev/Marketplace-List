@@ -31,4 +31,11 @@ class ItemRepository @Inject constructor(
     } catch (ex: Exception) {
         false
     }
+
+    suspend fun update(item: Item): Boolean = try {
+        itemDao.update(toEntity(item))
+        true
+    } catch (ex: Exception) {
+        false
+    }
 }
