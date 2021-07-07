@@ -14,8 +14,7 @@ data class Item(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readInt()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

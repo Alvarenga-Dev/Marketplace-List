@@ -9,6 +9,7 @@ import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.repository.ItemRepository
 import com.alvarengadev.marketplacelist.utils.Constants
 import com.alvarengadev.marketplacelist.utils.Parses
+import com.alvarengadev.marketplacelist.utils.TextFormatter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,49 +21,69 @@ class AddOrEditViewModel @Inject constructor(
 
     sealed class AddingState {
         object CollectItem : AddingState()
-        object SuccessfulAdd : AddingState()
+        object SuccessfulAddOrEdit : AddingState()
         class CollectItemInformation(val total: Double, val quantity: Int) : AddingState()
         class InvalidAddData(val messageError: List<Pair<String, Int>>) : AddingState()
+        class CollectEditItem(val id: Int, val name: String, val value: String, val quantity: String) : AddingState()
     }
 
     private val _registrationStateEvent = MutableLiveData<AddingState>(AddingState.CollectItem)
     val registrationStateEvent: LiveData<AddingState> get() = _registrationStateEvent
 
-    private var quantityA = 1
-    private var valueA = 0.0
+    private var quantity = 1
+    private var value = 0.0
 
     private fun setCollectTotal() {
-        _registrationStateEvent.postValue(AddingState.CollectItemInformation(quantityA * valueA, quantityA))
+        _registrationStateEvent.postValue(AddingState.CollectItemInformation(quantity * value, quantity))
     }
 
     fun plusQuantity() {
-        quantityA += 1
+        quantity += 1
         setCollectTotal()
     }
 
     fun minusQuantity() {
-        if (quantityA > 1) {
-            quantityA -= 1
+        if (quantity > 1) {
+            quantity -= 1
             setCollectTotal()
         }
     }
 
     fun setValue(value: String) {
-        valueA = Parses.parseToDouble(value)
+        this.value = Parses.parseToDouble(value)
         setCollectTotal()
     }
 
     fun addItem(name: String) {
-        if (isValidItem(name, valueA)) {
+        if (isValidItem(name, value)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            createItem(name, valueA, quantityA)
+            createItem(name, value, quantity)
         }
     }
 
-    fun editItem(item: Item) {
-        if (isValidItem(item.name, item.value)) {
+    fun editItem(itemId: Int, name: String) {
+        if (isValidItem(name, value)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            updateItem(item)
+            updateItem(itemId)
+        }
+    }
+
+    fun getDetailsItem(itemId: Int) = viewModelScope.launch {
+        val item = repository.getItem(itemId)
+        if (item != null) {
+            with(item) {
+                this@AddOrEditViewModel.value = value
+                this@AddOrEditViewModel.quantity = quantity
+
+                _registrationStateEvent.postValue(id?.let { id ->
+                    AddingState.CollectEditItem(
+                        id,
+                        name,
+                        TextFormatter.setCurrency(value),
+                        quantity.toString()
+                    )
+                })
+            }
         }
     }
 
@@ -73,14 +94,18 @@ class AddOrEditViewModel @Inject constructor(
     ) = viewModelScope.launch {
         val isAdd = repository.insert(Item(name, value, quantity))
         if (isAdd) {
-            _registrationStateEvent.postValue(AddingState.SuccessfulAdd)
+            _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
         }
     }
 
-    private fun updateItem(item: Item) = viewModelScope.launch {
-        val isEdit = repository.update(item)
-        if (isEdit) {
-            _registrationStateEvent.postValue(AddingState.SuccessfulAdd)
+    private fun updateItem(itemId: Int) = viewModelScope.launch {
+        val item = repository.getItem(itemId)
+
+        if (item != null) {
+            val isEdit = repository.update(item)
+            if (isEdit) {
+                _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
+            }
         }
     }
 

@@ -37,7 +37,11 @@ class CartAdapter(
             itemView.setOnClickListener {
                 val positionRcy = adapterPosition
                 if (positionRcy != RecyclerView.NO_POSITION) {
-                    onClickItemListener?.setOnClickItemListener(listItems[positionRcy])
+                    listItems[positionRcy].id?.let { id ->
+                        onClickItemListener?.setOnClickItemListener(
+                            id
+                        )
+                    }
                 }
             }
         }

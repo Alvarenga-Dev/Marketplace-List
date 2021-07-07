@@ -71,8 +71,8 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     val adapterListCart = CartAdapter(registrationState.listItems, parentFragmentManager)
                     adapterListCart.observerListEmpty(this@CartFragment)
                     adapterListCart.setOnClickItemListener(object : OnClickItemListener {
-                        override fun setOnClickItemListener(item: Item) {
-                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
+                        override fun setOnClickItemListener(itemId: Int) {
+                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(itemId)
                             findNavController().navigate(directions)
                         }
                     })

@@ -10,7 +10,7 @@ data class ItemEntity(
     val value: Double,
     val quantity: Int,
     @PrimaryKey(autoGenerate = true)
-    val id: Int?
+    val id: Int? = null
 )
 
 fun toArrayListItem(listItemsEntity: List<ItemEntity>): ArrayList<Item> {
@@ -32,4 +32,11 @@ fun toEntity(item: Item): ItemEntity = ItemEntity(
     item.value,
     item.quantity,
     item.id
+)
+
+fun toItem(itemEntity: ItemEntity): Item = Item(
+    itemEntity.name,
+    itemEntity.value,
+    itemEntity.quantity,
+    itemEntity.id
 )

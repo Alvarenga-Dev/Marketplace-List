@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
@@ -26,7 +25,7 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
     private val binding get() = _binding!!
 
     private val addOrEditViewModel: AddOrEditViewModel by viewModels()
-   // private val args: AddOrEditFragmentArgs? by navArgs()
+    private val args: AddOrEditFragmentArgs? by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +38,7 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        verifyEditItem(args?.itemId)
         initComponents()
         listenToRegistrationViewModelEvents()
     }
@@ -53,53 +53,46 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
         return super.getExitTransition()
     }
 
-//    private fun initializerEditItem(item: Item) = binding.apply {
-//        with(item) {
-//            tfNameItem.editText?.setText(name)
-//            tfValueItem.editText?.setText(TextFormatter.setCurrency(item.value))
-//            tvValueQuantity.text = quantity.toString()
-//        }
-//    }
+    private fun verifyEditItem(itemId: Int?) {
+        if (itemId != null) {
+            addOrEditViewModel.getDetailsItem(itemId)
+        }
+    }
 
-    private fun initComponents() {
-        binding.apply {
-            root.setOnClickListener {
-                this.tfNameItem.editText?.clearFocus()
-                this.tfValueItem.editText?.clearFocus()
-                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-            }
+    private fun initComponents() = binding.apply {
+        root.setOnClickListener {
+            this.tfNameItem.editText?.clearFocus()
+            this.tfValueItem.editText?.clearFocus()
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        }
 
-            ibBack.setOnClickListener {
-                findNavController().popBackStack()
-                clearFragment()
-            }
+        ibBack.setOnClickListener {
+            findNavController().popBackStack()
+            clearFragment()
+        }
 
-            footerAddItem
-                .setCartValue(0.0)
-                .setTextButton(getString(R.string.button_text_add))
-                .setIconButton(R.drawable.ic_shopping_cart)
-                .setActionButton {
-                    addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
-                }
+        footerAddItem
+            .setCartValue(0.0)
+            .setTextButton(getString(R.string.button_text_add))
+            .setIconButton(R.drawable.ic_shopping_cart)
 
-            ibMinus.setOnClickListener {
-                addOrEditViewModel.minusQuantity()
-            }
-            ibPlus.setOnClickListener {
-                addOrEditViewModel.plusQuantity()
-            }
+        ibMinus.setOnClickListener {
+            addOrEditViewModel.minusQuantity()
+        }
+        ibPlus.setOnClickListener {
+            addOrEditViewModel.plusQuantity()
+        }
 
-            tfNameItem.editText?.addTextChangedListener {
-                tfNameItem.dismiss()
-            }
+        tfNameItem.editText?.addTextChangedListener {
+            tfNameItem.dismiss()
+        }
 
-            tfValueItem.editText?.apply {
-                addTextChangedListener(MoneyTextWatcher(tfValueItem.editText))
-                addTextChangedListener { editableText ->
-                    tfValueItem.dismiss()
-                    addOrEditViewModel.setValue(editableText.toString())
-                }
+        tfValueItem.editText?.apply {
+            addTextChangedListener(MoneyTextWatcher(tfValueItem.editText))
+            addTextChangedListener { editableText ->
+                tfValueItem.dismiss()
+                addOrEditViewModel.setValue(editableText.toString())
             }
         }
     }
@@ -107,6 +100,11 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
     private fun listenToRegistrationViewModelEvents() = binding.apply {
         with(addOrEditViewModel) {
             registrationStateEvent.observeForever { registrationState ->
+                if (registrationState is AddOrEditViewModel.AddingState.CollectItem) {
+                    footerAddItem.setActionButton {
+                        addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
+                    }
+                }
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItemInformation) {
                     footerAddItem.setCartValue(registrationState.total)
                     tvValueQuantity.text = registrationState.quantity.toString()
@@ -116,7 +114,18 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
                         binding.root.createSnack(fieldError.second)
                     }
                 }
-                if (registrationState is AddOrEditViewModel.AddingState.SuccessfulAdd) {
+                if (registrationState is AddOrEditViewModel.AddingState.CollectEditItem) {
+                    with(registrationState) {
+                        tfNameItem.editText?.setText(name)
+                        tfValueItem.editText?.setText(value)
+                        tvValueQuantity.text = quantity
+
+                        footerAddItem.setActionButton {
+                            addOrEditViewModel.editItem(id, tfNameItem.editText?.text.toString())
+                        }
+                    }
+                }
+                if (registrationState is AddOrEditViewModel.AddingState.SuccessfulAddOrEdit) {
                     findNavController().popBackStack()
                     clearFragment()
                 }

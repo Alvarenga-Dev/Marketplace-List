@@ -29,12 +29,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.details.FragmentDetails"
+        android:name="com.alvarengadev.marketplacelist.ui.fragments.details.DetailsFragment"
         android:label="@string/fragment_title_details"
         tools:layout="@layout/fragment_details">
         <argument
-            android:name="Item"
-            app:argType="com.alvarengadev.marketplacelist.data.models.Item" />
+            android:name="ItemId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailsFragment_to_addFragment"
             app:destination="@id/addFragment" />
