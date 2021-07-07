@@ -101,8 +101,11 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
         with(addOrEditViewModel) {
             registrationStateEvent.observeForever { registrationState ->
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItem) {
-                    footerAddItem.setActionButton {
-                        addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
+                    footerAddItem.apply {
+                        setTextButton(getString(R.string.button_text_edit_finish))
+                        setActionButton {
+                            addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
+                        }
                     }
                 }
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItemInformation) {
