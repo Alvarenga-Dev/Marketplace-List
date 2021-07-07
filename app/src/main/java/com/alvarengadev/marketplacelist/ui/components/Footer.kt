@@ -47,7 +47,7 @@ class Footer(
         btnActionFooter?.setOnClickListener(viewOnClickListener)
     }
 
-    fun setCartValue(value: Double): Footer {
+    fun setCartValue(value: Double = 0.0): Footer {
         tvCartValue?.text = context.getString(R.string.text_total_cart, TextFormatter.setCurrency(value))
         return this
     }

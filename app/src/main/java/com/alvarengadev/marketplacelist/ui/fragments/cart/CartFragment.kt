@@ -38,6 +38,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cartViewModel.getListItems()
+        listenToRegistrationViewModelEvents()
         initComponents()
     }
 
@@ -52,32 +53,45 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             .setActionButton {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
+    }
 
-        cartViewModel.listItems.observeForever { listItems ->
-            if (listItems.isEmpty()) {
-                showList(false)
-            } else {
-                showList(true)
-                val adapterListCart = CartAdapter(listItems, parentFragmentManager)
-                adapterListCart.observerListEmpty(this@CartFragment)
-                adapterListCart.setOnClickItemListener(object : OnClickItemListener {
-                    override fun setOnClickItemListener(item: Item) {
-                        val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
-                        findNavController().navigate(directions)
+    private fun listenToRegistrationViewModelEvents() = binding.apply {
+        with(cartViewModel) {
+            registrationStateEvent.observeForever { registrationState ->
+                if (registrationState is CartViewModel.CartListState.LoadingList) {
+                    pbLoadingList.visibilityWithoutAnimation()
+                }
+
+                if (registrationState is CartViewModel.CartListState.ListEmpty) {
+                    showList(false)
+                    footerCart.setCartValue()
+                }
+
+                if (registrationState is CartViewModel.CartListState.SuccessList) {
+                    val adapterListCart = CartAdapter(registrationState.listItems, parentFragmentManager)
+                    adapterListCart.observerListEmpty(this@CartFragment)
+                    adapterListCart.setOnClickItemListener(object : OnClickItemListener {
+                        override fun setOnClickItemListener(item: Item) {
+                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(item)
+                            findNavController().navigate(directions)
+                        }
+                    })
+
+                    rcyCartItem.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = adapterListCart
                     }
-                })
 
-                rcyCartItem.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = adapterListCart
+                    showList(true)
+                    footerCart.setCartValue(registrationState.total)
                 }
             }
-
-            footerCart.setCartValue(Parses.parseValueTotal(listItems))
         }
     }
 
+
     private fun showList(isShow: Boolean) = binding.apply {
+        pbLoadingList.goneWithoutAnimation()
         if (isShow) {
             rcyCartItem.visibilityWithoutAnimation()
             containerListEmpty.goneWithoutAnimation()
@@ -88,13 +102,13 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     }
 
     override fun observer(listItems: ArrayList<Item>) {
-       binding.footerCart.apply {
+        binding.footerCart.apply {
             if (listItems.isNotEmpty()) {
                 setCartValue(Parses.parseValueTotal(listItems))
             } else {
                 showList(false)
-                setCartValue(0.0)
+                setCartValue()
             }
-       }
+        }
     }
 }

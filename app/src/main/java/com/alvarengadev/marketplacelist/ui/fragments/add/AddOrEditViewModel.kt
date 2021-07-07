@@ -20,8 +20,8 @@ class AddOrEditViewModel @Inject constructor(
 
     sealed class AddingState {
         object CollectItem : AddingState()
-        class CollectItemInformation(val total: Double, val quantity: Int) : AddingState()
         object SuccessfulAdd : AddingState()
+        class CollectItemInformation(val total: Double, val quantity: Int) : AddingState()
         class InvalidAddData(val messageError: List<Pair<String, Int>>) : AddingState()
     }
 
