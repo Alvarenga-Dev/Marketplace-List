@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -62,6 +63,12 @@ dependencies {
     def room_version = "2.3.0"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 
     // For instrumentation tests
     androidTestImplementation "com.google.dagger:hilt-android-testing:$version_hilt"
