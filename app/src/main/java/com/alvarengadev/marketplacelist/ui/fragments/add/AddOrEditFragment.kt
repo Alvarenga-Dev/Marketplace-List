@@ -101,11 +101,8 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
         with(addOrEditViewModel) {
             registrationStateEvent.observeForever { registrationState ->
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItem) {
-                    footerAddItem.apply {
-                        setTextButton(getString(R.string.button_text_edit_finish))
-                        setActionButton {
-                            addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
-                        }
+                    footerAddItem.setActionButton {
+                        addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())
                     }
                 }
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItemInformation) {
@@ -118,13 +115,20 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
                     }
                 }
                 if (registrationState is AddOrEditViewModel.AddingState.CollectEditItem) {
+                    tvTitleAddItem.text = getString(R.string.fragment_title_edit_item)
                     with(registrationState) {
                         tfNameItem.editText?.setText(name)
                         tfValueItem.editText?.setText(value)
                         tvValueQuantity.text = quantity
 
-                        footerAddItem.setActionButton {
-                            addOrEditViewModel.editItem(id, tfNameItem.editText?.text.toString())
+                        footerAddItem.apply {
+                            setTextButton(getString(R.string.button_text_edit_finish))
+                            setActionButton {
+                                addOrEditViewModel.editItem(
+                                    id,
+                                    tfNameItem.editText?.text.toString()
+                                )
+                            }
                         }
                     }
                 }

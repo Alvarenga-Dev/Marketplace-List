@@ -40,4 +40,5 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+    <string name="fragment_title_edit_item">Editar Item</string>
 </resources>
