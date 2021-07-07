@@ -1,7 +1,6 @@
 package com.alvarengadev.marketplacelist.repository
 
 import com.alvarengadev.marketplacelist.data.database.dao.ItemDao
-import com.alvarengadev.marketplacelist.data.database.entities.ItemEntity
 import com.alvarengadev.marketplacelist.data.database.entities.toArrayListItem
 import com.alvarengadev.marketplacelist.data.database.entities.toEntity
 import com.alvarengadev.marketplacelist.data.database.entities.toItem
@@ -26,8 +25,15 @@ class ItemRepository @Inject constructor(
         false
     }
 
-    suspend fun update(item: Item): Boolean = try {
-        itemDao.update(toEntity(item))
+    suspend fun update(itemId: Int, name: String, value: Double, quantity: Int): Boolean = try {
+        itemDao.update(
+            toEntity(Item(
+                name,
+                value,
+                quantity,
+                itemId
+            ))
+        )
         true
     } catch (ex: Exception) {
         false

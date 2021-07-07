@@ -27,6 +27,7 @@ class AddOrEditViewModel @Inject constructor(
             val total: Double,
             val quantity: Int
         ) : AddingState()
+
         class CollectEditItem(
             val id: Int,
             val name: String,
@@ -80,7 +81,7 @@ class AddOrEditViewModel @Inject constructor(
     ) {
         if (isValidItem(name, value)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            updateItem(itemId)
+            updateItem(itemId, name)
         }
     }
 
@@ -114,14 +115,13 @@ class AddOrEditViewModel @Inject constructor(
         }
     }
 
-    private fun updateItem(itemId: Int) = viewModelScope.launch {
-        val item = repository.getItem(itemId)
-
-        if (item != null) {
-            val isEdit = repository.update(item)
-            if (isEdit) {
-                _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
-            }
+    private fun updateItem(
+        itemId: Int,
+        name: String
+    ) = viewModelScope.launch {
+        val isEdit = repository.update(itemId, name, value, quantity)
+        if (isEdit) {
+            _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
         }
     }
 
