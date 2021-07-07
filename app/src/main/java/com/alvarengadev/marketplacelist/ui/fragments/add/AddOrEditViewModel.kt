@@ -22,9 +22,17 @@ class AddOrEditViewModel @Inject constructor(
     sealed class AddingState {
         object CollectItem : AddingState()
         object SuccessfulAddOrEdit : AddingState()
-        class CollectItemInformation(val total: Double, val quantity: Int) : AddingState()
         class InvalidAddData(val messageError: List<Pair<String, Int>>) : AddingState()
-        class CollectEditItem(val id: Int, val name: String, val value: String, val quantity: String) : AddingState()
+        class CollectItemInformation(
+            val total: Double,
+            val quantity: Int
+        ) : AddingState()
+        class CollectEditItem(
+            val id: Int,
+            val name: String,
+            val value: String,
+            val quantity: String
+        ) : AddingState()
     }
 
     private val _registrationStateEvent = MutableLiveData<AddingState>(AddingState.CollectItem)
@@ -34,7 +42,12 @@ class AddOrEditViewModel @Inject constructor(
     private var value = 0.0
 
     private fun setCollectTotal() {
-        _registrationStateEvent.postValue(AddingState.CollectItemInformation(quantity * value, quantity))
+        _registrationStateEvent.postValue(
+            AddingState.CollectItemInformation(
+                quantity * value,
+                quantity
+            )
+        )
     }
 
     fun plusQuantity() {
@@ -61,7 +74,10 @@ class AddOrEditViewModel @Inject constructor(
         }
     }
 
-    fun editItem(itemId: Int, name: String) {
+    fun editItem(
+        itemId: Int,
+        name: String
+    ) {
         if (isValidItem(name, value)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
             updateItem(itemId)
@@ -109,7 +125,10 @@ class AddOrEditViewModel @Inject constructor(
         }
     }
 
-    private fun isValidItem(name: String, value: Double): Boolean {
+    private fun isValidItem(
+        name: String,
+        value: Double
+    ): Boolean {
         val messageForError = arrayListOf<Pair<String, Int>>()
         if (name.isEmpty()) {
             messageForError.add(INPUT_NAME_ITEM)
