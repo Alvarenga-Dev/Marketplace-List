@@ -2,9 +2,15 @@
 <resources>
     <color name="primary_light">#A6D4FF</color>
     <color name="primary">#37AFFE</color>
-    <color name="dark">#131313</color>
-    <color name="dark_light">#1E1E1E</color>
+    <color name="secondary">#131313</color>
+    <color name="secondary_light">#1E1E1E</color>
     <color name="white">#F8F7FC</color>
     <color name="white_light">#FEFEFE</color>
     <color name="error">#ED4136</color>
+
+    <color name="background_generic_card">@color/white</color>
+    <color name="text_color_generic">@color/secondary</color>
+    <color name="text_color_light_generic">#A6131313</color>
+    <color name="text_color_highlight_generic">@color/primary</color>
+    <color name="line_color_generic">#59131313</color>
 </resources>

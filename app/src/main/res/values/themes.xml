@@ -8,13 +8,19 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primary_light</item>
         <item name="colorSecondaryVariant">@color/primary</item>
-        <item name="colorOnSecondary">@color/dark</item>
+        <item name="colorOnSecondary">@color/secondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/dark</item>
-        <item name="android:colorBackground">?attr/colorPrimaryVariant</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:colorBackground">@color/primary</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <!-- SplashScreenTheme -->
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <style name="ButtonStyle">
@@ -43,18 +49,18 @@
 
     <style name="TitleStyle">
         <item name="android:fontFamily">@font/montserrat_bold</item>
-        <item name="android:textColor">@color/dark</item>
+        <item name="android:textColor">@color/text_color_generic</item>
         <item name="android:textSize">@dimen/largerText</item>
     </style>
 
     <style name="SmallTextStyle">
-        <item name="android:textColor">#A6131313</item>
+        <item name="android:textColor">@color/text_color_light_generic</item>
         <item name="android:textSize">@dimen/smallText</item>
     </style>
 
     <style name="HighlightTextStyle">
         <item name="android:fontFamily">@font/montserrat_bold</item>
-        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/text_color_highlight_generic</item>
         <item name="android:textSize">@dimen/normalText</item>
     </style>
 

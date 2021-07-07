@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_light">#1E1E1E</color>
+    <color name="primary">#131313</color>
+    <color name="secondary">#3A3A3A</color>
+    <color name="secondary_light">#515050</color>
+    <color name="white">#F8F7FC</color>
+    <color name="white_light">#FEFEFE</color>
+    <color name="error">#ED4136</color>
+
+    <color name="background_generic_card">@color/primary</color>
+    <color name="text_color_generic">@color/white_light</color>
+    <color name="text_color_light_generic">@color/white_light</color>
+    <color name="text_color_highlight_generic">@color/white_light</color>
+    <color name="line_color_generic">#A6F8F7FC</color>
+</resources>
