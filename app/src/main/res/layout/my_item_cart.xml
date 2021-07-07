@@ -57,7 +57,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="lixeira"
+        android:contentDescription="@string/content_description_button_trash"
         android:padding="@dimen/marginOrPadding8dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvValueItem"
         app:layout_constraintEnd_toEndOf="@+id/divider"

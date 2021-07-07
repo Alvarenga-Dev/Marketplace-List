@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="Descrição do botão"
+        android:contentDescription="@string/content_description_back_button"
         android:padding="@dimen/marginOrPaddingDefault"
         android:src="@drawable/ic_arrow_left"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="EDITAR"
+        android:text="@string/button_text_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ibBack" />
 

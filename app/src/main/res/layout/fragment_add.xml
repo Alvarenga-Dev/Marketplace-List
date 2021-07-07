@@ -156,6 +156,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/tvTitleQuantity"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:contentDescription="@string/content_description_button_minus"
                     app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
 
                 <ImageButton
@@ -169,6 +170,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/tvTitleQuantity"
+                    android:contentDescription="@string/content_description_button_plus"
                     app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
 
                 <TextView
