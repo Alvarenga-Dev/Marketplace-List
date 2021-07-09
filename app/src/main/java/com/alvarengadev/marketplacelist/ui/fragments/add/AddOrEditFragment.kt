@@ -125,7 +125,7 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
                             setTextButton(getString(R.string.button_text_edit_finish))
                             setActionButton {
                                 addOrEditViewModel.editItem(
-                                    id,
+                                    itemId,
                                     tfNameItem.editText?.text.toString()
                                 )
                             }

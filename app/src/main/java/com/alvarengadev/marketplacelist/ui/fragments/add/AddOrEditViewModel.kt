@@ -29,7 +29,7 @@ class AddOrEditViewModel @Inject constructor(
         ) : AddingState()
 
         class CollectEditItem(
-            val id: Int,
+            val itemId: Int,
             val name: String,
             val value: String,
             val quantity: String
