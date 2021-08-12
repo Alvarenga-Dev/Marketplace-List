@@ -9,6 +9,7 @@
     <color name="error">#ED4136</color>
 
     <color name="background_generic_card">@color/primary</color>
+    <color name="background_generic">@color/primary_light</color>
     <color name="text_color_generic">@color/white_light</color>
     <color name="text_color_light_generic">@color/white_light</color>
     <color name="text_color_highlight_generic">@color/white_light</color>

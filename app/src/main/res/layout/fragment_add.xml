@@ -151,41 +151,44 @@
 
                 <ImageButton
                     android:id="@+id/ibMinus"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
                     android:background="?attr/colorPrimaryVariant"
+                    android:contentDescription="@string/content_description_button_minus"
                     android:padding="8dp"
                     android:src="@drawable/ic_minus"
                     app:layout_constraintEnd_toStartOf="@+id/tvTitleQuantity"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:contentDescription="@string/content_description_button_minus"
-                    app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
+                    app:layout_constraintTop_toTopOf="@+id/ibPlus" />
 
                 <ImageButton
                     android:id="@+id/ibPlus"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     android:background="?attr/colorPrimaryVariant"
+                    android:contentDescription="@string/content_description_button_plus"
                     android:padding="8dp"
                     android:src="@drawable/ic_plus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/tvTitleQuantity"
-                    android:contentDescription="@string/content_description_button_plus"
-                    app:layout_constraintTop_toTopOf="@+id/tvValueQuantity" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
 
                 <TextView
                     android:id="@+id/tvValueQuantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/value_default_quantity"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toStartOf="@+id/ibPlus"
                     app:layout_constraintStart_toEndOf="@+id/ibMinus"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
+                    app:layout_constraintTop_toTopOf="@+id/ibMinus" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
