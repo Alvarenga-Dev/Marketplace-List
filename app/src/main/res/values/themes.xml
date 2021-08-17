@@ -23,6 +23,11 @@
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
+    <!-- Settings -->
+    <style name="SettingsScreenTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
+    </style>
+
     <style name="ButtonStyle">
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>

@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentSettingsBinding
+import com.alvarengadev.marketplacelist.ui.settings.adapter.SettingsOptionsAdapter
+import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
 class SettingsFragment : Fragment() {
 
@@ -23,6 +24,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initComponents()
     }
 
     override fun onDestroy() {
@@ -31,7 +33,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initComponents() = binding.apply {
+        val settingsUtils = SettingsUtils()
+        settingsUtils.getInstance(context)
 
+        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettings())
+        binding.rcySettings.adapter = adapterListSettings
     }
 
 }

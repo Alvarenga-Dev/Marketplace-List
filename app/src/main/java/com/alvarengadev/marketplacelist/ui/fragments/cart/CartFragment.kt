@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
@@ -53,6 +52,10 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             .setActionButton {
                 findNavController().navigate(R.id.action_cartFragment_to_addFragment)
             }
+
+        ibSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_cartFragment_to_settings_graph)
+        }
     }
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
@@ -77,10 +80,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                         }
                     })
 
-                    rcyCartItem.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = adapterListCart
-                    }
+                    rcyCartItem.adapter = adapterListCart
 
                     showList(true)
                     footerCart.setCartValue(registrationState.total)

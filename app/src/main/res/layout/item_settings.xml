@@ -9,11 +9,13 @@
     <TextView
         android:id="@+id/tvTitleSettings"
         style="@style/TitleStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="@dimen/bigText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Política de privacidade" />
@@ -21,11 +23,13 @@
     <TextView
         android:id="@+id/tvDescriptionSettings"
         style="@style/SmallTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textSize="@dimen/normalText"
         android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleSettings"
         app:layout_constraintStart_toStartOf="@+id/tvTitleSettings"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleSettings"
         tools:text="clique aqui para mais informações" />

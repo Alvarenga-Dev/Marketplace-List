@@ -13,6 +13,7 @@
     <string name="content_description_back_button">Botão para retornar para a tela da listagem de itens</string>
     <string name="content_description_button_minus">Botão diminuir</string>
     <string name="content_description_button_plus">Botão aumentar</string>
+    <string name="content_description_button_settings">"Botão que lhe direciona a tela de configurações "</string>
     <string name="content_description_button_trash">Botão para excluir um item da sua lista.</string>
     <string name="content_description_iv_cooking">Ilustração</string>
 
@@ -54,5 +55,4 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
-
 </resources>

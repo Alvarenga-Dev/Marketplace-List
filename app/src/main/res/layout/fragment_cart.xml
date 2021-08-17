@@ -7,17 +7,35 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.cart.CartFragment">
 
-    <TextView
-        android:id="@+id/tvTitleCart"
-        style="@style/TitleFragmentStyle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/marginOrPadding24dp"
-        android:layout_marginTop="@dimen/marginOrPaddingDefault"
-        android:layout_marginEnd="@dimen/marginOrPadding24dp"
-        android:layout_marginBottom="@dimen/marginOrPaddingDefault"
-        android:text="@string/fragment_title_cart" />
+        android:layout_marginTop="@dimen/marginOrPadding8dp"
+        android:layout_marginBottom="@dimen/marginOrPadding8dp">
+
+        <ImageButton
+            android:id="@+id/ibSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/content_description_button_settings"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitleCart"
+            style="@style/TitleFragmentStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_title_cart"
+            app:layout_constraintBottom_toBottomOf="@+id/ibSettings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ibSettings" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.alvarengadev.marketplacelist.ui.components.Container
         android:layout_width="match_parent"
@@ -95,6 +113,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_cart"
                 tools:visibility="visible" />
 
