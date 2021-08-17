@@ -20,11 +20,25 @@
 
     <string name="footer_button_text">Novo Produto</string>
 
+    <string name="fragment_title_about">Sobre o app</string>
     <string name="fragment_title_add_item">Adicionar item</string>
     <string name="fragment_title_cart">Carrinho</string>
     <string name="fragment_title_details">Detalhes</string>
+    <string name="fragment_title_edit_item">Editar Item</string>
+    <string name="fragment_title_general">Geral</string>
+    <string name="fragment_title_settings">Configurações</string>
 
     <string name="hint_value">R$ 0,00</string>
+
+    <string name="item_about_option_description_privacy_policy">clique aqui para mais informações</string>
+    <string name="item_about_option_title_privacy_policy">Política de privacidade</string>
+    <string name="item_about_option_title_version">Versão</string>
+    <string name="item_general_option_description">atual: %s</string>
+    <string name="item_general_option_title_currency">Formato da moeda</string>
+    <string name="item_general_option_title_theme">Tema</string>
+    <string name="item_settings_option_description_general">tema e formato de moeda</string>
+    <string name="item_settings_option_title_about">Sobre o app</string>
+    <string name="item_settings_option_title_general">Geral</string>
 
     <string name="message_cart_empty">
         Sua lista está vazia :(
@@ -40,5 +54,5 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
-    <string name="fragment_title_edit_item">Editar Item</string>
+
 </resources>

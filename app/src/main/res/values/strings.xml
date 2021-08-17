@@ -20,12 +20,26 @@
 
     <string name="footer_button_text">New item</string>
 
+    <string name="fragment_title_about">About app</string>
     <string name="fragment_title_add_item">Add item</string>
     <string name="fragment_title_cart">Cart</string>
     <string name="fragment_title_details">Details</string>
+    <string name="fragment_title_edit_item">Edit Item</string>
+    <string name="fragment_title_general">General</string>
+    <string name="fragment_title_settings">Settings</string>
 
     <string name="hint_name_item" translatable="false">Ex.: Banana</string>
     <string name="hint_value">$0.00</string>
+
+    <string name="item_about_option_description_privacy_policy">tap here for more information</string>
+    <string name="item_about_option_title_privacy_policy">Privacy Policy</string>
+    <string name="item_about_option_title_version">Version</string>
+    <string name="item_general_option_description">actual: %s</string>
+    <string name="item_general_option_title_currency">Format currency</string>
+    <string name="item_general_option_title_theme">Theme</string>
+    <string name="item_settings_option_description_general">theme and format currency</string>
+    <string name="item_settings_option_title_about">About app</string>
+    <string name="item_settings_option_title_general">General</string>
 
     <string name="message_cart_empty">
         Your list is empty :(
@@ -44,5 +58,5 @@
     <string name="title_value_item">Value</string>
 
     <string name="value_default_quantity" translatable="false">1</string>
-    <string name="fragment_title_edit_item">Edit Item</string>
+
 </resources>

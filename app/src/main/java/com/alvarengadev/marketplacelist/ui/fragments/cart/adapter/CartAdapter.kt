@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
-import com.alvarengadev.marketplacelist.databinding.MyItemCartBinding
+import com.alvarengadev.marketplacelist.databinding.ItemCartBinding
 import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemDialog
 import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemInterface
 import com.alvarengadev.marketplacelist.utils.TextFormatter
@@ -28,7 +28,7 @@ class CartAdapter(
     }
 
     inner class CartViewHolder(
-        private val binding: MyItemCartBinding,
+        private val binding: ItemCartBinding,
         private val listItems: ArrayList<Item>,
         private val onClickItemListener: OnClickItemListener?
     ) : RecyclerView.ViewHolder(binding.root), DeleteItemInterface {
@@ -71,7 +71,7 @@ class CartAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val binding = MyItemCartBinding.inflate(
+        val binding = ItemCartBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

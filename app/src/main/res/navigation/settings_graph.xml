@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.alvarengadev.marketplacelist.ui.settings.fragments.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="@string/fragment_title_settings"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_generalFragment"
@@ -19,11 +19,11 @@
     <fragment
         android:id="@+id/generalFragment"
         android:name="com.alvarengadev.marketplacelist.ui.settings.fragments.GeneralFragment"
-        android:label="fragment_general"
+        android:label="@string/fragment_title_general"
         tools:layout="@layout/fragment_general" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.alvarengadev.marketplacelist.ui.settings.fragments.AboutFragment"
-        android:label="fragment_about"
+        android:label="@string/fragment_title_about"
         tools:layout="@layout/fragment_about" />
 </navigation>

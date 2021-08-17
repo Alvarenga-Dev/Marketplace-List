@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_generic"
     tools:context=".ui.settings.fragments.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcySettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="settingsssss" />
-
+        tools:listitem="@layout/item_settings" />
 </FrameLayout>
