@@ -9,5 +9,7 @@ class Constants {
         const val LIGHT_MODE = "light"
         const val DARK_MODE = "dark"
 
+        const val DIALOG_CURRENCY = "DIALOG_CURRENCY"
+        const val DIALOG_THEME = "DIALOG_THEME"
     }
 }

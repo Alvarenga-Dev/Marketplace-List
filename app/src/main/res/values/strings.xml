@@ -13,9 +13,9 @@
     <string name="content_description_back_button">Button Back for cart list</string>
     <string name="content_description_button_minus">Button minus</string>
     <string name="content_description_button_plus">Button Plus</string>
-    <string name="content_description_button_settings">Button goin to settings</string>
+    <string name="content_description_button_settings">Button going to settings</string>
     <string name="content_description_button_trash">Button for remove your item.</string>
-    <string name="content_description_iv_cooking">Ilustration</string>
+    <string name="content_description_iv_cooking">Illustration</string>
 
     <string name="dialog_message_delete">Do you really want to delete this item?</string>
 

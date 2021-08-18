@@ -33,17 +33,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnOptionOne"
+                android:id="@+id/btnOptionPrimary"
                 style="@style/ButtonDefaultStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Claro"
-                app:layout_constraintBottom_toBottomOf="@+id/btnOptionTwo"
+                app:layout_constraintBottom_toBottomOf="@+id/btnOptionSecondary"
                 app:layout_constraintStart_toStartOf="@+id/tvTitleDialog"
-                app:layout_constraintTop_toTopOf="@+id/btnOptionTwo" />
+                app:layout_constraintTop_toTopOf="@+id/btnOptionSecondary" />
 
             <Button
-                android:id="@+id/btnOptionTwo"
+                android:id="@+id/btnOptionSecondary"
                 style="@style/ButtonDefaultStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
