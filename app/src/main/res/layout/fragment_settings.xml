@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/background_generic"
-    tools:context=".ui.settings.fragments.SettingsFragment">
+    tools:context=".ui.fragments.settings.fragments.SettingsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarSettings"

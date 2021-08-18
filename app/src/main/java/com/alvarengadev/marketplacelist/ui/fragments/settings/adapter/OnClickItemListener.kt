@@ -1,4 +1,4 @@
-package com.alvarengadev.marketplacelist.ui.settings.adapter
+package com.alvarengadev.marketplacelist.ui.fragments.settings.adapter
 
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
 

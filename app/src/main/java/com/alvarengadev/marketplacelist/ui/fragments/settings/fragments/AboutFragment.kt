@@ -1,4 +1,4 @@
-package com.alvarengadev.marketplacelist.ui.settings.fragments
+package com.alvarengadev.marketplacelist.ui.fragments.settings.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentAboutBinding
-import com.alvarengadev.marketplacelist.ui.settings.adapter.OnClickItemListener
-import com.alvarengadev.marketplacelist.ui.settings.adapter.SettingsOptionsAdapter
+import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.OnClickItemListener
+import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.SettingsOptionsAdapter
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 

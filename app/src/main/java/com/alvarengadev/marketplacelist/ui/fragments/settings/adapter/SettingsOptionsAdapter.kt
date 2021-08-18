@@ -1,12 +1,10 @@
-package com.alvarengadev.marketplacelist.ui.settings.adapter
+package com.alvarengadev.marketplacelist.ui.fragments.settings.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.ItemSettingsBinding
-import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
 class SettingsOptionsAdapter(
