@@ -1,11 +1,14 @@
 package com.alvarengadev.marketplacelist.ui.fragments.settings.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentAboutBinding
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.SettingsOptionsAdapter
@@ -44,7 +47,11 @@ class AboutFragment : Fragment() {
             override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
                 when (typeOptionSettings) {
                     TypeOptionSettings.ABOUT_PRIVACY_POLICY -> {
-
+                        val openLinkIntent = Intent(Intent.ACTION_VIEW)
+                        openLinkIntent.data = Uri.parse(
+                            getString(R.string.url_privacy_policy)
+                        )
+                        startActivity(openLinkIntent)
                     }
                     else -> TODO()
                 }
