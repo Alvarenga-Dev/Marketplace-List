@@ -28,6 +28,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
     </style>
 
+    <!-- Buttons -->
     <style name="ButtonStyle">
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -46,6 +47,7 @@
         <item name="backgroundTint">@color/error</item>
     </style>
 
+    <!-- Texts -->
     <style name="TitleFragmentStyle">
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:textColor">@color/white</item>
@@ -56,6 +58,10 @@
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:textColor">@color/text_color_generic</item>
         <item name="android:textSize">@dimen/largerText</item>
+    </style>
+
+    <style name="TitleTextAppearance" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
 
     <style name="SmallTextStyle">
@@ -69,6 +75,7 @@
         <item name="android:textSize">@dimen/normalText</item>
     </style>
 
+    <!-- TextInput -->
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">?attr/colorOnSecondary</item>
         <item name="boxCornerRadiusTopStart">@dimen/cornerRadiusButton</item>
@@ -80,5 +87,13 @@
 
     <style name="TextInputEditTextStyle">
         <item name="android:padding">@dimen/marginOrPaddingDefault</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="ToolbarDefault">
+        <item name="titleTextAppearance">@style/TitleTextAppearance</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="navigationIcon">@drawable/ic_arrow_left</item>
+        <item name="android:background">@color/primary</item>
     </style>
 </resources>

@@ -13,14 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme">
         <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:theme="@style/SettingsScreenTheme"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:configChanges="uiMode"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

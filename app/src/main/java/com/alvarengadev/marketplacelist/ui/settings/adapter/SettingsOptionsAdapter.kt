@@ -62,12 +62,8 @@ class SettingsOptionsAdapter(
                 if (title != null) {
                     tvTitleSettings.text = title
                 }
-
                 if (description != null) {
-                    tvDescriptionSettings.apply {
-                        text = description
-                        visibilityWithoutAnimation()
-                    }
+                    tvDescriptionSettings.text = description
                 }
             }
         }
@@ -75,6 +71,5 @@ class SettingsOptionsAdapter(
         fun lastPosition() {
             binding.viewLineSettings.setBackgroundColor(Color.TRANSPARENT)
         }
-
     }
 }

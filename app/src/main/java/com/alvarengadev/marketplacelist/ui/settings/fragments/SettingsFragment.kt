@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentSettingsBinding
+import com.alvarengadev.marketplacelist.ui.settings.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.ui.settings.adapter.SettingsOptionsAdapter
+import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
 class SettingsFragment : Fragment() {
@@ -37,7 +41,25 @@ class SettingsFragment : Fragment() {
         settingsUtils.getInstance(context)
 
         val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettings())
+        adapterListSettings.setOnClickItemListener(object : OnClickItemListener {
+            override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
+                when (typeOptionSettings) {
+                    TypeOptionSettings.SETTINGS_GENERAL -> {
+                        findNavController().navigate(R.id.action_settingsFragment_to_generalFragment)
+                    }
+                    TypeOptionSettings.SETTINGS_ABOUT -> {
+                        findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+                    }
+                    else -> TODO()
+                }
+            }
+        })
+
         binding.rcySettings.adapter = adapterListSettings
+
+        toolbarSettings.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }
