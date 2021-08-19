@@ -5,6 +5,6 @@ import java.text.NumberFormat
 object TextFormatter {
     fun setCurrency(currencyValue: Double): String =
         NumberFormat
-            .getCurrencyInstance(Parses.parseLocale())
+            .getCurrencyInstance(CurrencyAppUtils.getCurrency())
             .format(currencyValue)
 }

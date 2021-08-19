@@ -1,5 +1,7 @@
 package com.alvarengadev.marketplacelist.utils
 
+import java.util.*
+
 class Constants {
     companion object {
         const val DATABASE_NAME = "marketplace_database"
@@ -10,6 +12,10 @@ class Constants {
         const val DARK_MODE = "dark"
 
         const val DIALOG_CURRENCY = "DIALOG_CURRENCY"
-        const val DIALOG_THEME = "DIALOG_THEME"
+
+        const val CURRENCY_BR = "CURRENCY_BR"
+        const val CURRENCY_EN = "CURRENCY_EN"
+
+        val LOCALE_BRAZIL = Locale("pt", "BR")
     }
 }

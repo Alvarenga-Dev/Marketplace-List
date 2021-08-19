@@ -3,8 +3,8 @@ package com.alvarengadev.marketplacelist.utils.settings
 import android.content.Context
 import com.alvarengadev.marketplacelist.BuildConfig
 import com.alvarengadev.marketplacelist.R
+import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
-import kotlin.collections.ArrayList
 
 class SettingsUtils {
 
@@ -39,22 +39,12 @@ class SettingsUtils {
         return listOptions
     }
 
-    fun getListSettingsGeneral(
-        theme: String,
-        currency: String
-    ): ArrayList<Options> {
+    fun getListSettingsGeneral(): ArrayList<Options> {
         val listOptions = ArrayList<Options>()
         listOptions.add(
             Options(
-                context?.getString(R.string.item_general_option_title_theme),
-                context?.getString(R.string.item_general_option_description, theme),
-                TypeOptionSettings.GENERAL_THEME
-            )
-        )
-        listOptions.add(
-            Options(
                 context?.getString(R.string.item_general_option_title_currency),
-                context?.getString(R.string.item_general_option_description, currency),
+                context?.getString(R.string.item_general_option_description, if (Parses.isLocaleBrazil()) "Real - BR (R$)" else "Dollar - US ($)" ),
                 TypeOptionSettings.GENERAL_CURRENCY
             )
         )

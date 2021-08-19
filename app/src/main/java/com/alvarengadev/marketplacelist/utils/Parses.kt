@@ -10,7 +10,7 @@ class Parses {
         fun parseToCurrency(value: String): String {
             val replaceable = String.format(
                 "[%s,.\\s]",
-                NumberFormat.getCurrencyInstance(parseLocale()).currency?.symbol
+                NumberFormat.getCurrencyInstance(CurrencyAppUtils.getCurrency()).currency?.symbol
             )
             var cleanString = value.replace(replaceable.toRegex(), "")
             if (cleanString.isEmpty()) cleanString = "0"
@@ -22,13 +22,13 @@ class Parses {
             )
 
             return NumberFormat
-                .getCurrencyInstance(parseLocale())
+                .getCurrencyInstance(CurrencyAppUtils.getCurrency())
                 .format(parsed)
         }
 
         fun parseToDouble(value: String): Double {
             return if (value.isNotEmpty()) {
-                if (Locale.getDefault().displayName == Locale("pt", "BR").displayName) {
+                if (isLocaleBrazil()) {
                     value.replace("R$", "")
                         .replace(".", "")
                         .replace(",", ".")
@@ -41,13 +41,6 @@ class Parses {
             }
         }
 
-        fun parseLocale(): Locale {
-            val getLocaleBR = Locale("pt", "BR")
-            val getLocalEN = Locale.US
-
-            return if (Locale.getDefault().displayName == getLocaleBR.displayName) getLocaleBR else getLocalEN
-        }
-
         fun parseValueTotal(listItems: ArrayList<Item>): Double {
             var totalValue = 0.0
 
@@ -57,5 +50,7 @@ class Parses {
 
             return totalValue
         }
+
+        fun isLocaleBrazil() = CurrencyAppUtils.getCurrency().displayName == Constants.LOCALE_BRAZIL.displayName
     }
 }

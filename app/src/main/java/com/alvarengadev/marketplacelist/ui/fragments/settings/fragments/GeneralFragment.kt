@@ -1,10 +1,10 @@
 package com.alvarengadev.marketplacelist.ui.fragments.settings.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.databinding.FragmentGeneralBinding
 import com.alvarengadev.marketplacelist.ui.components.dialog.DialogDefault
@@ -12,13 +12,13 @@ import com.alvarengadev.marketplacelist.ui.components.dialog.OnButtonsDialogList
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.SettingsOptionsAdapter
 import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.CurrencyAppUtils
+import com.alvarengadev.marketplacelist.utils.PreferencesManager
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
-import com.alvarengadev.marketplacelist.utils.extensions.toast
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
 class GeneralFragment : Fragment() {
 
+    private var preferencesManager: PreferencesManager? = null
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding!!
 
@@ -32,6 +32,7 @@ class GeneralFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferencesManager = PreferencesManager.instance
         initComponents()
     }
 
@@ -44,35 +45,21 @@ class GeneralFragment : Fragment() {
         val settingsUtils = SettingsUtils()
         settingsUtils.getInstance(context)
 
-        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettingsGeneral(
-            theme = "Light",
-            currency = CurrencyAppUtils.getCurrency()
-        ))
+        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettingsGeneral())
         adapterListSettings.setOnClickItemListener(object : OnClickItemListener {
             override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
                 when (typeOptionSettings) {
-                    TypeOptionSettings.GENERAL_THEME -> {
-                        val dialog = DialogDefault.getInstance("Escolha um dos temas", "Claro", "Escuro")
-                        dialog.setOnButtonPrimaryDialogListener(object : OnButtonsDialogListener {
-                            override fun setOnClickListenerButtonPrimary() {
-                                context?.toast("Botão 1 - Claro")
-                            }
-
-                            override fun setOnClickListenerButtonSecondary() {
-                                context?.toast("Botão 2 - Escuro")
-                            }
-                        })
-                        dialog.show(childFragmentManager, Constants.DIALOG_THEME)
-                    }
                     TypeOptionSettings.GENERAL_CURRENCY -> {
                         val dialog = DialogDefault.getInstance("Escolha uma das moedas", "Dólar", "Real")
                         dialog.setOnButtonPrimaryDialogListener(object : OnButtonsDialogListener {
                             override fun setOnClickListenerButtonPrimary() {
-                                context?.toast("Botão 1 - Dólar")
+                                preferencesManager?.setCurrency(Constants.CURRENCY_EN)
+                                dialog.dismiss()
                             }
 
                             override fun setOnClickListenerButtonSecondary() {
-                                context?.toast("Botão 2 - Real")
+                                preferencesManager?.setCurrency(Constants.CURRENCY_BR)
+                                dialog.dismiss()
                             }
                         })
                         dialog.show(childFragmentManager, Constants.DIALOG_CURRENCY)
