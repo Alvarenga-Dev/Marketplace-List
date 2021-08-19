@@ -16,7 +16,7 @@ class SettingsUtils {
 
     data class Options(
         val title: String?,
-        val description: String?,
+        var description: String?,
         val typeOptionSettings: TypeOptionSettings? = null
     )
 
@@ -44,7 +44,7 @@ class SettingsUtils {
         listOptions.add(
             Options(
                 context?.getString(R.string.item_general_option_title_currency),
-                context?.getString(R.string.item_general_option_description, if (Parses.isLocaleBrazil()) "Real - BR (R$)" else "Dollar - US ($)" ),
+                if (Parses.isLocaleBrazil()) context?.getString(R.string.item_general_option_description_real) else context?.getString(R.string.item_general_option_description_dollar),
                 TypeOptionSettings.GENERAL_CURRENCY
             )
         )

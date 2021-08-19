@@ -55,4 +55,11 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+    <string name="dialog_currency_title">Escolha uma da moeda</string>
+    <string name="dialog_currency_option_real_button">Real</string>
+    <string name="dialog_currency_option_dollar_button">Dólar</string>
+    item_general_option_description_real
+    item_general_option_description_dollar
+    <string name="item_general_option_description_real">Atual: Real - R$</string>
+    <string name="item_general_option_description_dollar">Atual: Dólar - $</string>
 </resources>

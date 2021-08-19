@@ -59,4 +59,10 @@
     <string name="title_value_item">Value</string>
 
     <string name="value_default_quantity" translatable="false">1</string>
+    <string name="dialog_currency_title">Choose one of the currency</string>
+    <string name="dialog_currency_option_real_button">Real</string>
+    <string name="dialog_currency_option_dollar_button">Dollar</string>
+
+    <string name="item_general_option_description_real">Actual: Real - R$</string>
+    <string name="item_general_option_description_dollar">Actual: Dollar - $</string>
 </resources>
