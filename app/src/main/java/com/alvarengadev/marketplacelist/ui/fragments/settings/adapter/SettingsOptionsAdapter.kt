@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alvarengadev.marketplacelist.databinding.ItemSettingsBinding
-import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
