@@ -1,6 +1,6 @@
 # Marketplace List
 
-![Recurso gráfico.png](Marketplace%20List%2059f829b1a7564f9a97f8c37687b63953/Recurso_grfico.png)
+![header.png](images_readme/header.png)
 
 Esse simples App de lista de compras tem como objetivo ser simples e eficiente. A ideia é que você consiga criar a sua lista de compras e já saiba o valor final da compra.
 
