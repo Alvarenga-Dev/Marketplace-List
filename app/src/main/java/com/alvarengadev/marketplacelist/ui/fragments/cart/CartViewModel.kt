@@ -19,6 +19,8 @@ class CartViewModel @Inject constructor(
     sealed class CartListState {
         object LoadingList : CartListState()
         object ListEmpty : CartListState()
+        object ClearSuccess : CartListState()
+        object ClearFailListNotEmpty : CartListState()
         class SuccessList(val listItems: ArrayList<Item>, val total: Double) : CartListState()
     }
 
@@ -31,6 +33,15 @@ class CartViewModel @Inject constructor(
             _registrationStateEvent.postValue(CartListState.SuccessList(listItems, Parses.parseValueTotal(listItems)))
         } else {
             _registrationStateEvent.postValue(CartListState.ListEmpty)
+        }
+    }
+
+    fun clearCart() = viewModelScope.launch {
+        val isClear = repository.deleteAll()
+        if (isClear) {
+            _registrationStateEvent.postValue(CartListState.ClearSuccess)
+        } else {
+            _registrationStateEvent.postValue(CartListState.ClearFailListNotEmpty)
         }
     }
 }

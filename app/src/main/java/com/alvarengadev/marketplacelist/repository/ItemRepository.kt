@@ -5,8 +5,8 @@ import com.alvarengadev.marketplacelist.data.database.entities.toArrayListItem
 import com.alvarengadev.marketplacelist.data.database.entities.toEntity
 import com.alvarengadev.marketplacelist.data.database.entities.toItem
 import com.alvarengadev.marketplacelist.data.models.Item
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 class ItemRepository @Inject constructor(
     private val itemDao: ItemDao
@@ -37,6 +37,19 @@ class ItemRepository @Inject constructor(
         true
     } catch (ex: Exception) {
         false
+    }
+
+    suspend fun deleteAll(): Boolean {
+        return if (getAll().isNotEmpty()) {
+            try {
+                itemDao.deleteAll()
+                true
+            } catch (ex: Exception) {
+                false
+            }
+        } else {
+            false
+        }
     }
 
     suspend fun getAll(): ArrayList<Item> = try {

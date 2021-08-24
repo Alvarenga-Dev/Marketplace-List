@@ -2,9 +2,10 @@ package com.alvarengadev.marketplacelist.ui.fragments.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
@@ -15,8 +16,10 @@ import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEm
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
+import com.alvarengadev.marketplacelist.utils.extensions.toast
 import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
@@ -56,6 +59,16 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         ibSettings.setOnClickListener {
             findNavController().navigate(R.id.action_cartFragment_to_settings_graph)
         }
+
+        ibMore.setOnClickListener {
+            val popupMenu = context?.let { context -> PopupMenu(context, it) }
+            popupMenu?.menuInflater?.inflate(R.menu.menu_popup_cart, popupMenu.menu)
+            popupMenu?.setOnMenuItemClickListener{
+                cartViewModel.clearCart()
+                true
+            }
+            popupMenu?.show()
+        }
     }
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
@@ -85,10 +98,17 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     showList(true)
                     footerCart.setCartValue(registrationState.total)
                 }
+
+                if (registrationState is CartViewModel.CartListState.ClearSuccess) {
+                    cartViewModel.getListItems()
+                }
+
+                if (registrationState is CartViewModel.CartListState.ClearFailListNotEmpty) {
+                    context?.toast("Seu carrinho já está vazio!")
+                }
             }
         }
     }
-
 
     private fun showList(isShow: Boolean) = binding.apply {
         pbLoadingList.goneWithoutAnimation()
