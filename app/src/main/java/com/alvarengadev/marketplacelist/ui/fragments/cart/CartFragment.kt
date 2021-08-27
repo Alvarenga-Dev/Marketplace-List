@@ -15,11 +15,10 @@ import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.utils.Parses
+import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
-import com.alvarengadev.marketplacelist.utils.extensions.toast
 import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
@@ -73,7 +72,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
         with(cartViewModel) {
-            registrationStateEvent.observeForever { registrationState ->
+            registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is CartViewModel.CartListState.LoadingList) {
                     pbLoadingList.visibilityWithoutAnimation()
                 }
@@ -98,13 +97,15 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     showList(true)
                     footerCart.setCartValue(registrationState.total)
                 }
-
-                if (registrationState is CartViewModel.CartListState.ClearSuccess) {
-                    cartViewModel.getListItems()
-                }
-
-                if (registrationState is CartViewModel.CartListState.ClearFailListNotEmpty) {
-                    context?.toast("Seu carrinho já está vazio!")
+            }
+            registrationStateClearCartEvent.observe(viewLifecycleOwner) { registrationState ->
+                if (registrationState is CartViewModel.ClearCart.Result) {
+                    if (registrationState.isSuccessful) {
+                        cartViewModel.getListItems()
+                    } else {
+                        root.createSnack(R.string.alert_list_empty)
+                    }
+                    cartViewModel.resetClearCart()
                 }
             }
         }
