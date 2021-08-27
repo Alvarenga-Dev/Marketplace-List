@@ -11,10 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
+import com.alvarengadev.marketplacelist.ui.components.bottomsheet.BottomSheetOnboarding
+import com.alvarengadev.marketplacelist.ui.components.bottomsheet.`interface`.ButtonGotItClickListener
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.feature.FeatureClearCartDialog
+import com.alvarengadev.marketplacelist.utils.Constants
 import com.alvarengadev.marketplacelist.utils.Parses
+import com.alvarengadev.marketplacelist.utils.PreferencesManager
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
 import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
@@ -23,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
+    private var preferencesManager: PreferencesManager? = null
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
     private val cartViewModel: CartViewModel by viewModels()
@@ -33,14 +39,16 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
+        context?.let { PreferencesManager.initializeInstance(it) }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cartViewModel.getListItems()
+        preferencesManager = PreferencesManager.instance
+        setupComponents()
+        setupEvents()
         listenToRegistrationViewModelEvents()
-        initComponents()
     }
 
     override fun onDestroy() {
@@ -48,7 +56,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         _binding = null
     }
 
-    private fun initComponents() = binding.apply {
+    private fun setupComponents() = binding.apply {
         footerCart
             .setTextButton(getString(R.string.footer_button_text))
             .setActionButton {
@@ -67,6 +75,16 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                 true
             }
             popupMenu?.show()
+        }
+
+        if (preferencesManager?.getViewOnboardingWelcome() == false) {
+            val bottomSheet = BottomSheetOnboarding()
+            bottomSheet.setButtonGotItClickListener(object : ButtonGotItClickListener {
+                override fun onClick() {
+                    preferencesManager?.setViewOnboardingWelcome()
+                    bottomSheet.dismiss()
+                }
+            }).show(childFragmentManager, Constants.BOTTOM_SHEET_WELCOME)
         }
     }
 
@@ -95,6 +113,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     rcyCartItem.adapter = adapterListCart
 
                     showList(true)
+                    viewDialogAlertFeatureClearCart()
                     footerCart.setCartValue(registrationState.total)
                 }
 
@@ -106,7 +125,23 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     }
                     cartViewModel.resetClearCart()
                 }
+
+                if (registrationState is CartViewModel.CartListState.Dialog) {
+                    showDialogFeatureClearCart()
+                    cartViewModel.resetClearCart()
+                }
             }
+        }
+    }
+
+    private fun setupEvents() = cartViewModel.apply {
+        getListItems()
+    }
+
+    private fun showDialogFeatureClearCart() {
+        if (preferencesManager?.getViewFeatureClearCart() == false) {
+            val dialog = FeatureClearCartDialog()
+            dialog.show(childFragmentManager, Constants.DIALOG_FEATURE_CLEAR_CART)
         }
     }
 

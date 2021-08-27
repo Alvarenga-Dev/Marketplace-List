@@ -20,6 +20,7 @@ class CartViewModel @Inject constructor(
         object None : CartListState()
         object LoadingList : CartListState()
         object ListEmpty : CartListState()
+        object Dialog : CartListState()
         class SuccessList(val listItems: ArrayList<Item>, val total: Double) : CartListState()
         class Result(val isSuccessful: Boolean) : CartListState()
     }
@@ -42,4 +43,11 @@ class CartViewModel @Inject constructor(
     }
 
     fun resetClearCart() = _registrationStateEvent.postValue(CartListState.None)
+
+    fun viewDialogAlertFeatureClearCart() = viewModelScope.launch {
+        val listItems = repository.getAll()
+        if (listItems.size >= 1) {
+            _registrationStateEvent.postValue(CartListState.Dialog)
+        }
+    }
 }

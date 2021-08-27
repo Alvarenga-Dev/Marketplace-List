@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.ItemCartBinding
-import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemDialog
-import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.DeleteItemInterface
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.delete.DeleteItemDialog
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.delete.DeleteItemInterface
 import com.alvarengadev.marketplacelist.utils.TextFormatter
 
 class CartAdapter(

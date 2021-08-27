@@ -65,4 +65,10 @@
     <string name="title_value_item">Value</string>
 
     <string name="value_default_quantity" translatable="false">1</string>
+    <string name="bottomsheet_onboarding_title_welcome">A thank you message</string>
+    <string name="bottomsheet_onboarding_description_welcome">Thanks for being a part of this, we hope we can help you with your shopping.</string>
+    <string name="dialog_feature_clear_cart_title">You can do a clean sweep!</string>
+    <string name="dialog_feature_clear_cart_description">It will no longer be necessary to clean item by item, just click on the 3 (three) dots there!</string>
+    <string name="bottomsheet_onboarding_button_welcome">Left to use!</string>
+    <string name="dialog_feature_clear_cart_button">Got it, yup!</string>
 </resources>

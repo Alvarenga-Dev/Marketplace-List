@@ -61,4 +61,10 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+    <string name="bottomsheet_onboarding_title_welcome">Uma mensagem de agradecimento</string>
+    <string name="bottomsheet_onboarding_description_welcome">Obrigado por fazer parte disso, esperamos que possamos te ajudar nas suas compras.</string>
+    <string name="dialog_feature_clear_cart_title">Você pode fazer uma limpa geral!</string>
+    <string name="dialog_feature_clear_cart_description">Não será mais preciso limpar item por item, basta clicar ali nos 3 (três) pontinhos!</string>
+    <string name="bottomsheet_onboarding_button_welcome">Partiu usar!</string>
+    <string name="dialog_feature_clear_cart_button">Entendi, oba!</string>
 </resources>

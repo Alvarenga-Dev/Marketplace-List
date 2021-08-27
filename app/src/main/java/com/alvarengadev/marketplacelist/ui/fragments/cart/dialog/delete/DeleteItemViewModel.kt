@@ -1,4 +1,4 @@
-package com.alvarengadev.marketplacelist.ui.fragments.cart.dialog
+package com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.delete
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
