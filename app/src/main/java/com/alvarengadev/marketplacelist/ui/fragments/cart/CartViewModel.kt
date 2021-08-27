@@ -24,13 +24,11 @@ class CartViewModel @Inject constructor(
         class Result(val isSuccessful: Boolean) : CartListState()
     }
 
-    sealed class ClearCart {
-    }
-
     private val _registrationStateEvent = MutableLiveData<CartListState>(CartListState.LoadingList)
     val registrationStateEvent: LiveData<CartListState> get() = _registrationStateEvent
 
     fun getListItems() = viewModelScope.launch {
+        _registrationStateEvent.postValue(CartListState.LoadingList)
         val listItems = repository.getAll()
         if (listItems.isNotEmpty()) {
             _registrationStateEvent.postValue(CartListState.SuccessList(listItems, Parses.parseValueTotal(listItems)))
