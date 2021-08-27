@@ -40,7 +40,7 @@ class FeatureClearCartDialog : DialogFragment() {
         btnDialogFeature.apply {
             text = getString(R.string.dialog_feature_clear_cart_button)
             setOnClickListener {
-                PreferencesManager.instance?.setViewOnboardingWelcome()
+                PreferencesManager.instance?.setViewFeatureClearCart()
                 closeDialog()
             }
         }
