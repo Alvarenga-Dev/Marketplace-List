@@ -1,5 +1,6 @@
 package com.alvarengadev.marketplacelist.ui.fragments.cart.dialog
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,10 +14,15 @@ import javax.inject.Inject
 class DeleteItemViewModel @Inject constructor(
     private val repository: ItemRepository
 ) : ViewModel() {
-    val isDelete = MutableLiveData<Boolean>()
 
-    fun deleteItem(item: Item) =
-        viewModelScope.launch {
-            isDelete.value = repository.delete(item)
-        }
+    sealed class DeleteState {
+        class Result(val isSuccessful: Boolean) : DeleteState()
+    }
+
+    private val _registrationStateEvent = MutableLiveData<DeleteState>()
+    val registrationStateEvent: LiveData<DeleteState> get() = _registrationStateEvent
+
+    fun deleteItem(item: Item) = viewModelScope.launch {
+        _registrationStateEvent.postValue(DeleteState.Result(repository.delete(item)))
+    }
 }

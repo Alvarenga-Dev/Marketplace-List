@@ -97,9 +97,8 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     showList(true)
                     footerCart.setCartValue(registrationState.total)
                 }
-            }
-            registrationStateClearCartEvent.observe(viewLifecycleOwner) { registrationState ->
-                if (registrationState is CartViewModel.ClearCart.Result) {
+
+                if (registrationState is CartViewModel.CartListState.Result) {
                     if (registrationState.isSuccessful) {
                         cartViewModel.getListItems()
                     } else {

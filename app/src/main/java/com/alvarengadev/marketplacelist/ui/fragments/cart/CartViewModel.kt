@@ -17,21 +17,18 @@ class CartViewModel @Inject constructor(
 ) : ViewModel() {
 
     sealed class CartListState {
+        object None : CartListState()
         object LoadingList : CartListState()
         object ListEmpty : CartListState()
         class SuccessList(val listItems: ArrayList<Item>, val total: Double) : CartListState()
+        class Result(val isSuccessful: Boolean) : CartListState()
     }
 
     sealed class ClearCart {
-        object None : ClearCart()
-        class Result(val isSuccessful: Boolean) : ClearCart()
     }
 
     private val _registrationStateEvent = MutableLiveData<CartListState>(CartListState.LoadingList)
     val registrationStateEvent: LiveData<CartListState> get() = _registrationStateEvent
-
-    private val _registrationStateClearCartEvent = MutableLiveData<ClearCart>()
-    val registrationStateClearCartEvent: LiveData<ClearCart> get() = _registrationStateClearCartEvent
 
     fun getListItems() = viewModelScope.launch {
         val listItems = repository.getAll()
@@ -43,8 +40,8 @@ class CartViewModel @Inject constructor(
     }
 
     fun clearCart() = viewModelScope.launch {
-        _registrationStateClearCartEvent.postValue(ClearCart.Result(repository.deleteAll()))
+        _registrationStateEvent.postValue(CartListState.Result(repository.deleteAll()))
     }
 
-    fun resetClearCart() = _registrationStateClearCartEvent.postValue(ClearCart.None)
+    fun resetClearCart() = _registrationStateEvent.postValue(CartListState.None)
 }

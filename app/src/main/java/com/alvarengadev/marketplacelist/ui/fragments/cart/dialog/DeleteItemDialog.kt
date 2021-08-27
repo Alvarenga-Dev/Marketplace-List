@@ -34,28 +34,33 @@ class DeleteItemDialog : DialogFragment() {
         dialog = builder.create()
         dialog.setCanceledOnTouchOutside(true)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        listenToRegistrationViewModelEvents()
 
         return dialog
     }
 
-    private fun initializerDialog(binding: DialogDeleteItemBinding) =
-        binding.apply {
-            btnConfirmDialogDelete.setOnClickListener {
-                deleteItemViewModel.apply {
-                    item?.let { item -> deleteItem(item) }
-                    isDelete.observeForever { isDelete ->
-                        if (isDelete) {
-                            item?.let { item -> deleteItemInterface?.notifyItemDelete(item) }
-                            closeDialog()
-                        }
-                    }
-                }
-            }
-
-            btnCancelDialogDelete.setOnClickListener {
-                closeDialog()
+    private fun initializerDialog(binding: DialogDeleteItemBinding) = binding.apply {
+        btnConfirmDialogDelete.setOnClickListener {
+            deleteItemViewModel.apply {
+                item?.let { item -> deleteItem(item) }
             }
         }
+
+        btnCancelDialogDelete.setOnClickListener {
+            closeDialog()
+        }
+    }
+
+    private fun listenToRegistrationViewModelEvents() {
+        deleteItemViewModel.registrationStateEvent.observeForever { registrationState ->
+            if (registrationState is DeleteItemViewModel.DeleteState.Result) {
+                if (registrationState.isSuccessful) {
+                    item?.let { item -> deleteItemInterface?.notifyItemDelete(item) }
+                    closeDialog()
+                }
+            }
+        }
+    }
 
     private fun closeDialog() = dialog.dismiss()
 }
