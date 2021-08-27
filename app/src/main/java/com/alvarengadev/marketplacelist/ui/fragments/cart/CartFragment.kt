@@ -139,7 +139,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     }
 
     private fun showDialogFeatureClearCart() {
-        if (preferencesManager?.getViewFeatureClearCart() == false) {
+        if (preferencesManager?.getViewFeatureClearCart() == false && preferencesManager?.getViewOnboardingWelcome() == true) {
             val dialog = FeatureClearCartDialog()
             dialog.show(childFragmentManager, Constants.DIALOG_FEATURE_CLEAR_CART)
         }
