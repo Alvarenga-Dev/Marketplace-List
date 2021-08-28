@@ -35,6 +35,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/ibSettings" />
+
+        <ImageButton
+            android:id="@+id/ibMore"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitleCart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitleCart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.alvarengadev.marketplacelist.ui.components.Container

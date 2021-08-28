@@ -99,7 +99,7 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
         with(addOrEditViewModel) {
-            registrationStateEvent.observeForever { registrationState ->
+            registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is AddOrEditViewModel.AddingState.CollectItem) {
                     footerAddItem.setActionButton {
                         addOrEditViewModel.addItem(tfNameItem.editText?.text.toString())

@@ -47,7 +47,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun listenToRegistrationViewModelEvents() = binding.apply {
         with(detailsViewModel) {
-            registrationStateEvent.observeForever { registrationState ->
+            registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is DetailsViewModel.DetailsState.SuccessGetItem) {
                     btnEditDetails.setOnClickListener {
                         val directions = DetailsFragmentDirections

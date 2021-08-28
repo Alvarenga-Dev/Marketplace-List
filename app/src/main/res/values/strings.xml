@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="alert_error_add_item">Ops… error add item</string>
+    <string name="alert_list_empty">Your cart is empty</string>
     <string name="alert_text_name_empty">Name the product is empty!</string>
     <string name="alert_text_value_empty">Value is empty!</string>
 
@@ -17,6 +18,9 @@
     <string name="content_description_button_trash">Button for remove your item.</string>
     <string name="content_description_iv_cooking">Illustration</string>
 
+    <string name="dialog_currency_option_dollar_button">Dollar</string>
+    <string name="dialog_currency_option_real_button">Real</string>
+    <string name="dialog_currency_title">Choose one of the currency</string>
     <string name="dialog_message_delete">Do you really want to delete this item?</string>
 
     <string name="footer_button_text">New item</string>
@@ -36,6 +40,8 @@
     <string name="item_about_option_title_privacy_policy">Privacy Policy</string>
     <string name="item_about_option_title_version">Version</string>
     <string name="item_general_option_description">actual: %s</string>
+    <string name="item_general_option_description_dollar">Actual: Dollar - $</string>
+    <string name="item_general_option_description_real">Actual: Real - R$</string>
     <string name="item_general_option_title_currency">Format currency</string>
     <string name="item_general_option_title_theme">Theme</string>
     <string name="item_settings_option_description_general">theme and format currency</string>
@@ -59,10 +65,10 @@
     <string name="title_value_item">Value</string>
 
     <string name="value_default_quantity" translatable="false">1</string>
-    <string name="dialog_currency_title">Choose one of the currency</string>
-    <string name="dialog_currency_option_real_button">Real</string>
-    <string name="dialog_currency_option_dollar_button">Dollar</string>
-
-    <string name="item_general_option_description_real">Actual: Real - R$</string>
-    <string name="item_general_option_description_dollar">Actual: Dollar - $</string>
+    <string name="bottomsheet_onboarding_title_welcome">A thank you message</string>
+    <string name="bottomsheet_onboarding_description_welcome">Thanks for being a part of this, we hope we can help you with your shopping.</string>
+    <string name="dialog_feature_clear_cart_title">You can do a clean sweep!</string>
+    <string name="dialog_feature_clear_cart_description">It will no longer be necessary to clean item by item, just click on the 3 (three) dots there!</string>
+    <string name="bottomsheet_onboarding_button_welcome">Left to use!</string>
+    <string name="dialog_feature_clear_cart_button">Got it, yup!</string>
 </resources>

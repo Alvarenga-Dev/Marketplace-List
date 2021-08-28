@@ -11,7 +11,9 @@ class Constants {
         const val LIGHT_MODE = "light"
         const val DARK_MODE = "dark"
 
+        const val BOTTOM_SHEET_WELCOME = "BOTTOM_SHEET_WELCOME"
         const val DIALOG_CURRENCY = "DIALOG_CURRENCY"
+        const val DIALOG_FEATURE_CLEAR_CART = "DIALOG_FEATURE_CLEAR_CART"
 
         const val CURRENCY_BR = "CURRENCY_BR"
         const val CURRENCY_EN = "CURRENCY_EN"

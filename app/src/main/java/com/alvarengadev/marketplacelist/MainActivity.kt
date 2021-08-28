@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_MarketplaceList)
         setContentView(R.layout.activity_main)
-        PreferencesManager.initializeInstance(applicationContext)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="alert_error_add_item">Ops… algo de errado aconteceu!</string>
+    <string name="alert_list_empty">Seu carrinho já está vazio</string>
     <string name="alert_text_name_empty">O nome do produto está vazio!</string>
     <string name="alert_text_value_empty">O valor está vazio!</string>
 
@@ -17,6 +18,9 @@
     <string name="content_description_button_trash">Botão para excluir um item da sua lista.</string>
     <string name="content_description_iv_cooking">Ilustração</string>
 
+    <string name="dialog_currency_option_dollar_button">Dólar</string>
+    <string name="dialog_currency_option_real_button">Real</string>
+    <string name="dialog_currency_title">Escolha uma da moeda</string>
     <string name="dialog_message_delete">Deseja realmente excluir esse item?</string>
 
     <string name="footer_button_text">Novo Produto</string>
@@ -35,6 +39,8 @@
     <string name="item_about_option_title_privacy_policy">Política de privacidade</string>
     <string name="item_about_option_title_version">Versão</string>
     <string name="item_general_option_description">atual: %s</string>
+    <string name="item_general_option_description_dollar">Atual: Dólar - $</string>
+    <string name="item_general_option_description_real">Atual: Real - R$</string>
     <string name="item_general_option_title_currency">Formato da moeda</string>
     <string name="item_general_option_title_theme">Tema</string>
     <string name="item_settings_option_description_general">tema e formato de moeda</string>
@@ -55,11 +61,10 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
-    <string name="dialog_currency_title">Escolha uma da moeda</string>
-    <string name="dialog_currency_option_real_button">Real</string>
-    <string name="dialog_currency_option_dollar_button">Dólar</string>
-    item_general_option_description_real
-    item_general_option_description_dollar
-    <string name="item_general_option_description_real">Atual: Real - R$</string>
-    <string name="item_general_option_description_dollar">Atual: Dólar - $</string>
+    <string name="bottomsheet_onboarding_title_welcome">Uma mensagem de agradecimento</string>
+    <string name="bottomsheet_onboarding_description_welcome">Obrigado por fazer parte disso, esperamos que possamos te ajudar nas suas compras.</string>
+    <string name="dialog_feature_clear_cart_title">Você pode fazer uma limpa geral!</string>
+    <string name="dialog_feature_clear_cart_description">Não será mais preciso limpar item por item, basta clicar ali nos 3 (três) pontinhos!</string>
+    <string name="bottomsheet_onboarding_button_welcome">Partiu usar!</string>
+    <string name="dialog_feature_clear_cart_button">Entendi, oba!</string>
 </resources>
