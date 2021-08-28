@@ -23,7 +23,7 @@ class FeatureClearCartDialog : DialogFragment() {
         initializerDialog(binding)
 
         dialog = builder.create()
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return dialog
