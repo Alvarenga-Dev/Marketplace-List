@@ -8,34 +8,42 @@ import java.util.*
 class Parses {
     companion object {
         fun parseToCurrency(value: String): String {
-            val replaceable = String.format(
-                "[%s,.\\s]",
-                NumberFormat.getCurrencyInstance(CurrencyAppUtils.getCurrency()).currency?.symbol
-            )
-            var cleanString = value.replace(replaceable.toRegex(), "")
-            if (cleanString.isEmpty()) cleanString = "0"
+            return try {
+                val replaceable = String.format(
+                    "[%s,.\\s]",
+                    NumberFormat.getCurrencyInstance(CurrencyAppUtils.getCurrency()).currency?.symbol
+                )
+                var cleanString = value.replace(replaceable.toRegex(), "")
+                if (cleanString.isEmpty()) cleanString = "0"
 
-            val parsed = BigDecimal(cleanString).setScale(
-                2, BigDecimal.ROUND_FLOOR
-            ).divide(
-                BigDecimal(100), BigDecimal.ROUND_FLOOR
-            )
+                val parsed = BigDecimal(cleanString).setScale(
+                    2, BigDecimal.ROUND_FLOOR
+                ).divide(
+                    BigDecimal(100), BigDecimal.ROUND_FLOOR
+                )
 
-            return NumberFormat
-                .getCurrencyInstance(CurrencyAppUtils.getCurrency())
-                .format(parsed)
+                NumberFormat
+                    .getCurrencyInstance(CurrencyAppUtils.getCurrency())
+                    .format(parsed)
+            } catch (ex: Exception) {
+                ""
+            }
         }
 
         fun parseToDouble(value: String): Double {
             return if (value.isNotEmpty()) {
-                if (isLocaleBrazil()) {
-                    value.replace("R$", "")
-                        .replace(".", "")
-                        .replace(",", ".")
-                } else {
-                    value.replace("$", "")
-                        .replace(",", "")
-                }.trim().toDouble()
+                try {
+                    if (isLocaleBrazil()) {
+                        value.replace("R$", "")
+                            .replace(".", "")
+                            .replace(",", ".")
+                    } else {
+                        value.replace("$", "")
+                            .replace(",", "")
+                    }.trim().toDouble()
+                } catch (ex: Exception) {
+                    0.0
+                }
             } else {
                 0.0
             }
@@ -43,11 +51,9 @@ class Parses {
 
         fun parseValueTotal(listItems: ArrayList<Item>): Double {
             var totalValue = 0.0
-
             for (item in listItems) {
                 totalValue += (item.value * item.quantity)
             }
-
             return totalValue
         }
 
