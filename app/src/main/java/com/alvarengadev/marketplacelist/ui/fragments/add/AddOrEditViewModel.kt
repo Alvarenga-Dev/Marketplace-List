@@ -69,7 +69,7 @@ class AddOrEditViewModel @Inject constructor(
     }
 
     fun addItem(name: String) {
-        if (isValidItem(name, value)) {
+        if (isValidItem(name)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
             createItem(name, value, quantity)
         }
@@ -79,7 +79,7 @@ class AddOrEditViewModel @Inject constructor(
         itemId: Int,
         name: String
     ) {
-        if (isValidItem(name, value)) {
+        if (isValidItem(name)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
             updateItem(itemId, name)
         }
@@ -126,16 +126,11 @@ class AddOrEditViewModel @Inject constructor(
     }
 
     private fun isValidItem(
-        name: String,
-        value: Double
+        name: String
     ): Boolean {
         val messageForError = arrayListOf<Pair<String, Int>>()
         if (name.isEmpty()) {
             messageForError.add(INPUT_NAME_ITEM)
-        }
-
-        if (value == 0.0) {
-            messageForError.add(INPUT_VALUE_ITEM)
         }
 
         if (messageForError.isNotEmpty()) {
@@ -148,6 +143,5 @@ class AddOrEditViewModel @Inject constructor(
 
     companion object {
         val INPUT_NAME_ITEM = Constants.INPUT_NAME_ITEM to R.string.alert_text_name_empty
-        val INPUT_VALUE_ITEM = Constants.INPUT_VALUE_ITEM to R.string.alert_text_value_empty
     }
 }
