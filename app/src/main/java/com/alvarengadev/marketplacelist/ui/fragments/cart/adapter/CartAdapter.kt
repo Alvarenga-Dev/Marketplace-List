@@ -40,7 +40,7 @@ class CartAdapter(
         holder.bind(
             listItems[position],
             supportFragmentManager,
-            position.toString()
+            (position + 1).toString()
         )
     }
 

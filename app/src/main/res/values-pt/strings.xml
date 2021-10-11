@@ -21,7 +21,7 @@
     <string name="content_description_button_plus">Aumentar um do valor da quantidade</string>
     <string name="content_description_button_settings">"Ir para a tela de configurações</string>
     <string name="content_description_button_trash">Excluir um item da sua lista.</string>
-    <string name="content_description_item_cart">Item %s: %s de valor %s</string>
+    <string name="content_description_item_cart">Item %s: %s de valor %s e com quantidade de %s itens</string>
 
     <string name="dialog_currency_option_dollar_button">Dólar</string>
     <string name="dialog_currency_option_real_button">Real</string>

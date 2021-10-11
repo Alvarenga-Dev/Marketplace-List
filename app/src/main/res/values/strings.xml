@@ -21,7 +21,7 @@
     <string name="content_description_button_plus">Plus</string>
     <string name="content_description_button_settings">Going to settings</string>
     <string name="content_description_button_trash">Remove your item</string>
-    <string name="content_description_item_cart">Item %s: %s your value is %s</string>
+    <string name="content_description_item_cart">Item %s: %s your value is %s and your quantity is %s</string>
 
     <string name="dialog_currency_option_dollar_button">Dollar</string>
     <string name="dialog_currency_option_real_button">Real</string>

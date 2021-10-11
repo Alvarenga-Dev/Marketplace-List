@@ -11,6 +11,7 @@
         android:id="@+id/header"
         android:layout_marginTop="@dimen/marginOrPadding8dp"
         android:layout_marginBottom="@dimen/marginOrPadding8dp"
+        android:importantForAccessibility="no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -46,6 +47,7 @@
     <com.alvarengadev.marketplacelist.ui.components.Container
         android:id="@+id/container"
         android:layout_width="match_parent"
+        android:importantForAccessibility="no"
         android:layout_height="match_parent">
 
         <com.alvarengadev.marketplacelist.ui.components.Footer
@@ -183,7 +185,8 @@
                 <TextView
                     android:id="@+id/tvValueQuantity"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
                     android:text="@string/value_default_quantity"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/ibPlus"
