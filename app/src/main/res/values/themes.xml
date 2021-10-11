@@ -87,7 +87,7 @@
 
     <!-- TextInput -->
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:textColorHint">?attr/colorOnSecondary</item>
+        <item name="android:textColorHint">@color/text_color_generic</item>
         <item name="boxCornerRadiusTopStart">@dimen/cornerRadiusButton</item>
         <item name="boxCornerRadiusTopEnd">@dimen/cornerRadiusButton</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadiusButton</item>

@@ -37,7 +37,11 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(listItems[position], supportFragmentManager)
+        holder.bind(
+            listItems[position],
+            supportFragmentManager,
+            position.toString()
+        )
     }
 
     override fun getItemCount(): Int {
@@ -71,20 +75,43 @@ class CartAdapter(
 
         fun bind(
             item: Item,
-            supportFragmentManager: FragmentManager
+            supportFragmentManager: FragmentManager,
+            position: String
         ) = binding.apply {
             item.apply {
                 tvNameItem.text = name
-                tvQuantityItem.text = itemView.context.getString(R.string.title_quantity_item_with_value, quantity.toString())
-                tvValueItem.text = itemView.context.getString(R.string.text_value_details, TextFormatter.setCurrency(value))
+                tvQuantityItem.text = itemView
+                    .context
+                    .getString(
+                        R.string.title_quantity_item_with_value,
+                        quantity.toString()
+                    )
+                tvValueItem.text = itemView
+                    .context
+                    .getString(
+                        R.string.text_value_details,
+                        TextFormatter.setCurrency(value)
+                    )
                 ibDeleteItem.setOnClickListener {
                     val deleteItemDialog = DeleteItemDialog()
-                    deleteItemDialog.setInstance(item, this@CartViewHolder)
+                    deleteItemDialog.setInstance(
+                        item,
+                        this@CartViewHolder
+                    )
                     deleteItemDialog.show(
                         supportFragmentManager,
                         ""
                     )
                 }
+
+                root.contentDescription = itemView
+                    .context
+                    .getString(
+                        R.string.content_description_item_cart,
+                        position,
+                        name,
+                        TextFormatter.setCurrency(value)
+                    )
             }
         }
 

@@ -15,12 +15,13 @@
     <string name="button_text_edit">Edit</string>
     <string name="button_text_edit_finish">Finish</string>
 
-    <string name="content_description_back_button">Button Back for cart list</string>
-    <string name="content_description_button_minus">Button minus</string>
-    <string name="content_description_button_plus">Button Plus</string>
-    <string name="content_description_button_settings">Button going to settings</string>
-    <string name="content_description_button_trash">Button for remove your item.</string>
-    <string name="content_description_iv_cooking">Illustration</string>
+    <string name="content_description_back_button">Back for cart list</string>
+    <string name="content_description_button_minus">Minus</string>
+    <string name="content_description_button_more">Open more options</string>
+    <string name="content_description_button_plus">Plus</string>
+    <string name="content_description_button_settings">Going to settings</string>
+    <string name="content_description_button_trash">Remove your item</string>
+    <string name="content_description_item_cart">Item %s: %s your value is %s</string>
 
     <string name="dialog_currency_option_dollar_button">Dollar</string>
     <string name="dialog_currency_option_real_button">Real</string>
