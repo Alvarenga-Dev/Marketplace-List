@@ -16,8 +16,8 @@ android {
         applicationId "com.alvarengadev.marketplacelist"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 7
-        versionName "1.2.0b"
+        versionCode 8
+        versionName "1.2.1b"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
