@@ -51,8 +51,8 @@ class Parses {
 
         fun parseValueTotal(listItems: ArrayList<Item>): Double {
             var totalValue = 0.0
-            for (item in listItems) {
-                totalValue += (item.value * item.quantity)
+            listItems.map {
+                totalValue += (it.value * it.quantity)
             }
             return totalValue
         }

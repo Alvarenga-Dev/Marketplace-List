@@ -17,11 +17,11 @@ class DeleteItemDialog : DialogFragment() {
 
     private val deleteItemViewModel: DeleteItemViewModel by viewModels()
     private var deleteItemInterface: DeleteItemInterface? = null
-    private var item: Item? = null
+    private var itemId: Int? = null
     private lateinit var dialog: AlertDialog
 
-    fun setInstance(item: Item, deleteItemInterface: DeleteItemInterface) {
-        this.item = item
+    fun setInstance(itemId: Int?, deleteItemInterface: DeleteItemInterface) {
+        this.itemId = itemId
         this.deleteItemInterface = deleteItemInterface
     }
 
@@ -42,7 +42,7 @@ class DeleteItemDialog : DialogFragment() {
     private fun initializerDialog(binding: DialogDeleteItemBinding) = binding.apply {
         btnConfirmDialogDelete.setOnClickListener {
             deleteItemViewModel.apply {
-                item?.let { item -> deleteItem(item) }
+                itemId?.let { deleteItem(it) }
             }
         }
 
@@ -55,7 +55,7 @@ class DeleteItemDialog : DialogFragment() {
         deleteItemViewModel.registrationStateEvent.observeForever { registrationState ->
             if (registrationState is DeleteItemViewModel.DeleteState.Result) {
                 if (registrationState.isSuccessful) {
-                    item?.let { item -> deleteItemInterface?.notifyItemDelete(item) }
+                    itemId?.let { deleteItemInterface?.notifyItemDelete(it) }
                     closeDialog()
                 }
             }

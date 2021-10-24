@@ -22,7 +22,7 @@ class DeleteItemViewModel @Inject constructor(
     private val _registrationStateEvent = MutableLiveData<DeleteState>()
     val registrationStateEvent: LiveData<DeleteState> get() = _registrationStateEvent
 
-    fun deleteItem(item: Item) = viewModelScope.launch {
-        _registrationStateEvent.postValue(DeleteState.Result(repository.delete(item)))
+    fun deleteItem(itemId: Int) = viewModelScope.launch {
+        _registrationStateEvent.postValue(DeleteState.Result(repository.delete(itemId)))
     }
 }

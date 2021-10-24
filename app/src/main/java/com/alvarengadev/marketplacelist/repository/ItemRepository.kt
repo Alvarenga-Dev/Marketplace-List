@@ -18,8 +18,8 @@ class ItemRepository @Inject constructor(
         false
     }
 
-    suspend fun delete(item: Item): Boolean = try {
-        itemDao.delete(toEntity(item))
+    suspend fun delete(itemId: Int): Boolean = try {
+        itemDao.delete(itemDao.getItem(itemId))
         true
     } catch (ex: Exception) {
         false

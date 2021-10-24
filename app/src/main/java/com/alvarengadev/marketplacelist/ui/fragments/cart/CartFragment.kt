@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
 import com.alvarengadev.marketplacelist.ui.components.bottomsheet.BottomSheetOnboarding
 import com.alvarengadev.marketplacelist.ui.components.bottomsheet.`interface`.ButtonGotItClickListener
@@ -18,7 +17,6 @@ import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEm
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.feature.FeatureClearCartDialog
 import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.PreferencesManager
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
@@ -101,14 +99,22 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                 }
 
                 if (registrationState is CartViewModel.CartListState.SuccessList) {
-                    val adapterListCart = CartAdapter(registrationState.listItems, parentFragmentManager)
-                    adapterListCart.observerListEmpty(this@CartFragment)
-                    adapterListCart.setOnClickItemListener(object : OnClickItemListener {
-                        override fun setOnClickItemListener(itemId: Int) {
-                            val directions = CartFragmentDirections.actionCartFragmentToDetailsFragment(itemId)
-                            findNavController().navigate(directions)
-                        }
-                    })
+                    val adapterListCart = CartAdapter()
+                    adapterListCart.apply {
+                        submitList(registrationState.listItems)
+                        setSupportFragmentManager(parentFragmentManager)
+                        observerListEmpty(this@CartFragment)
+                        setOnClickItemListener(object : OnClickItemListener {
+                            override fun setOnClickItemListener(itemId: Int) {
+                                val directions = CartFragmentDirections
+                                    .actionCartFragmentToDetailsFragment(itemId)
+
+                                findNavController()
+                                    .navigate(directions)
+                            }
+                        })
+                    }
+
 
                     rcyCartItem.adapter = adapterListCart
 
@@ -156,11 +162,13 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         }
     }
 
-    override fun observer(listItems: ArrayList<Item>) {
+    override fun observer(total: Double, isEmpty: Boolean) {
         binding.footerCart.apply {
-            if (listItems.isNotEmpty()) {
-                setCartValue(Parses.parseValueTotal(listItems))
-            } else {
+            if (total > 0.0) {
+                setCartValue(total)
+            }
+
+            if (isEmpty) {
                 showList(false)
                 setCartValue()
             }

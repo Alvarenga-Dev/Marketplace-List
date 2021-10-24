@@ -42,21 +42,25 @@ class AboutFragment : Fragment() {
         val settingsUtils = SettingsUtils()
         settingsUtils.getInstance(context)
 
-        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettingsAbout())
-        adapterListSettings.setOnClickItemListener(object : OnClickItemListener {
-            override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
-                when (typeOptionSettings) {
-                    TypeOptionSettings.ABOUT_PRIVACY_POLICY -> {
-                        val openLinkIntent = Intent(Intent.ACTION_VIEW)
-                        openLinkIntent.data = Uri.parse(
-                            getString(R.string.url_privacy_policy)
-                        )
-                        startActivity(openLinkIntent)
+        val adapterListSettings = SettingsOptionsAdapter()
+        adapterListSettings.apply {
+            submitList(settingsUtils.getListSettingsAbout())
+            setOnClickItemListener(object : OnClickItemListener {
+                override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
+                    when (typeOptionSettings) {
+                        TypeOptionSettings.ABOUT_PRIVACY_POLICY -> {
+                            val openLinkIntent = Intent(Intent.ACTION_VIEW)
+                            openLinkIntent.data = Uri.parse(
+                                getString(R.string.url_privacy_policy)
+                            )
+                            startActivity(openLinkIntent)
+                        }
+                        else -> {
+                        }
                     }
-                    else -> TODO()
                 }
-            }
-        })
+            })
+        }
 
         binding.rcySettingsAbout.adapter = adapterListSettings
 

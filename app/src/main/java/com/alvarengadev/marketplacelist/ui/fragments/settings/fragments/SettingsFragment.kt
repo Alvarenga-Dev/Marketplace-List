@@ -40,20 +40,25 @@ class SettingsFragment : Fragment() {
         val settingsUtils = SettingsUtils()
         settingsUtils.getInstance(context)
 
-        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettings())
-        adapterListSettings.setOnClickItemListener(object : OnClickItemListener {
-            override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
-                when (typeOptionSettings) {
-                    TypeOptionSettings.SETTINGS_GENERAL -> {
-                        findNavController().navigate(R.id.action_settingsFragment_to_generalFragment)
+        val adapterListSettings = SettingsOptionsAdapter()
+
+        adapterListSettings.apply {
+            submitList(settingsUtils.getListSettings())
+            setOnClickItemListener(object : OnClickItemListener {
+                override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
+                    when (typeOptionSettings) {
+                        TypeOptionSettings.SETTINGS_GENERAL -> {
+                            findNavController().navigate(R.id.action_settingsFragment_to_generalFragment)
+                        }
+                        TypeOptionSettings.SETTINGS_ABOUT -> {
+                            findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+                        }
+                        else -> {
+                        }
                     }
-                    TypeOptionSettings.SETTINGS_ABOUT -> {
-                        findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
-                    }
-                    else -> TODO()
                 }
-            }
-        })
+            })
+        }
 
         binding.rcySettings.adapter = adapterListSettings
 

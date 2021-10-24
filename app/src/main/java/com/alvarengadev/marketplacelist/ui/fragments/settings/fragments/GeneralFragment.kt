@@ -47,33 +47,47 @@ class GeneralFragment : Fragment() {
         val settingsUtils = SettingsUtils()
         settingsUtils.getInstance(context)
 
-        val adapterListSettings = SettingsOptionsAdapter(settingsUtils.getListSettingsGeneral())
-        binding.rcySettingsGeneral.adapter = adapterListSettings
+        val adapterListSettings = SettingsOptionsAdapter()
 
-        adapterListSettings.setOnClickItemListener(object : OnClickItemListener {
-            override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
-                when (typeOptionSettings) {
-                    TypeOptionSettings.GENERAL_CURRENCY -> {
-                        val dialog = DialogDefault.getInstance(
-                            getString(R.string.dialog_currency_title),
-                            getString(R.string.dialog_currency_option_dollar_button),
-                            getString(R.string.dialog_currency_option_real_button)
-                        )
-                        dialog.setOnButtonPrimaryDialogListener(object : OnButtonsDialogListener {
-                            override fun setOnClickListenerButtonPrimary() {
-                                dismissDialog(dialog, Constants.CURRENCY_EN, adapterListSettings)
-                            }
+        adapterListSettings.apply {
+            submitList(settingsUtils.getListSettingsGeneral())
+            setOnClickItemListener(object : OnClickItemListener {
+                override fun setOnClickItemListener(typeOptionSettings: TypeOptionSettings) {
+                    when (typeOptionSettings) {
+                        TypeOptionSettings.GENERAL_CURRENCY -> {
+                            val dialog = DialogDefault.getInstance(
+                                getString(R.string.dialog_currency_title),
+                                getString(R.string.dialog_currency_option_dollar_button),
+                                getString(R.string.dialog_currency_option_real_button)
+                            )
+                            dialog.setOnButtonPrimaryDialogListener(object :
+                                OnButtonsDialogListener {
+                                override fun setOnClickListenerButtonPrimary() {
+                                    dismissDialog(
+                                        dialog,
+                                        Constants.CURRENCY_EN,
+                                        adapterListSettings
+                                    )
+                                }
 
-                            override fun setOnClickListenerButtonSecondary() {
-                                dismissDialog(dialog, Constants.CURRENCY_BR, adapterListSettings)
-                            }
-                        })
-                        dialog.show(childFragmentManager, Constants.DIALOG_CURRENCY)
+                                override fun setOnClickListenerButtonSecondary() {
+                                    dismissDialog(
+                                        dialog,
+                                        Constants.CURRENCY_BR,
+                                        adapterListSettings
+                                    )
+                                }
+                            })
+                            dialog.show(childFragmentManager, Constants.DIALOG_CURRENCY)
+                        }
+                        else -> {
+                        }
                     }
-                    else -> TODO()
                 }
-            }
-        })
+            })
+
+            binding.rcySettingsGeneral.adapter = adapterListSettings
+        }
 
         toolbarSettingsGeneral.setNavigationOnClickListener {
             findNavController().popBackStack()
