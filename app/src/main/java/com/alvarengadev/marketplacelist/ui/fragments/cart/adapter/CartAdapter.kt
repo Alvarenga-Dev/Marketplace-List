@@ -110,7 +110,8 @@ class CartAdapter(
                         R.string.content_description_item_cart,
                         position,
                         name,
-                        TextFormatter.setCurrency(value)
+                        TextFormatter.setCurrency(value),
+                        quantity.toString()
                     )
             }
         }
