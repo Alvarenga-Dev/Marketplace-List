@@ -18,6 +18,6 @@ class Constants {
         const val CURRENCY_BR = "CURRENCY_BR"
         const val CURRENCY_EN = "CURRENCY_EN"
 
-        val LOCALE_BRAZIL = Locale("pt", "BR")
+        val LOCALE_BRAZIL = Locale("pt", "br")
     }
 }

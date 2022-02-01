@@ -55,7 +55,7 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
 
     private fun verifyEditItem(itemId: Int?) {
         if (itemId != null) {
-            addOrEditViewModel.getDetailsItem(itemId)
+            addOrEditViewModel.getItemFromDatabase(itemId)
         }
     }
 

@@ -69,7 +69,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             val popupMenu = context?.let { context -> PopupMenu(context, it) }
             popupMenu?.menuInflater?.inflate(R.menu.menu_popup_cart, popupMenu.menu)
             popupMenu?.setOnMenuItemClickListener{
-                cartViewModel.clearCart()
+                cartViewModel.deleteAllItemsFromDatabase()
                 true
             }
             popupMenu?.show()
@@ -125,7 +125,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
                 if (registrationState is CartViewModel.CartListState.Result) {
                     if (registrationState.isSuccessful) {
-                        cartViewModel.getListItems()
+                        cartViewModel.getAllItemsFromDatabase()
                     } else {
                         root.createSnack(R.string.alert_list_empty)
                     }
@@ -141,7 +141,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     }
 
     private fun setupEvents() = cartViewModel.apply {
-        getListItems()
+        getAllItemsFromDatabase()
     }
 
     private fun showDialogFeatureClearCart() {

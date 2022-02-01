@@ -28,20 +28,25 @@ class CartViewModel @Inject constructor(
     private val _registrationStateEvent = MutableLiveData<CartListState>(CartListState.LoadingList)
     val registrationStateEvent: LiveData<CartListState> get() = _registrationStateEvent
 
-    fun getListItems() = viewModelScope.launch {
+    fun getAllItemsFromDatabase() = viewModelScope.launch {
         _registrationStateEvent.postValue(CartListState.LoadingList)
-        val listItems = repository.getAll()
+        val listItems = repository.getAllItemsFromDatabase()
         if (listItems.isNotEmpty()) {
-            _registrationStateEvent.postValue(CartListState.SuccessList(listItems, Parses.parseValueTotal(listItems)))
+            _registrationStateEvent.postValue(
+                CartListState.SuccessList(
+                    listItems,
+                    Parses.parseValueTotal(listItems)
+                )
+            )
         } else {
             _registrationStateEvent.postValue(CartListState.ListEmpty)
         }
     }
 
-    fun clearCart() = viewModelScope.launch {
+    fun deleteAllItemsFromDatabase() = viewModelScope.launch {
         _registrationStateEvent.postValue(
             CartListState.Result(
-                repository.deleteAll()
+                repository.deleteAllItemsFromDatabase()
             )
         )
     }
@@ -49,7 +54,7 @@ class CartViewModel @Inject constructor(
     fun resetClearCart() = _registrationStateEvent.postValue(CartListState.None)
 
     fun viewDialogAlertFeatureClearCart() = viewModelScope.launch {
-        if (repository.getAll().size >= 1) {
+        if (repository.getAllItemsFromDatabase().size >= 1) {
             _registrationStateEvent.postValue(CartListState.Dialog)
         }
     }

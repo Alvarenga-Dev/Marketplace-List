@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.databinding.DialogDeleteItemBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +41,7 @@ class DeleteItemDialog : DialogFragment() {
     private fun initializerDialog(binding: DialogDeleteItemBinding) = binding.apply {
         btnConfirmDialogDelete.setOnClickListener {
             deleteItemViewModel.apply {
-                itemId?.let { deleteItem(it) }
+                itemId?.let { deleteItemFromDatabase(it) }
             }
         }
 
