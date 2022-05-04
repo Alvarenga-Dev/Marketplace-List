@@ -71,7 +71,7 @@ class AddOrEditViewModel @Inject constructor(
     fun addItem(name: String) {
         if (isValidItem(name)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            createItem(name, value, quantity)
+            createItemFromDatabase(name, value, quantity)
         }
     }
 
@@ -81,12 +81,14 @@ class AddOrEditViewModel @Inject constructor(
     ) {
         if (isValidItem(name)) {
             _registrationStateEvent.postValue(AddingState.CollectItem)
-            updateItem(itemId, name)
+            updateItemFromDatabase(itemId, name)
         }
     }
 
-    fun getDetailsItem(itemId: Int) = viewModelScope.launch {
-        val item = repository.getItem(itemId)
+    fun getItemFromDatabase(
+        itemId: Int
+    ) = viewModelScope.launch {
+        val item = repository.getItemFromDatabase(itemId)
         if (item != null) {
             with(item) {
                 this@AddOrEditViewModel.value = value
@@ -104,22 +106,33 @@ class AddOrEditViewModel @Inject constructor(
         }
     }
 
-    private fun createItem(
+    private fun createItemFromDatabase(
         name: String,
         value: Double,
         quantity: Int
     ) = viewModelScope.launch {
-        val isAdd = repository.insert(Item(name, value, quantity))
+        val isAdd = repository.createItemFromDatabase(
+            Item(
+                name,
+                value,
+                quantity
+            )
+        )
         if (isAdd) {
             _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
         }
     }
 
-    private fun updateItem(
+    private fun updateItemFromDatabase(
         itemId: Int,
         name: String
     ) = viewModelScope.launch {
-        val isEdit = repository.update(itemId, name, value, quantity)
+        val isEdit = repository.updateItemFromDatabase(
+            itemId,
+            name,
+            value,
+            quantity
+        )
         if (isEdit) {
             _registrationStateEvent.postValue(AddingState.SuccessfulAddOrEdit)
         }
@@ -134,7 +147,9 @@ class AddOrEditViewModel @Inject constructor(
         }
 
         if (messageForError.isNotEmpty()) {
-            _registrationStateEvent.postValue(AddingState.InvalidAddData(messageForError))
+            _registrationStateEvent.postValue(
+                AddingState.InvalidAddData(messageForError)
+            )
             return false
         }
 

@@ -36,7 +36,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             findNavController().popBackStack()
         }
 
-        detailsViewModel.getItem(args.itemId)
+        detailsViewModel.getItemFromDatabase(args.itemId)
         listenToRegistrationViewModelEvents()
     }
 

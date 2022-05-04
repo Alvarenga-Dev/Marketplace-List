@@ -23,8 +23,10 @@ class DetailsViewModel @Inject constructor(
     private val _registrationStateEvent = MutableLiveData<DetailsState>(DetailsState.CollectItem)
     val registrationStateEvent: LiveData<DetailsState> get() = _registrationStateEvent
 
-    fun getItem(itemId: Int) = viewModelScope.launch {
-        val item = repository.getItem(itemId)
+    fun getItemFromDatabase(
+        itemId: Int
+    ) = viewModelScope.launch {
+        val item = repository.getItemFromDatabase(itemId)
         if (item != null) {
             with(item) {
                 _registrationStateEvent.postValue(id?.let { id ->
