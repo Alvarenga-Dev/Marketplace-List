@@ -43,10 +43,7 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
         val newList = currentList.toMutableList()
         val item = newList.first { item -> itemId == item.id }
         val position = newList.indexOf(item)
-
         newList.removeAt(position)
-
-        notifyItemRemoved(position)
         submitList(newList)
 
         var newTotal = 0.0
@@ -54,6 +51,8 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
             newTotal += (it.value * it.quantity)
         }
 
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, newList.size)
         observerListEmpty?.observer(newTotal, newList.isEmpty())
     }
 
