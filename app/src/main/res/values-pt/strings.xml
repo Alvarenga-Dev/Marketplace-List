@@ -55,6 +55,9 @@
     <string name="item_settings_option_title_about">Sobre o app</string>
     <string name="item_settings_option_title_general">Geral</string>
 
+    <string name="menu_clear_cart">Limpar carrinho</string>
+    <string name="menu_shared_list">Compartilhar</string>
+
     <string name="message_cart_empty">
         Sua lista está vazia :(
         \n\n
@@ -69,4 +72,8 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+
+    <string name="message_shared_title">Olá, essa é a minha lista de compras que eu fiz!\n\n</string>
+    <string name="message_shared_description">* produto: %s\n* quantidade: %d\n* valor: %s}\n\n</string>
+    <string name="message_shared_footer">*O total da compra é %s*\n\nA lista foi feita usando o aplicativo de Lista de compras do Lucas Alvarenga!\n\nhttps://play.google.com/store/apps/details?id=com.alvarengadev.marketplacelist</string>
 </resources>

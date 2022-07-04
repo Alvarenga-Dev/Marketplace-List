@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/sharedListMenu"
+        android:title="@string/menu_shared_list" />
+
     <item android:id="@+id/clearCartMenu"
-        android:title="Limpar carrinho" />
+        android:title="@string/menu_clear_cart" />
 </menu>
