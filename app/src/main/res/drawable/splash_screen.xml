@@ -5,7 +5,7 @@
         <color android:color="@color/primary"/>
     </item>
     <item>
-        <bitmap android:src="@drawable/cart"
+        <bitmap android:src="@drawable/image_cart"
             android:gravity="center"/>
     </item>
 </layer-list>

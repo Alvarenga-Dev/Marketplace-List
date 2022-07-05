@@ -7,6 +7,9 @@
 
     <string name="app_name">Lista de Compras</string>
 
+    <string name="bottomsheet_functions_description">Para que você tire um máximo proveito de sua lista, permitimos que você limpe ou compartilhe a sua lista! Basta clicar ali nos 3 (três) pontinhos.</string>
+    <string name="bottomsheet_functions_title">Estamos sempre atentos a você!</string>
+    <string name="bottomsheet_functions_button">Entendi, oba!</string>
     <string name="bottomsheet_onboarding_button_welcome">Partiu usar!</string>
     <string name="bottomsheet_onboarding_description_welcome">Obrigado por fazer parte disso, esperamos que possamos te ajudar nas suas compras.</string>
     <string name="bottomsheet_onboarding_title_welcome">Uma mensagem de agradecimento</string>
@@ -26,9 +29,6 @@
     <string name="dialog_currency_option_dollar_button">Dólar</string>
     <string name="dialog_currency_option_real_button">Real</string>
     <string name="dialog_currency_title">Escolha uma da moeda</string>
-    <string name="dialog_feature_clear_cart_button">Entendi, oba!</string>
-    <string name="dialog_feature_clear_cart_description">Não será mais preciso limpar item por item, basta clicar ali nos 3 (três) pontinhos!</string>
-    <string name="dialog_feature_clear_cart_title">Você pode fazer uma limpa geral!</string>
     <string name="dialog_message_delete">Deseja realmente excluir esse item?</string>
 
     <string name="footer_button_text">Novo Produto</string>
@@ -41,7 +41,7 @@
     <string name="fragment_title_general">Geral</string>
     <string name="fragment_title_settings">Configurações</string>
 
-    <string name="hint_value">R$ 0,00</string>
+    <string name="intent_title_shared">Compartilhe para…</string>
 
     <string name="item_about_option_description_privacy_policy">clique aqui para mais informações</string>
     <string name="item_about_option_title_privacy_policy">Política de privacidade</string>
@@ -65,6 +65,9 @@
     </string>
     <string name="message_confirm">Sim</string>
     <string name="message_negative">Não</string>
+    <string name="message_shared_description">* produto: %s\n* quantidade: %d\n* valor: %s\n\n</string>
+    <string name="message_shared_footer">*O total da compra é %s*\n\nA lista foi feita usando o aplicativo de Lista de compras do Lucas Alvarenga!\n\nhttps://play.google.com/store/apps/details?id=com.alvarengadev.marketplacelist</string>
+    <string name="message_shared_title">Olá, essa é a minha lista de compras que eu fiz!\n\n</string>
 
     <string name="text_value_details">Valor: %s</string>
 
@@ -72,8 +75,5 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
-
-    <string name="message_shared_title">Olá, essa é a minha lista de compras que eu fiz!\n\n</string>
-    <string name="message_shared_description">* produto: %s\n* quantidade: %d\n* valor: %s}\n\n</string>
-    <string name="message_shared_footer">*O total da compra é %s*\n\nA lista foi feita usando o aplicativo de Lista de compras do Lucas Alvarenga!\n\nhttps://play.google.com/store/apps/details?id=com.alvarengadev.marketplacelist</string>
+    <string name="toast_cart_empty">Seu carrinho está vazio!</string>
 </resources>

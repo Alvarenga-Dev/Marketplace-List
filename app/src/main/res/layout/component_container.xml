@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_grey_transparent"
     android:orientation="vertical"
-    android:paddingStart="@dimen/marginOrPaddingDefault"
-    android:paddingTop="@dimen/marginOrPaddingDefault"
-    android:paddingEnd="@dimen/marginOrPaddingDefault">
+    android:paddingStart="@dimen/default_size"
+    android:paddingTop="@dimen/default_size"
+    android:paddingEnd="@dimen/default_size">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/background_white"

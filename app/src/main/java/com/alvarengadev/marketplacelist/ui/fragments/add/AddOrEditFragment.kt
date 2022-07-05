@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
+import com.alvarengadev.marketplacelist.utils.Constants
+import com.alvarengadev.marketplacelist.utils.CurrencyAppUtils
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
 import com.alvarengadev.marketplacelist.utils.extensions.dismiss
@@ -89,10 +91,11 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
         }
 
         tfValueItem.editText?.apply {
+            hint = if (CurrencyAppUtils.getCurrency() == Constants.LOCALE_BRAZIL) HINT_CURRENCY_BRAZIL else HINT_CURRENCY_DOLLAR
             addTextChangedListener(MoneyTextWatcher(tfValueItem.editText))
             addTextChangedListener { editableText ->
-                tfValueItem.dismiss()
                 addOrEditViewModel.setValue(editableText.toString())
+                tfValueItem.dismiss()
             }
         }
     }
@@ -142,5 +145,10 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
 
     private fun clearFragment() {
         _binding = null
+    }
+
+    private companion object {
+        const val HINT_CURRENCY_BRAZIL = "R$ 0,00"
+        const val HINT_CURRENCY_DOLLAR = "$0.00"
     }
 }

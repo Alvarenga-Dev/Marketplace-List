@@ -10,8 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginOrPadding8dp"
-        android:layout_marginBottom="@dimen/marginOrPadding8dp">
+        android:layout_marginTop="@dimen/small_size"
+        android:layout_marginBottom="@dimen/small_size">
 
         <ImageButton
             android:id="@+id/ibSettings"
@@ -85,7 +85,7 @@
                     android:layout_marginEnd="32dp"
                     android:contentDescription="@null"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/empty_cart" />
+                    android:src="@drawable/image_empty_cart" />
 
                 <TextView
                     style="@style/TitleStyle"

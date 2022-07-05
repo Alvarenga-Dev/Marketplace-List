@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_marginTop="@dimen/marginOrPadding8dp"
-        android:layout_marginBottom="@dimen/marginOrPadding8dp"
+        android:layout_marginTop="@dimen/small_size"
+        android:layout_marginBottom="@dimen/small_size"
         android:importantForAccessibility="no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,7 +22,7 @@
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/content_description_back_button"
-            android:padding="@dimen/marginOrPaddingDefault"
+            android:padding="@dimen/default_size"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="@+id/tvTitleAddItem"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            android:paddingStart="@dimen/marginOrPaddingDefault"
-            android:paddingTop="@dimen/marginOrPaddingDefault"
-            android:paddingEnd="@dimen/marginOrPaddingDefault"
+            android:paddingStart="@dimen/default_size"
+            android:paddingTop="@dimen/default_size"
+            android:paddingEnd="@dimen/default_size"
             android:scrollbarSize="0dp"
             app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingBottom="@dimen/marginOrPaddingDefault"
+                android:paddingBottom="@dimen/default_size"
                 app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                     android:layout_marginTop="16dp"
                     android:contentDescription="@null"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/cooking"
+                    android:src="@drawable/image_cooking"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,7 +137,6 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_value"
                         android:inputType="numberSigned" />
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/component_bottom_sheet_functions.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/component_bottom_sheet_onboarding.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/dialog_default_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/dialog_delete_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/dialog_new_feature_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lucas/AndroidStudioProjects/MarketplaceList/app/src/main/res/layout/fragment_add.xml" value="0.19010416666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
