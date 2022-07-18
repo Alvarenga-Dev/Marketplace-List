@@ -1,5 +1,6 @@
 package com.alvarengadev.marketplacelist.ui.fragments.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,26 +11,28 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentCartBinding
+import com.alvarengadev.marketplacelist.ui.components.bottomsheet.BottomSheetNewsFunctions
 import com.alvarengadev.marketplacelist.ui.components.bottomsheet.BottomSheetOnboarding
 import com.alvarengadev.marketplacelist.ui.components.bottomsheet.`interface`.ButtonGotItClickListener
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
-import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.feature.FeatureClearCartDialog
 import com.alvarengadev.marketplacelist.utils.Constants
 import com.alvarengadev.marketplacelist.utils.PreferencesManager
+import com.alvarengadev.marketplacelist.utils.TextFormatter
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
-import com.alvarengadev.marketplacelist.utils.extensions.goneWithoutAnimation
-import com.alvarengadev.marketplacelist.utils.extensions.visibilityWithoutAnimation
+import com.alvarengadev.marketplacelist.utils.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
-    private var preferencesManager: PreferencesManager? = null
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
     private val cartViewModel: CartViewModel by viewModels()
+
+    private var preferencesManager: PreferencesManager? = null
+    private var intentSharedCart: Intent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,9 +46,8 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        preferencesManager = PreferencesManager.instance
-        setupComponents()
         setupEvents()
+        setupComponents()
         listenToRegistrationViewModelEvents()
     }
 
@@ -68,9 +70,29 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         ibMore.setOnClickListener {
             val popupMenu = context?.let { context -> PopupMenu(context, it) }
             popupMenu?.menuInflater?.inflate(R.menu.menu_popup_cart, popupMenu.menu)
-            popupMenu?.setOnMenuItemClickListener{
-                cartViewModel.deleteAllItemsFromDatabase()
-                true
+            popupMenu?.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.sharedListMenu -> {
+                        intentSharedCart?.let { intent ->
+                            intent.type = TYPE_TEXT
+                            if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+                                startActivity(
+                                    Intent.createChooser(
+                                        intent,
+                                        getString(R.string.intent_title_shared)
+                                    )
+                                )
+                            } else {
+                                root.createSnack(R.string.toast_cart_empty)
+                            }
+                        }
+                    }
+                    R.id.clearCartMenu -> {
+                        intentSharedCart?.removeExtra(Intent.EXTRA_TEXT)
+                        cartViewModel.deleteAllItemsFromDatabase()
+                    }
+                }
+                false
             }
             popupMenu?.show()
         }
@@ -90,11 +112,11 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         with(cartViewModel) {
             registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is CartViewModel.CartListState.LoadingList) {
-                    pbLoadingList.visibilityWithoutAnimation()
+                    binding.cartViewFlipper.displayedChild = VIEW_FLIPPER_LOADING
                 }
 
                 if (registrationState is CartViewModel.CartListState.ListEmpty) {
-                    showList(false)
+                    binding.cartViewFlipper.displayedChild = VIEW_FLIPPER_EMPTY
                     footerCart.setCartValue()
                 }
 
@@ -115,12 +137,19 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                         })
                     }
 
-
                     rcyCartItem.adapter = adapterListCart
-
-                    showList(true)
-                    viewDialogAlertFeatureClearCart()
+                    binding.cartViewFlipper.displayedChild = VIEW_FLIPPER_LIST
+                    viewBottomSheetNewsFunctions()
                     footerCart.setCartValue(registrationState.total)
+                    intentSharedCart?.putExtra(
+                        Intent.EXTRA_TEXT,
+                        context?.let {
+                            TextFormatter.messageSharedList(
+                                it,
+                                registrationState.listItems
+                            )
+                        }
+                    )
                 }
 
                 if (registrationState is CartViewModel.CartListState.Result) {
@@ -132,33 +161,24 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                     cartViewModel.resetClearCart()
                 }
 
-                if (registrationState is CartViewModel.CartListState.Dialog) {
-                    showDialogFeatureClearCart()
+                if (registrationState is CartViewModel.CartListState.BottomSheet) {
+                    showBottomSheetNewsFunctions()
                     cartViewModel.resetClearCart()
                 }
             }
         }
     }
 
-    private fun setupEvents() = cartViewModel.apply {
-        getAllItemsFromDatabase()
+    private fun setupEvents() {
+        cartViewModel.getAllItemsFromDatabase()
+        preferencesManager = PreferencesManager.instance
+        intentSharedCart = Intent(Intent.ACTION_SEND)
     }
 
-    private fun showDialogFeatureClearCart() {
-        if (preferencesManager?.getViewFeatureClearCart() == false && preferencesManager?.getViewOnboardingWelcome() == true) {
-            val dialog = FeatureClearCartDialog()
-            dialog.show(childFragmentManager, Constants.DIALOG_FEATURE_CLEAR_CART)
-        }
-    }
-
-    private fun showList(isShow: Boolean) = binding.apply {
-        pbLoadingList.goneWithoutAnimation()
-        if (isShow) {
-            rcyCartItem.visibilityWithoutAnimation()
-            containerListEmpty.goneWithoutAnimation()
-        } else {
-            rcyCartItem.goneWithoutAnimation()
-            containerListEmpty.visibilityWithoutAnimation()
+    private fun showBottomSheetNewsFunctions() {
+        if (preferencesManager?.getViewOnboardingNewsFunctions() == false && preferencesManager?.getViewOnboardingWelcome() == true) {
+            val bottomSheet = BottomSheetNewsFunctions()
+            bottomSheet.show(childFragmentManager, Constants.BOTTOM_SHEET_NEWS_FUNCTIONS)
         }
     }
 
@@ -169,9 +189,18 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             }
 
             if (isEmpty) {
-                showList(false)
+                intentSharedCart?.removeExtra(Intent.EXTRA_TEXT)
+                binding.cartViewFlipper.displayedChild = VIEW_FLIPPER_EMPTY
                 setCartValue()
             }
         }
+    }
+
+    private companion object {
+        const val VIEW_FLIPPER_EMPTY = 0
+        const val VIEW_FLIPPER_LIST = 1
+        const val VIEW_FLIPPER_LOADING = 2
+
+        const val TYPE_TEXT = "text/html"
     }
 }

@@ -22,19 +22,19 @@ class PreferencesManager private constructor(context: Context) {
 
     fun getViewOnboardingWelcome(): Boolean = mPref.getBoolean(KEY_ONBOARDING_WELCOME, false)
 
-    fun setViewFeatureClearCart() {
+    fun setViewOnboardingNewsFunctions() {
         mPref.edit()
-            .putBoolean(KEY_FEATURE_CLEAR_CART, true)
+            .putBoolean(KEY_ONBOARDING_NEWS_FUNCTIONS, true)
             .apply()
     }
 
-    fun getViewFeatureClearCart(): Boolean = mPref.getBoolean(KEY_FEATURE_CLEAR_CART, false)
+    fun getViewOnboardingNewsFunctions(): Boolean = mPref.getBoolean(KEY_ONBOARDING_NEWS_FUNCTIONS, false)
 
     companion object {
         private const val PREFERENCES_MARKETPLACE_LIST = "com.alvarengadev.marketplacelist.PREFERENCES_MARKETPLACE_LIST"
         private const val KEY_CURRENCY = "com.alvarengadev.marketplacelist.KEY_CURRENCY"
         private const val KEY_ONBOARDING_WELCOME = "com.alvarengadev.marketplacelist.KEY_ONBOARDING_WELCOME"
-        private const val KEY_FEATURE_CLEAR_CART = "com.alvarengadev.marketplacelist.KEY_FEATURE_CLEAR_CART"
+        private const val KEY_ONBOARDING_NEWS_FUNCTIONS = "com.alvarengadev.marketplacelist.KEY_ONBOARDING_NEWS_FUNCTIONS"
 
         private var sInstance: PreferencesManager? = null
 
