@@ -13,7 +13,7 @@ class Constants {
 
         const val BOTTOM_SHEET_WELCOME = "BOTTOM_SHEET_WELCOME"
         const val DIALOG_CURRENCY = "DIALOG_CURRENCY"
-        const val DIALOG_FEATURE_CLEAR_CART = "DIALOG_FEATURE_CLEAR_CART"
+        const val BOTTOM_SHEET_NEWS_FUNCTIONS = "BOTTOM_SHEET_NEWS_FUNCTIONS"
 
         const val CURRENCY_BR = "CURRENCY_BR"
         const val CURRENCY_EN = "CURRENCY_EN"

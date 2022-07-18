@@ -96,7 +96,7 @@
     </style>
 
     <style name="TextInputEditTextStyle">
-        <item name="android:padding">@dimen/marginOrPaddingDefault</item>
+        <item name="android:padding">@dimen/default_size</item>
     </style>
 
     <!-- Toolbar -->

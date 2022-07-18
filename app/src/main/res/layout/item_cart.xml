@@ -12,20 +12,22 @@
         android:layout_height="81dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@null"
         android:importantForAccessibility="no"
-        app:srcCompat="@drawable/cooking" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image_cooking" />
 
     <TextView
         android:id="@+id/tvNameItem"
         style="@style/TitleStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivCookingItem"
@@ -35,9 +37,13 @@
     <TextView
         android:id="@+id/tvQuantityItem"
         style="@style/SmallTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/ibDeleteItem"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvNameItem"
         app:layout_constraintTop_toBottomOf="@+id/tvNameItem"
         tools:text="Qtd: 2" />
@@ -45,10 +51,14 @@
     <TextView
         android:id="@+id/tvValueItem"
         style="@style/HighlightTextStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@+id/ivCookingItem"
+        app:layout_constraintEnd_toStartOf="@+id/ibDeleteItem"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvQuantityItem"
         app:layout_constraintTop_toBottomOf="@+id/tvQuantityItem"
         app:layout_constraintVertical_bias="1.0"
@@ -60,15 +70,13 @@
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/content_description_button_trash"
-        android:padding="@dimen/marginOrPadding8dp"
+        android:padding="@dimen/small_size"
         app:layout_constraintBottom_toBottomOf="@+id/tvValueItem"
         app:layout_constraintEnd_toEndOf="@+id/divider"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tvValueItem"
         app:layout_constraintTop_toTopOf="@+id/tvValueItem"
         app:layout_constraintVertical_bias="1.0"
-        app:tint="@color/text_color_generic"
-        app:srcCompat="@drawable/ic_trash" />
+        app:srcCompat="@drawable/ic_trash"
+        app:tint="@color/text_color_generic" />
 
     <View
         android:id="@+id/divider"

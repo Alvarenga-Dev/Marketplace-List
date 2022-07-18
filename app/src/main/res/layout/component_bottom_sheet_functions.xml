@@ -19,15 +19,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/bottomsheet_onboarding_title_welcome"
+            android:text="@string/bottomsheet_functions_title"
             android:textAlignment="center" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_marginVertical="@dimen/small_size"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/image_love"
-            android:contentDescription="@null" />
+            android:layout_marginVertical="@dimen/small_size"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/image_happy" />
 
         <TextView
             style="@style/SmallTextStyle"
@@ -35,17 +35,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/default_size"
-            android:text="@string/bottomsheet_onboarding_description_welcome"
+            android:text="@string/bottomsheet_functions_description"
             android:textAlignment="center"
             android:textSize="@dimen/normalText" />
 
         <Button
-            android:id="@+id/btnGotItOnboarding"
+            android:id="@+id/btnGotItNews"
             style="@style/ButtonDefaultStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:text="@string/bottomsheet_onboarding_button_welcome" />
+            android:text="@string/bottomsheet_functions_button" />
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

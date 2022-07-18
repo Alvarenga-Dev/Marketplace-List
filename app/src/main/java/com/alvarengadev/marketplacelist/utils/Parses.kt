@@ -13,7 +13,7 @@ class Parses {
                     "[%s,.\\s]",
                     NumberFormat.getCurrencyInstance(CurrencyAppUtils.getCurrency()).currency?.symbol
                 )
-                var cleanString = value.replace(replaceable.toRegex(), "")
+                var cleanString = value.replace(replaceable.toRegex(), "").replace("$", "")
                 if (cleanString.isEmpty()) cleanString = "0"
 
                 val parsed = BigDecimal(cleanString).setScale(
