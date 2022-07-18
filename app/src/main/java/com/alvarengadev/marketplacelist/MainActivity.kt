@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_MarketplaceList)
+
+
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
