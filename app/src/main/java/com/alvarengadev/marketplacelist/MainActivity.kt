@@ -3,8 +3,7 @@ package com.alvarengadev.marketplacelist
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.PreferencesManager
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.ThemeHelper
 import dagger.hilt.android.AndroidEntryPoint
 

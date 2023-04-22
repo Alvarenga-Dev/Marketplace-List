@@ -1,13 +1,15 @@
 package com.alvarengadev.marketplacelist.ui.fragments.add
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.data.models.Item
 import com.alvarengadev.marketplacelist.repository.ItemRepository
-import com.alvarengadev.marketplacelist.utils.Constants
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.TextFormatter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +18,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddOrEditViewModel @Inject constructor(
-    private val repository: ItemRepository
-) : ViewModel() {
+    private val repository: ItemRepository,
+    application: Application,
+) : AndroidViewModel(application) {
+
+    private val context: Context
+        get() = getApplication<Application>().applicationContext
 
     sealed class AddingState {
         object CollectItem : AddingState()
@@ -64,7 +70,7 @@ class AddOrEditViewModel @Inject constructor(
     }
 
     fun setValue(value: String) {
-        this.value = Parses.parseToDouble(value)
+        this.value = Parses.parseToDouble(context, value)
         setCollectTotal()
     }
 
@@ -98,7 +104,7 @@ class AddOrEditViewModel @Inject constructor(
                     AddingState.CollectEditItem(
                         id,
                         name,
-                        TextFormatter.setCurrency(value),
+                        TextFormatter.setCurrency(context, value),
                         quantity.toString()
                     )
                 })

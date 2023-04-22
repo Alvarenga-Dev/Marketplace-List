@@ -1,8 +1,10 @@
 package com.alvarengadev.marketplacelist.ui.fragments.details
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alvarengadev.marketplacelist.repository.ItemRepository
 import com.alvarengadev.marketplacelist.utils.TextFormatter
@@ -12,8 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val repository: ItemRepository
-) : ViewModel() {
+    private val repository: ItemRepository,
+    application: Application,
+) : AndroidViewModel(application) {
+
+    private val context: Context
+        get() = getApplication<Application>().applicationContext
 
     sealed class DetailsState {
         object CollectItem : DetailsState()
@@ -33,7 +39,7 @@ class DetailsViewModel @Inject constructor(
                     DetailsState.SuccessGetItem(
                         id,
                         name,
-                        TextFormatter.setCurrency(value),
+                        TextFormatter.setCurrency(context, value),
                         quantity.toString()
                     )
                 })

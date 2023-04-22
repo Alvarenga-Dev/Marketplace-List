@@ -3,7 +3,8 @@ package com.alvarengadev.marketplacelist.utils.settings
 import android.content.Context
 import com.alvarengadev.marketplacelist.BuildConfig
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.utils.Parses
+import com.alvarengadev.marketplacelist.utils.CurrencyAppUtils
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
 
 class SettingsUtils {
@@ -40,11 +41,15 @@ class SettingsUtils {
     }
 
     fun getListSettingsGeneral(): ArrayList<Options> {
+        val isLocaleBrazil =
+            context?.let { CurrencyAppUtils.getCurrency(it).displayName } == Constants.LOCALE_BRAZIL.displayName
         val listOptions = ArrayList<Options>()
         listOptions.add(
             Options(
                 context?.getString(R.string.item_general_option_title_currency),
-                if (Parses.isLocaleBrazil()) context?.getString(R.string.item_general_option_description_real) else context?.getString(R.string.item_general_option_description_dollar),
+                if (isLocaleBrazil) context?.getString(R.string.item_general_option_description_real) else context?.getString(
+                    R.string.item_general_option_description_dollar
+                ),
                 TypeOptionSettings.GENERAL_CURRENCY
             )
         )

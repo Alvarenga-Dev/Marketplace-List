@@ -6,9 +6,9 @@ import com.alvarengadev.marketplacelist.data.models.Item
 import java.text.NumberFormat
 
 object TextFormatter {
-    fun setCurrency(currencyValue: Double): String =
+    fun setCurrency(context: Context, currencyValue: Double): String =
         NumberFormat
-            .getCurrencyInstance(CurrencyAppUtils.getCurrency())
+            .getCurrencyInstance(CurrencyAppUtils.getCurrency(context))
             .format(currencyValue)
 
     fun messageSharedList(context: Context, listItems: ArrayList<Item>): String {
@@ -16,11 +16,11 @@ object TextFormatter {
         var total = 0.0
 
         listItems.forEach {
-            message += context.getString(R.string.message_shared_description, it.name, it.quantity, setCurrency(it.value))
+            message += context.getString(R.string.message_shared_description, it.name, it.quantity, setCurrency(context, it.value))
             total += (it.value * it.quantity)
         }
 
-        message += context.getString(R.string.message_shared_footer, setCurrency(total))
+        message += context.getString(R.string.message_shared_footer, setCurrency(context, total))
 
         return message
     }

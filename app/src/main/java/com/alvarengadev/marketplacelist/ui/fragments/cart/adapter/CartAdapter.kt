@@ -77,7 +77,7 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
                     .context
                     .getString(
                         R.string.text_value_details,
-                        TextFormatter.setCurrency(value)
+                        TextFormatter.setCurrency(itemView.context, value)
                     )
 
                 ibDeleteItem.setOnClickListener {
@@ -91,7 +91,7 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
                         R.string.content_description_item_cart,
                         position,
                         name,
-                        TextFormatter.setCurrency(value),
+                        TextFormatter.setCurrency(itemView.context, value),
                         quantity.toString()
                     )
 

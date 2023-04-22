@@ -48,7 +48,7 @@ class Footer(
     }
 
     fun setCartValue(value: Double = 0.0): Footer {
-        tvCartValue?.text = context.getString(R.string.text_total_cart, TextFormatter.setCurrency(value))
+        tvCartValue?.text = context.getString(R.string.text_total_cart, TextFormatter.setCurrency(context, value))
         return this
     }
 }

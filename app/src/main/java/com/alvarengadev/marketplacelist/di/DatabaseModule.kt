@@ -3,7 +3,7 @@ package com.alvarengadev.marketplacelist.di
 import android.content.Context
 import androidx.room.Room
 import com.alvarengadev.marketplacelist.data.database.MarketplaceDatabase
-import com.alvarengadev.marketplacelist.utils.Constants
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
