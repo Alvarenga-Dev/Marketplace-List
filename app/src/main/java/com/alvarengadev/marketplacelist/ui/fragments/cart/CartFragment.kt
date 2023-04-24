@@ -17,11 +17,13 @@ import com.alvarengadev.marketplacelist.ui.components.bottomsheet.`interface`.Bu
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
-import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.PreferencesManager
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.TextFormatter
+import com.alvarengadev.marketplacelist.utils.constants.KEY_ONBOARDING_NEWS_FUNCTIONS
+import com.alvarengadev.marketplacelist.utils.constants.KEY_ONBOARDING_WELCOME
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
-import com.alvarengadev.marketplacelist.utils.extensions.toast
+import com.alvarengadev.marketplacelist.utils.extensions.preferences
+import com.alvarengadev.marketplacelist.utils.extensions.save
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +33,6 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     private val binding get() = _binding!!
     private val cartViewModel: CartViewModel by viewModels()
 
-    private var preferencesManager: PreferencesManager? = null
     private var intentSharedCart: Intent? = null
 
     override fun onCreateView(
@@ -40,7 +41,6 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
-        context?.let { PreferencesManager.initializeInstance(it) }
         return binding.root
     }
 
@@ -97,11 +97,11 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             popupMenu?.show()
         }
 
-        if (preferencesManager?.getViewOnboardingWelcome() == false) {
+        if (context?.preferences?.getBoolean(KEY_ONBOARDING_WELCOME, false) == false) {
             val bottomSheet = BottomSheetOnboarding()
             bottomSheet.setButtonGotItClickListener(object : ButtonGotItClickListener {
                 override fun onClick() {
-                    preferencesManager?.setViewOnboardingWelcome()
+                    context?.preferences?.save(KEY_ONBOARDING_WELCOME, true)
                     bottomSheet.dismiss()
                 }
             }).show(childFragmentManager, Constants.BOTTOM_SHEET_WELCOME)
@@ -171,12 +171,14 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
     private fun setupEvents() {
         cartViewModel.getAllItemsFromDatabase()
-        preferencesManager = PreferencesManager.instance
         intentSharedCart = Intent(Intent.ACTION_SEND)
     }
 
     private fun showBottomSheetNewsFunctions() {
-        if (preferencesManager?.getViewOnboardingNewsFunctions() == false && preferencesManager?.getViewOnboardingWelcome() == true) {
+        val isViewedOnboardingWelcome = context?.preferences?.getBoolean(KEY_ONBOARDING_WELCOME, false)
+        val isViewedOnboardingNewFunctions = context?.preferences?.getBoolean(KEY_ONBOARDING_NEWS_FUNCTIONS, false)
+
+        if (isViewedOnboardingNewFunctions == false && isViewedOnboardingWelcome == true) {
             val bottomSheet = BottomSheetNewsFunctions()
             bottomSheet.show(childFragmentManager, Constants.BOTTOM_SHEET_NEWS_FUNCTIONS)
         }

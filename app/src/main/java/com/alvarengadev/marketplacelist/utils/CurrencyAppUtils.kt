@@ -1,18 +1,23 @@
 package com.alvarengadev.marketplacelist.utils
 
-import java.util.*
+import android.content.Context
+import com.alvarengadev.marketplacelist.utils.constants.Constants
+import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.CURRENCY_BR
+import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.CURRENCY_EN
+import com.alvarengadev.marketplacelist.utils.constants.KEY_CURRENCY
+import com.alvarengadev.marketplacelist.utils.extensions.preferences
+import java.util.Locale
 
 object CurrencyAppUtils {
-    fun getCurrency(): Locale {
-        val currency = PreferencesManager.instance?.getCurrency()
+    fun getCurrency(context: Context): Locale {
         val getLocaleBR = Constants.LOCALE_BRAZIL
         val getLocalEN = Locale.US
 
-        return when (currency) {
-            Constants.CURRENCY_BR -> {
+        return when (context.preferences.getString(KEY_CURRENCY, null)) {
+            CURRENCY_BR -> {
                 getLocaleBR
             }
-            Constants.CURRENCY_EN -> {
+            CURRENCY_EN -> {
                 getLocalEN
             }
             else -> {

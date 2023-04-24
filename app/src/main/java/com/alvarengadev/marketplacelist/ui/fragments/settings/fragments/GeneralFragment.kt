@@ -12,15 +12,16 @@ import com.alvarengadev.marketplacelist.ui.components.dialog.DialogDefault
 import com.alvarengadev.marketplacelist.ui.components.dialog.OnButtonsDialogListener
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.OnClickItemListener
 import com.alvarengadev.marketplacelist.ui.fragments.settings.adapter.SettingsOptionsAdapter
-import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.Parses
-import com.alvarengadev.marketplacelist.utils.PreferencesManager
+import com.alvarengadev.marketplacelist.utils.CurrencyAppUtils
+import com.alvarengadev.marketplacelist.utils.constants.Constants
+import com.alvarengadev.marketplacelist.utils.constants.KEY_CURRENCY
 import com.alvarengadev.marketplacelist.utils.enums.TypeOptionSettings
+import com.alvarengadev.marketplacelist.utils.extensions.preferences
+import com.alvarengadev.marketplacelist.utils.extensions.save
 import com.alvarengadev.marketplacelist.utils.settings.SettingsUtils
 
 class GeneralFragment : Fragment() {
 
-    private var preferencesManager: PreferencesManager? = null
     private var _binding: FragmentGeneralBinding? = null
     private val binding get() = _binding!!
 
@@ -34,7 +35,6 @@ class GeneralFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        preferencesManager = PreferencesManager.instance
         initComponents()
     }
 
@@ -99,8 +99,10 @@ class GeneralFragment : Fragment() {
         currency: String,
         adapterListSettings: SettingsOptionsAdapter
     ) {
-        preferencesManager?.setCurrency(currency)
+        val isLocaleBrazil = context?.let { CurrencyAppUtils.getCurrency(it).displayName } == Constants.LOCALE_BRAZIL.displayName
+
+        context?.preferences?.save(KEY_CURRENCY, currency)
         dialogDefault.dismiss()
-        adapterListSettings.updateItem(TypeOptionSettings.GENERAL_CURRENCY, if (Parses.isLocaleBrazil()) getString(R.string.item_general_option_description_real) else getString(R.string.item_general_option_description_dollar))
+        adapterListSettings.updateItem(TypeOptionSettings.GENERAL_CURRENCY, if (isLocaleBrazil) getString(R.string.item_general_option_description_real) else getString(R.string.item_general_option_description_dollar))
     }
 }

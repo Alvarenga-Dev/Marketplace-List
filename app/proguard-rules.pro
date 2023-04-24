@@ -1,5 +1,5 @@
 -keep class com.alvarengadev.marketplacelist.data**
--keep class com.alvarengadev.marketplacelist.utils.Constants
+-keep class com.alvarengadev.marketplacelist.utils.constants.Constants
 
 -keep class butterknife.** { *; }
  -dontwarn butterknife.internal.**

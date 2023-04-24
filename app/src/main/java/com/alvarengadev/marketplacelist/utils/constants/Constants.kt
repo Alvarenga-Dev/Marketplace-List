@@ -1,4 +1,4 @@
-package com.alvarengadev.marketplacelist.utils
+package com.alvarengadev.marketplacelist.utils.constants
 
 import java.util.*
 

@@ -2,8 +2,8 @@ package com.alvarengadev.marketplacelist.utils
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import com.alvarengadev.marketplacelist.utils.Constants.Companion.DARK_MODE
-import com.alvarengadev.marketplacelist.utils.Constants.Companion.LIGHT_MODE
+import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.DARK_MODE
+import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.LIGHT_MODE
 
 object ThemeHelper {
     fun applyTheme(themePref: String) {
