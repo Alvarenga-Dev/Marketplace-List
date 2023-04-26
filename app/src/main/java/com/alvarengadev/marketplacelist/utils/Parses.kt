@@ -1,7 +1,7 @@
 package com.alvarengadev.marketplacelist.utils
 
 import android.content.Context
-import com.alvarengadev.marketplacelist.data.models.Item
+import com.alvarengadev.marketplacelist.data.model.ItemModel
 import com.alvarengadev.marketplacelist.utils.constants.Constants
 import java.math.BigDecimal
 import java.text.NumberFormat
@@ -52,9 +52,9 @@ class Parses {
             }
         }
 
-        fun parseValueTotal(listItems: ArrayList<Item>): Double {
+        fun parseValueTotal(listItemModels: List<ItemModel>): Double {
             var totalValue = 0.0
-            listItems.map {
+            listItemModels.map {
                 totalValue += (it.value * it.quantity)
             }
             return totalValue

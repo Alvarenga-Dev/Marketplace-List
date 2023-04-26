@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.data.models.Item
+import com.alvarengadev.marketplacelist.data.model.ItemModel
 import com.alvarengadev.marketplacelist.databinding.ItemCartBinding
 import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.delete.DeleteItemDialog
 import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.delete.DeleteItemInterface
 import com.alvarengadev.marketplacelist.utils.TextFormatter
 
-class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK) {
+class CartAdapter : ListAdapter<ItemModel, CartAdapter.CartViewHolder>(DIFF_CALLBACK) {
 
     private var onClickItemListener: OnClickItemListener? = null
     private var observerListEmpty: ObserverListEmpty? = null
@@ -61,11 +61,11 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
         private val onClickItemListener: OnClickItemListener?
     ) : RecyclerView.ViewHolder(binding.root), DeleteItemInterface {
         fun bind(
-            item: Item,
+            itemModel: ItemModel,
             supportFragmentManager: FragmentManager?,
             position: String
         ) = binding.apply {
-            item.apply {
+            itemModel.apply {
                 tvNameItem.text = name
                 tvQuantityItem.text = itemView
                     .context
@@ -126,13 +126,13 @@ class CartAdapter : ListAdapter<Item, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Item>() {
-            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem.id == newItem.id
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemModel>() {
+            override fun areItemsTheSame(oldItemModel: ItemModel, newItemModel: ItemModel): Boolean {
+                return oldItemModel.id == newItemModel.id
             }
 
-            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItemModel: ItemModel, newItemModel: ItemModel): Boolean {
+                return oldItemModel.id == newItemModel.id
             }
         }
     }

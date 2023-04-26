@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.data.models.Item
-import com.alvarengadev.marketplacelist.repository.ItemRepository
+import com.alvarengadev.marketplacelist.data.model.ItemModel
+import com.alvarengadev.marketplacelist.repository.IItemRepository
 import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.Parses
 import com.alvarengadev.marketplacelist.utils.TextFormatter
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddOrEditViewModel @Inject constructor(
-    private val repository: ItemRepository,
+    private val repository: IItemRepository,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -94,7 +94,7 @@ class AddOrEditViewModel @Inject constructor(
     fun getItemFromDatabase(
         itemId: Int
     ) = viewModelScope.launch {
-        val item = repository.getItemFromDatabase(itemId)
+        val item = repository.getItem(itemId)
         if (item != null) {
             with(item) {
                 this@AddOrEditViewModel.value = value
@@ -117,8 +117,8 @@ class AddOrEditViewModel @Inject constructor(
         value: Double,
         quantity: Int
     ) = viewModelScope.launch {
-        val isAdd = repository.createItemFromDatabase(
-            Item(
+        val isAdd = repository.insertItem(
+            ItemModel(
                 name,
                 value,
                 quantity
@@ -133,7 +133,7 @@ class AddOrEditViewModel @Inject constructor(
         itemId: Int,
         name: String
     ) = viewModelScope.launch {
-        val isEdit = repository.updateItemFromDatabase(
+        val isEdit = repository.updateItem(
             itemId,
             name,
             value,
