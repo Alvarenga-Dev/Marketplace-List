@@ -41,7 +41,7 @@ class DeleteItemDialog : DialogFragment() {
     private fun initializerDialog(binding: DialogDeleteItemBinding) = binding.apply {
         btnConfirmDialogDelete.setOnClickListener {
             deleteItemViewModel.apply {
-                itemId?.let { deleteItemFromDatabase(it) }
+                itemId?.let { deleteItemWithId(it) }
             }
         }
 

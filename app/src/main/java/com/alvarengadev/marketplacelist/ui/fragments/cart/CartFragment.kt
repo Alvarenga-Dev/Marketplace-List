@@ -123,7 +123,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                 if (registrationState is CartViewModel.CartListState.SuccessList) {
                     val adapterListCart = CartAdapter()
                     adapterListCart.apply {
-                        submitList(registrationState.listItems)
+                        submitList(registrationState.listItemModels)
                         setSupportFragmentManager(parentFragmentManager)
                         observerListEmpty(this@CartFragment)
                         setOnClickItemListener(object : OnClickItemListener {
@@ -146,7 +146,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                         context?.let {
                             TextFormatter.messageSharedList(
                                 it,
-                                registrationState.listItems
+                                registrationState.listItemModels
                             )
                         }
                     )

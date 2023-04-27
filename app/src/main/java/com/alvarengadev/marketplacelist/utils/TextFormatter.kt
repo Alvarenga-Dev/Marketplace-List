@@ -2,7 +2,7 @@ package com.alvarengadev.marketplacelist.utils
 
 import android.content.Context
 import com.alvarengadev.marketplacelist.R
-import com.alvarengadev.marketplacelist.data.models.Item
+import com.alvarengadev.marketplacelist.data.model.ItemModel
 import java.text.NumberFormat
 
 object TextFormatter {
@@ -11,11 +11,11 @@ object TextFormatter {
             .getCurrencyInstance(CurrencyAppUtils.getCurrency(context))
             .format(currencyValue)
 
-    fun messageSharedList(context: Context, listItems: ArrayList<Item>): String {
+    fun messageSharedList(context: Context, listItemModels: List<ItemModel>): String {
         var message = context.getString(R.string.message_shared_title)
         var total = 0.0
 
-        listItems.forEach {
+        listItemModels.forEach {
             message += context.getString(R.string.message_shared_description, it.name, it.quantity, setCurrency(context, it.value))
             total += (it.value * it.quantity)
         }

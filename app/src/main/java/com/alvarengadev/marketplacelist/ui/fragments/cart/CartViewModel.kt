@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alvarengadev.marketplacelist.data.models.Item
-import com.alvarengadev.marketplacelist.repository.ItemRepository
+import com.alvarengadev.marketplacelist.data.model.ItemModel
+import com.alvarengadev.marketplacelist.repository.IItemRepository
 import com.alvarengadev.marketplacelist.utils.Parses
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val repository: ItemRepository
+    private val repository: IItemRepository
 ) : ViewModel() {
 
     sealed class CartListState {
@@ -21,7 +21,8 @@ class CartViewModel @Inject constructor(
         object LoadingList : CartListState()
         object ListEmpty : CartListState()
         object BottomSheet : CartListState()
-        class SuccessList(val listItems: ArrayList<Item>, val total: Double) : CartListState()
+        class SuccessList(val listItemModels: List<ItemModel>, val total: Double) : CartListState()
+
         class Result(val isSuccessful: Boolean) : CartListState()
     }
 
@@ -30,7 +31,7 @@ class CartViewModel @Inject constructor(
 
     fun getAllItemsFromDatabase() = viewModelScope.launch {
         _registrationStateEvent.postValue(CartListState.LoadingList)
-        val listItems = repository.getAllItemsFromDatabase()
+        val listItems = repository.getAllItems()
         if (listItems.isNotEmpty()) {
             _registrationStateEvent.postValue(
                 CartListState.SuccessList(
@@ -46,7 +47,7 @@ class CartViewModel @Inject constructor(
     fun deleteAllItemsFromDatabase() = viewModelScope.launch {
         _registrationStateEvent.postValue(
             CartListState.Result(
-                repository.deleteAllItemsFromDatabase()
+                repository.deleteAllItems()
             )
         )
     }
@@ -54,7 +55,7 @@ class CartViewModel @Inject constructor(
     fun resetClearCart() = _registrationStateEvent.postValue(CartListState.None)
 
     fun viewBottomSheetNewsFunctions() = viewModelScope.launch {
-        if (repository.getAllItemsFromDatabase().size >= 1) {
+        if (repository.getAllItems().isNotEmpty()) {
             _registrationStateEvent.postValue(CartListState.BottomSheet)
         }
     }

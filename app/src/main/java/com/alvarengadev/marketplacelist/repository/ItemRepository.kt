@@ -1,46 +1,44 @@
 package com.alvarengadev.marketplacelist.repository
 
 import com.alvarengadev.marketplacelist.data.database.dao.ItemDao
-import com.alvarengadev.marketplacelist.data.database.entities.toArrayListItem
-import com.alvarengadev.marketplacelist.data.database.entities.toEntity
-import com.alvarengadev.marketplacelist.data.database.entities.toItem
-import com.alvarengadev.marketplacelist.data.models.Item
+import com.alvarengadev.marketplacelist.data.model.ItemModel
+import com.alvarengadev.marketplacelist.data.model.mapper.IItemMapper
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ItemRepository @Inject constructor(
-    private val itemDao: ItemDao
-) {
-    suspend fun createItemFromDatabase(
-        item: Item
-    ): Boolean = try {
-        itemDao.insert(toEntity(item))
+    private val itemDao: ItemDao,
+    private val mapper: IItemMapper
+): IItemRepository {
+
+    override suspend fun insertItem(item: ItemModel): Boolean = try {
+        itemDao.insert(mapper.itemModelToEntity(item))
         true
     } catch (ex: Exception) {
         false
     }
 
-    suspend fun deleteItemFromDatabase(
-        itemId: Int
-    ): Boolean = try {
-        itemDao.delete(itemDao.getItem(itemId))
+    override suspend fun deleteItemWithId(id: Int): Boolean = try {
+        itemDao.delete(itemDao.getItem(id))
         true
     } catch (ex: Exception) {
         false
     }
 
-    suspend fun updateItemFromDatabase(
-        itemId: Int,
+    override suspend fun updateItem(
+        id: Int,
         name: String,
         value: Double,
         quantity: Int
     ): Boolean = try {
         itemDao.update(
-            toEntity(
-                Item(
+            mapper.itemModelToEntity(
+                ItemModel(
                     name,
                     value,
                     quantity,
-                    itemId
+                    id
                 )
             )
         )
@@ -49,8 +47,8 @@ class ItemRepository @Inject constructor(
         false
     }
 
-    suspend fun deleteAllItemsFromDatabase(): Boolean {
-        return if (getAllItemsFromDatabase().isNotEmpty()) {
+    override suspend fun deleteAllItems(): Boolean {
+        return if (itemDao.getAllItems().isNotEmpty()) {
             try {
                 itemDao.deleteAll()
                 true
@@ -62,17 +60,17 @@ class ItemRepository @Inject constructor(
         }
     }
 
-    suspend fun getAllItemsFromDatabase(): ArrayList<Item> = try {
-        toArrayListItem(itemDao.getAllItems())
+    override suspend fun getAllItems(): List<ItemModel> = try {
+        itemDao.getAllItems().map {
+            mapper.itemEntityToModel(it)
+        }
     } catch (ex: Exception) {
-        arrayListOf()
+        emptyList()
     }
 
-    suspend fun getItemFromDatabase(
-        itemId: Int
-    ): Item? = try {
-        toItem(
-            itemDao.getItem(itemId)
+    override suspend fun getItem(id: Int): ItemModel? = try {
+        mapper.itemEntityToModel(
+            itemDao.getItem(id)
         )
     } catch (ex: Exception) {
         null
