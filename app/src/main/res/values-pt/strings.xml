@@ -7,9 +7,9 @@
 
     <string name="app_name">Lista de Compras</string>
 
+    <string name="bottomsheet_functions_button">Entendi, oba!</string>
     <string name="bottomsheet_functions_description">Para que você tire um máximo proveito de sua lista, permitimos que você limpe ou compartilhe a sua lista! Basta clicar ali nos 3 (três) pontinhos.</string>
     <string name="bottomsheet_functions_title">Estamos sempre atentos a você!</string>
-    <string name="bottomsheet_functions_button">Entendi, oba!</string>
     <string name="bottomsheet_onboarding_button_welcome">Partiu usar!</string>
     <string name="bottomsheet_onboarding_description_welcome">Obrigado por fazer parte disso, esperamos que possamos te ajudar nas suas compras.</string>
     <string name="bottomsheet_onboarding_title_welcome">Uma mensagem de agradecimento</string>
@@ -30,6 +30,10 @@
     <string name="dialog_currency_option_real_button">Real</string>
     <string name="dialog_currency_title">Escolha uma da moeda</string>
     <string name="dialog_message_delete">Deseja realmente excluir esse item?</string>
+    <string name="dialog_permission_body">Visando ficar mais próximo de você e ser mais útil, estou sempre a te ajudar a fazer melhores compras em supermercados, te ajudar a não esquecer do que incluir em sua lista, te ajudar a procurar melhores preços e assim por diante! Se fizer sentido para você não deixe de ativar, caso não ache necessário vocé pode recusar. Caso mude de ideia poderá acessar as configurações e habilitar para que sua lista possa te enviar notificações!</string>
+    <string name="dialog_permission_button_accept">Ótimo!</string>
+    <string name="dialog_permission_button_recuse">Não, valeu</string>
+    <string name="dialog_permission_title">Porque sua lista envia notificações?</string>
 
     <string name="footer_button_text">Novo Produto</string>
 
@@ -75,5 +79,7 @@
     <string name="title_quantity_item">Quantidade:</string>
     <string name="title_quantity_item_with_value">Quantidade: %s</string>
     <string name="title_value_item">Valor do produto</string>
+
     <string name="toast_cart_empty">Seu carrinho está vazio!</string>
+    <string name="toast_cart_permissions">Para receber dicas e lembretes, ative as notificações!</string>
 </resources>

@@ -1,18 +1,24 @@
 package com.alvarengadev.marketplacelist
 
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.alvarengadev.marketplacelist.utils.constants.Constants
+import androidx.appcompat.app.AppCompatActivity
+import com.alvarengadev.marketplacelist.databinding.ActivityMainBinding
 import com.alvarengadev.marketplacelist.utils.ThemeHelper
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_MarketplaceList)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
