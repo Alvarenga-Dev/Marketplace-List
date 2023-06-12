@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragments.ItemFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_marginTop="@dimen/small_size"
+        android:layout_marginBottom="@dimen/small_size"
+        android:importantForAccessibility="no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/content_description_back_button"
+            android:padding="@dimen/default_size"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitleAddItem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitleAddItem" />
+
+        <TextView
+            android:id="@+id/tvTitleAddItem"
+            style="@style/TitleFragmentStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/fragment_title_add_item"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.alvarengadev.marketplacelist.view.component.Container
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:importantForAccessibility="no"
+        android:layout_height="match_parent">
+
+        <com.alvarengadev.marketplacelist.view.component.Footer
+            android:id="@+id/footerAddItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:paddingStart="@dimen/default_size"
+            android:paddingTop="@dimen/default_size"
+            android:paddingEnd="@dimen/default_size"
+            android:scrollbarSize="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivCooking"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/image_cooking"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfNameItem"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/title_name_item"
+                    app:expandedHintEnabled="false"
+                    app:hintEnabled="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCooking"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivCooking"
+                    app:layout_constraintTop_toTopOf="@+id/ivCooking"
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:hint="@string/hint_name_item" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfValueItem"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/title_value_item"
+                    app:expandedHintEnabled="false"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tfNameItem">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvTitleQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/title_quantity_item"
+                    android:textSize="@dimen/bigText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tfValueItem" />
+
+                <ImageButton
+                    android:id="@+id/ibMinus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="?attr/colorPrimaryVariant"
+                    android:contentDescription="@string/content_description_button_minus"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintEnd_toStartOf="@+id/tvTitleQuantity"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ibPlus" />
+
+                <ImageButton
+                    android:id="@+id/ibPlus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="?attr/colorPrimaryVariant"
+                    android:contentDescription="@string/content_description_button_plus"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tvTitleQuantity"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
+
+                <TextView
+                    android:id="@+id/tvValueQuantity"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="@string/value_default_quantity"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibPlus"
+                    app:layout_constraintEnd_toStartOf="@+id/ibPlus"
+                    app:layout_constraintStart_toEndOf="@+id/ibMinus"
+                    app:layout_constraintTop_toTopOf="@+id/ibMinus" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </com.alvarengadev.marketplacelist.view.component.Container>
+
+</LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.details.DetailsFragment">
+    tools:context=".view.fragments.DetailsFragment">
 
     <ImageButton
         android:id="@+id/ibBack"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ibBack" />
 
-    <com.alvarengadev.marketplacelist.ui.components.Container
+    <com.alvarengadev.marketplacelist.view.component.Container
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -101,5 +101,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvQuantityDetails"
             app:layout_constraintVertical_bias="1.0" />
-    </com.alvarengadev.marketplacelist.ui.components.Container>
+    </com.alvarengadev.marketplacelist.view.component.Container>
 </androidx.constraintlayout.widget.ConstraintLayout>

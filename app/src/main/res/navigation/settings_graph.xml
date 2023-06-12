@@ -6,7 +6,7 @@
     app:startDestination="@id/settingsFragment">
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.settings.fragments.SettingsFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.SettingsFragment"
         android:label="@string/fragment_title_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -18,12 +18,12 @@
     </fragment>
     <fragment
         android:id="@+id/generalFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.settings.fragments.GeneralFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.GeneralFragment"
         android:label="@string/fragment_title_general"
         tools:layout="@layout/fragment_general" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.settings.fragments.AboutFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.AboutFragment"
         android:label="@string/fragment_title_about"
         tools:layout="@layout/fragment_about" />
 </navigation>
