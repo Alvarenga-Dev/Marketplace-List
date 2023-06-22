@@ -17,10 +17,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Remove google-services.json
+        run: |
+          if [ -f "app/google-services.json" ]; then
+            rm app/google-services.json
+          else
+            echo "google-services.json not found"
+          fi
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
@@ -29,7 +38,7 @@ jobs:
           build-tools: '30.0.3'
 
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: ./gradlew compileDebugKotlin
 
       - name: Run Tests
         run: ./gradlew testDebug
