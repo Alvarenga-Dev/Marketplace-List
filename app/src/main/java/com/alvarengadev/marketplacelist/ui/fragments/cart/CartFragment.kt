@@ -1,10 +1,13 @@
 package com.alvarengadev.marketplacelist.ui.fragments.cart
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,11 +20,17 @@ import com.alvarengadev.marketplacelist.ui.components.bottomsheet.`interface`.Bu
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.CartAdapter
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.ObserverListEmpty
 import com.alvarengadev.marketplacelist.ui.fragments.cart.adapter.OnClickItemListener
-import com.alvarengadev.marketplacelist.utils.Constants
-import com.alvarengadev.marketplacelist.utils.PreferencesManager
+import com.alvarengadev.marketplacelist.ui.fragments.cart.dialog.permissions.PermissionsDialog
+import com.alvarengadev.marketplacelist.utils.FirebaseTokenNotifications
 import com.alvarengadev.marketplacelist.utils.TextFormatter
+import com.alvarengadev.marketplacelist.utils.constants.Constants
+import com.alvarengadev.marketplacelist.utils.constants.KEY_NEVER_ASK_PERMISSION_NOTIFICATIONS
+import com.alvarengadev.marketplacelist.utils.constants.KEY_ONBOARDING_NEWS_FUNCTIONS
+import com.alvarengadev.marketplacelist.utils.constants.KEY_ONBOARDING_WELCOME
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
-import com.alvarengadev.marketplacelist.utils.extensions.toast
+import com.alvarengadev.marketplacelist.utils.extensions.preferences
+import com.alvarengadev.marketplacelist.utils.extensions.save
+import com.alvarengadev.marketplacelist.utils.extensions.shortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,8 +40,15 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
     private val binding get() = _binding!!
     private val cartViewModel: CartViewModel by viewModels()
 
-    private var preferencesManager: PreferencesManager? = null
     private var intentSharedCart: Intent? = null
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            context?.shortToast(R.string.toast_cart_permissions)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +56,6 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
-        context?.let { PreferencesManager.initializeInstance(it) }
         return binding.root
     }
 
@@ -97,11 +112,11 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
             popupMenu?.show()
         }
 
-        if (preferencesManager?.getViewOnboardingWelcome() == false) {
+        if (context?.preferences?.getBoolean(KEY_ONBOARDING_WELCOME, false) == false) {
             val bottomSheet = BottomSheetOnboarding()
             bottomSheet.setButtonGotItClickListener(object : ButtonGotItClickListener {
                 override fun onClick() {
-                    preferencesManager?.setViewOnboardingWelcome()
+                    context?.preferences?.save(KEY_ONBOARDING_WELCOME, true)
                     bottomSheet.dismiss()
                 }
             }).show(childFragmentManager, Constants.BOTTOM_SHEET_WELCOME)
@@ -123,7 +138,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                 if (registrationState is CartViewModel.CartListState.SuccessList) {
                     val adapterListCart = CartAdapter()
                     adapterListCart.apply {
-                        submitList(registrationState.listItems)
+                        submitList(registrationState.listItemModels)
                         setSupportFragmentManager(parentFragmentManager)
                         observerListEmpty(this@CartFragment)
                         setOnClickItemListener(object : OnClickItemListener {
@@ -146,7 +161,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
                         context?.let {
                             TextFormatter.messageSharedList(
                                 it,
-                                registrationState.listItems
+                                registrationState.listItemModels
                             )
                         }
                     )
@@ -171,14 +186,41 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverListEmpty {
 
     private fun setupEvents() {
         cartViewModel.getAllItemsFromDatabase()
-        preferencesManager = PreferencesManager.instance
         intentSharedCart = Intent(Intent.ACTION_SEND)
+
+        // remove 'if' and move conditional for viewModel
+        val isNeverAcceptNotifications = context?.preferences?.getBoolean(KEY_NEVER_ASK_PERMISSION_NOTIFICATIONS, false)
+        if (isNeverAcceptNotifications == false) {
+            showAskNotificationPermission()
+        }
     }
 
+    // remove 'if' and move conditional for viewModel
     private fun showBottomSheetNewsFunctions() {
-        if (preferencesManager?.getViewOnboardingNewsFunctions() == false && preferencesManager?.getViewOnboardingWelcome() == true) {
+        val isViewedOnboardingWelcome = context?.preferences?.getBoolean(KEY_ONBOARDING_WELCOME, false)
+        val isViewedOnboardingNewFunctions = context?.preferences?.getBoolean(KEY_ONBOARDING_NEWS_FUNCTIONS, false)
+
+        if (isViewedOnboardingNewFunctions == false && isViewedOnboardingWelcome == true) {
             val bottomSheet = BottomSheetNewsFunctions()
             bottomSheet.show(childFragmentManager, Constants.BOTTOM_SHEET_NEWS_FUNCTIONS)
+        }
+    }
+
+    private fun showAskNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                val permissionsDialog = PermissionsDialog(
+                    acceptNotification = {
+                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    },
+                    recuseNotification = {
+                        context?.preferences?.save(KEY_NEVER_ASK_PERMISSION_NOTIFICATIONS, true)
+                    }
+                )
+                permissionsDialog.show(parentFragmentManager, "")
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 

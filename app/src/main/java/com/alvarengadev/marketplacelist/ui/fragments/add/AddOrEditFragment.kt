@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.FragmentAddBinding
-import com.alvarengadev.marketplacelist.utils.Constants
+import com.alvarengadev.marketplacelist.utils.constants.Constants
 import com.alvarengadev.marketplacelist.utils.CurrencyAppUtils
 import com.alvarengadev.marketplacelist.utils.MoneyTextWatcher
 import com.alvarengadev.marketplacelist.utils.extensions.createSnack
@@ -91,8 +91,8 @@ class AddOrEditFragment : Fragment(R.layout.fragment_add) {
         }
 
         tfValueItem.editText?.apply {
-            hint = if (CurrencyAppUtils.getCurrency() == Constants.LOCALE_BRAZIL) HINT_CURRENCY_BRAZIL else HINT_CURRENCY_DOLLAR
-            addTextChangedListener(MoneyTextWatcher(tfValueItem.editText))
+            hint = if (CurrencyAppUtils.getCurrency(context) == Constants.LOCALE_BRAZIL) HINT_CURRENCY_BRAZIL else HINT_CURRENCY_DOLLAR
+            addTextChangedListener(MoneyTextWatcher(context, tfValueItem.editText))
             addTextChangedListener { editableText ->
                 addOrEditViewModel.setValue(editableText.toString())
                 tfValueItem.dismiss()

@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.alvarengadev.marketplacelist.databinding.DialogDeleteItemBinding
@@ -19,6 +18,10 @@ class DeleteItemDialog : DialogFragment() {
     private var itemId: Int? = null
     private lateinit var dialog: AlertDialog
 
+    private val binding by lazy {
+        DialogDeleteItemBinding.inflate(layoutInflater)
+    }
+
     fun setInstance(itemId: Int?, deleteItemInterface: DeleteItemInterface) {
         this.itemId = itemId
         this.deleteItemInterface = deleteItemInterface
@@ -26,7 +29,6 @@ class DeleteItemDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(this.context)
-        val binding = DialogDeleteItemBinding.inflate(LayoutInflater.from(this.context))
         builder.setView(binding.root)
         initializerDialog(binding)
 
@@ -41,7 +43,7 @@ class DeleteItemDialog : DialogFragment() {
     private fun initializerDialog(binding: DialogDeleteItemBinding) = binding.apply {
         btnConfirmDialogDelete.setOnClickListener {
             deleteItemViewModel.apply {
-                itemId?.let { deleteItemFromDatabase(it) }
+                itemId?.let { deleteItemWithId(it) }
             }
         }
 

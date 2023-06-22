@@ -6,13 +6,13 @@ import com.alvarengadev.marketplacelist.data.database.entities.ItemEntity
 @Dao
 interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(itemEntity: ItemEntity)
+    suspend fun insert(item: ItemEntity)
 
     @Delete
-    suspend fun delete(itemEntity: ItemEntity)
+    suspend fun delete(item: ItemEntity)
 
     @Update
-    suspend fun update(itemEntity: ItemEntity)
+    suspend fun update(item: ItemEntity)
 
     @Query("DELETE FROM marketplace_item")
     suspend fun deleteAll()

@@ -1,10 +1,12 @@
 package com.alvarengadev.marketplacelist.utils
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
 class MoneyTextWatcher(
+    private val context: Context,
     private val editText: EditText?
 ) : TextWatcher {
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -12,8 +14,7 @@ class MoneyTextWatcher(
     override fun afterTextChanged(editable: Editable) {
         val editText = editText ?: return
         editText.removeTextChangedListener(this)
-
-        val formatted = Parses.parseToCurrency(editable.toString())
+        val formatted = Parses.parseToCurrency(context, editable.toString())
 
         editText.setText(formatted)
         editText.setSelection(formatted.length)

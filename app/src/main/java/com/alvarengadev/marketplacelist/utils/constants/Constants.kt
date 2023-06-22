@@ -1,6 +1,6 @@
-package com.alvarengadev.marketplacelist.utils
+package com.alvarengadev.marketplacelist.utils.constants
 
-import java.util.*
+import java.util.Locale
 
 class Constants {
     companion object {
@@ -17,6 +17,9 @@ class Constants {
 
         const val CURRENCY_BR = "CURRENCY_BR"
         const val CURRENCY_EN = "CURRENCY_EN"
+
+        const val CHANNEL_NOTIFICATION_FIREBASE = "CHANNEL_NOTIFICATION_FIREBASE"
+        const val NOTIFICATION_NAME_FIREBASE = "NOTIFICATION_NAME_FIREBASE"
 
         val LOCALE_BRAZIL = Locale("pt", "br")
     }
