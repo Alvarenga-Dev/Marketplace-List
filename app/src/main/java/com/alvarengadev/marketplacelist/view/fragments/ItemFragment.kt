@@ -153,3 +153,4 @@ class ItemFragment : Fragment(R.layout.fragment_item) {
         const val HINT_CURRENCY_DOLLAR = "$0.00"
     }
 }
+

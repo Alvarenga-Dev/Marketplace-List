@@ -248,3 +248,4 @@ class CartFragment : Fragment(R.layout.fragment_cart), ObserverCartEmpty {
         const val TYPE_TEXT = "text/html"
     }
 }
+
