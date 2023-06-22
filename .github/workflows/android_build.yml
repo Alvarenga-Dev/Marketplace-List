@@ -1,16 +1,35 @@
 name: Android Build
 
-on: pull_request
-
-permissions:
-  contents: read
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the code
+      - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Build the app
-        run: ./gradlew build
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-platform: 'android-30'
+          build-tools: '30.0.3'
+
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug
+
+      - name: Run Tests
+        run: ./gradlew testDebug
