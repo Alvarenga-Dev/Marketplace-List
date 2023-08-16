@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.cart.CartFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.CartFragment"
         android:label="@string/fragment_title_cart"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -22,9 +22,9 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.add.AddOrEditFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.ItemFragment"
         android:label="@string/fragment_title_add_item"
-        tools:layout="@layout/fragment_add" >
+        tools:layout="@layout/fragment_item" >
         <argument
             android:name="ItemId"
             app:argType="integer"
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.alvarengadev.marketplacelist.ui.fragments.details.DetailsFragment"
+        android:name="com.alvarengadev.marketplacelist.view.fragments.DetailsFragment"
         android:label="@string/fragment_title_details"
         tools:layout="@layout/fragment_details">
         <argument

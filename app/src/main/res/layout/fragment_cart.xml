@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.cart.CartFragment">
+    tools:context=".view.fragments.CartFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="@+id/tvTitleCart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.alvarengadev.marketplacelist.ui.components.Container
+    <com.alvarengadev.marketplacelist.view.component.Container
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -133,7 +133,7 @@
 
         </ViewFlipper>
 
-        <com.alvarengadev.marketplacelist.ui.components.Footer
+        <com.alvarengadev.marketplacelist.view.component.Footer
             android:id="@+id/footerCart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -141,6 +141,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </com.alvarengadev.marketplacelist.ui.components.Container>
+    </com.alvarengadev.marketplacelist.view.component.Container>
 
 </LinearLayout>
