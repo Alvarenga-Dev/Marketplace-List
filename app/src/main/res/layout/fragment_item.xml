@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/ibBack"
+            android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -24,12 +24,12 @@
             android:contentDescription="@string/content_description_back_button"
             android:padding="@dimen/default_size"
             android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTitleAddItem"
+            app:layout_constraintBottom_toBottomOf="@+id/text_title_item"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTitleAddItem" />
+            app:layout_constraintTop_toTopOf="@+id/text_title_item" />
 
         <TextView
-            android:id="@+id/tvTitleAddItem"
+            android:id="@+id/text_title_item"
             style="@style/TitleFragmentStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_height="match_parent">
 
         <com.alvarengadev.marketplacelist.view.component.Footer
-            android:id="@+id/footerAddItem"
+            android:id="@+id/footer_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ScrollView
-            android:id="@+id/scrollContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
@@ -67,7 +66,7 @@
             android:paddingTop="@dimen/default_size"
             android:paddingEnd="@dimen/default_size"
             android:scrollbarSize="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
+            app:layout_constraintBottom_toTopOf="@+id/footer_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -76,13 +75,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:paddingBottom="@dimen/default_size"
-                app:layout_constraintBottom_toTopOf="@+id/footerAddItem"
+                app:layout_constraintBottom_toTopOf="@+id/footer_item"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivCooking"
+                    android:id="@+id/image_cooking"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_marginStart="16dp"
@@ -94,7 +93,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tfNameItem"
+                    android:id="@+id/input_name_item"
                     style="@style/TextInputLayoutStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -103,23 +102,23 @@
                     android:hint="@string/title_name_item"
                     app:expandedHintEnabled="false"
                     app:hintEnabled="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivCooking"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_cooking"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivCooking"
-                    app:layout_constraintTop_toTopOf="@+id/ivCooking"
+                    app:layout_constraintStart_toEndOf="@+id/image_cooking"
+                    app:layout_constraintTop_toTopOf="@+id/image_cooking"
                     app:layout_constraintVertical_bias="1.0">
 
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:hint="@string/hint_name_item" />
+                        android:hint="@string/hint_name_item"
+                        android:maxLines="2" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tfValueItem"
+                    android:id="@+id/input_value_item"
                     style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,7 +130,7 @@
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tfNameItem">
+                    app:layout_constraintTop_toBottomOf="@+id/input_name_item">
 
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/TextInputEditTextStyle"
@@ -141,7 +140,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/tvTitleQuantity"
+                    android:id="@+id/text_title_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -149,10 +148,10 @@
                     android:textSize="@dimen/bigText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tfValueItem" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_value_item" />
 
                 <ImageButton
-                    android:id="@+id/ibMinus"
+                    android:id="@+id/button_minus"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
@@ -160,13 +159,13 @@
                     android:contentDescription="@string/content_description_button_minus"
                     android:padding="8dp"
                     android:src="@drawable/ic_minus"
-                    app:layout_constraintEnd_toStartOf="@+id/tvTitleQuantity"
+                    app:layout_constraintEnd_toStartOf="@+id/text_title_quantity"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ibPlus" />
+                    app:layout_constraintTop_toTopOf="@+id/button_plus" />
 
                 <ImageButton
-                    android:id="@+id/ibPlus"
+                    android:id="@+id/button_plus"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
@@ -178,20 +177,20 @@
                     android:src="@drawable/ic_plus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/tvTitleQuantity"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitleQuantity" />
+                    app:layout_constraintStart_toEndOf="@+id/text_title_quantity"
+                    app:layout_constraintTop_toBottomOf="@+id/text_title_quantity" />
 
                 <TextView
-                    android:id="@+id/tvValueQuantity"
+                    android:id="@+id/text_value_quantity"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:text="@string/value_default_quantity"
                     android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/ibPlus"
-                    app:layout_constraintEnd_toStartOf="@+id/ibPlus"
-                    app:layout_constraintStart_toEndOf="@+id/ibMinus"
-                    app:layout_constraintTop_toTopOf="@+id/ibMinus" />
+                    app:layout_constraintBottom_toBottomOf="@+id/button_plus"
+                    app:layout_constraintEnd_toStartOf="@+id/button_plus"
+                    app:layout_constraintStart_toEndOf="@+id/button_minus"
+                    app:layout_constraintTop_toTopOf="@+id/button_minus" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

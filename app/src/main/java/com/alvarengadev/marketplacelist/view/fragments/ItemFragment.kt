@@ -64,39 +64,39 @@ class ItemFragment : Fragment(R.layout.fragment_item) {
 
     private fun initComponents() = binding.apply {
         root.setOnClickListener {
-            this.tfNameItem.editText?.clearFocus()
-            this.tfValueItem.editText?.clearFocus()
+            this.inputNameItem.editText?.clearFocus()
+            this.inputValueItem.editText?.clearFocus()
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.hideSoftInputFromWindow(view?.windowToken, 0)
         }
 
-        ibBack.setOnClickListener {
+        buttonBack.setOnClickListener {
             findNavController().popBackStack()
             clearFragment()
         }
 
-        footerAddItem
+        footerItem
             .setCartValue(0.0)
             .setTextButton(getString(R.string.button_text_add))
             .setIconButton(R.drawable.ic_shopping_cart)
 
-        ibMinus.setOnClickListener {
+        buttonMinus.setOnClickListener {
             itemViewModel.minusQuantity()
         }
-        ibPlus.setOnClickListener {
+        buttonPlus.setOnClickListener {
             itemViewModel.plusQuantity()
         }
 
-        tfNameItem.editText?.addTextChangedListener {
-            tfNameItem.dismiss()
+        inputNameItem.editText?.addTextChangedListener {
+            inputNameItem.dismiss()
         }
 
-        tfValueItem.editText?.apply {
+        inputValueItem.editText?.apply {
             hint = if (CurrencyAppUtils.getCurrency(context) == Constants.LOCALE_BRAZIL) HINT_CURRENCY_BRAZIL else HINT_CURRENCY_DOLLAR
-            addTextChangedListener(MoneyTextWatcher(context, tfValueItem.editText))
+            addTextChangedListener(MoneyTextWatcher(context, inputValueItem.editText))
             addTextChangedListener { editableText ->
                 itemViewModel.setValue(editableText.toString())
-                tfValueItem.dismiss()
+                inputValueItem.dismiss()
             }
         }
     }
@@ -105,13 +105,13 @@ class ItemFragment : Fragment(R.layout.fragment_item) {
         with(itemViewModel) {
             registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is ItemViewModel.AddingState.CollectItem) {
-                    footerAddItem.setActionButton {
-                        itemViewModel.addItem(tfNameItem.editText?.text.toString())
+                    footerItem.setActionButton {
+                        itemViewModel.addItem(inputNameItem.editText?.text.toString())
                     }
                 }
                 if (registrationState is ItemViewModel.AddingState.CollectItemInformation) {
-                    footerAddItem.setCartValue(registrationState.total)
-                    tvValueQuantity.text = registrationState.quantity.toString()
+                    footerItem.setCartValue(registrationState.total)
+                    textValueQuantity.text = registrationState.quantity.toString()
                 }
                 if (registrationState is ItemViewModel.AddingState.InvalidAddData) {
                     registrationState.messageError.forEach { fieldError ->
@@ -119,18 +119,18 @@ class ItemFragment : Fragment(R.layout.fragment_item) {
                     }
                 }
                 if (registrationState is ItemViewModel.AddingState.CollectEditItem) {
-                    tvTitleAddItem.text = getString(R.string.fragment_title_edit_item)
+                    textTitleItem.text = getString(R.string.fragment_title_edit_item)
                     with(registrationState) {
-                        tfNameItem.editText?.setText(name)
-                        tfValueItem.editText?.setText(value)
-                        tvValueQuantity.text = quantity
+                        inputNameItem.editText?.setText(name)
+                        inputValueItem.editText?.setText(value)
+                        textValueQuantity.text = quantity
 
-                        footerAddItem.apply {
+                        footerItem.apply {
                             setTextButton(getString(R.string.button_text_edit_finish))
                             setActionButton {
                                 itemViewModel.editItem(
                                     itemId,
-                                    tfNameItem.editText?.text.toString()
+                                    inputNameItem.editText?.text.toString()
                                 )
                             }
                         }
