@@ -3,7 +3,7 @@ package com.alvarengadev.marketplacelist.utils.notification
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
-import com.alvarengadev.marketplacelist.view.activity.MainActivity
+import com.alvarengadev.marketplacelist.MainActivity
 import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.CHANNEL_NOTIFICATION_FIREBASE
 import com.alvarengadev.marketplacelist.utils.constants.Constants.Companion.NOTIFICATION_NAME_FIREBASE

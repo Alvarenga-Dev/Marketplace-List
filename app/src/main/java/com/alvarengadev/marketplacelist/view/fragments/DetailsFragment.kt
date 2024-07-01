@@ -51,8 +51,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             registrationStateEvent.observe(viewLifecycleOwner) { registrationState ->
                 if (registrationState is DetailsViewModel.DetailsState.SuccessGetItem) {
                     btnEditDetails.setOnClickListener {
-                        val directions = DetailsFragmentDirections.actionDetailsFragmentToAddFragment()
-                            .setItemId(registrationState.id)
+                        val directions = DetailsFragmentDirections.actionDetailsFragmentToAddFragment(
+                            registrationState.id
+                        )
 
                         findNavController().navigate(directions)
                     }
