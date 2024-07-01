@@ -99,10 +99,10 @@ class GeneralFragment : Fragment() {
         currency: String,
         adapterListSettings: SettingsOptionsAdapter
     ) {
+        context?.preferences?.save(KEY_CURRENCY, currency)
         val isLocaleBrazil = context?.let { CurrencyAppUtils.getCurrency(it).displayName } == Constants.LOCALE_BRAZIL.displayName
 
-        context?.preferences?.save(KEY_CURRENCY, currency)
-        dialogDefault.dismiss()
         adapterListSettings.updateItem(TypeOptionSettings.GENERAL_CURRENCY, if (isLocaleBrazil) getString(R.string.item_general_option_description_real) else getString(R.string.item_general_option_description_dollar))
+        dialogDefault.dismiss()
     }
 }
