@@ -1,9 +1,8 @@
-package com.alvarengadev.marketplacelist.view.activity
+package com.alvarengadev.marketplacelist
 
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alvarengadev.marketplacelist.R
 import com.alvarengadev.marketplacelist.databinding.ActivityMainBinding
 import com.alvarengadev.marketplacelist.utils.ThemeHelper
 import com.alvarengadev.marketplacelist.utils.constants.Constants

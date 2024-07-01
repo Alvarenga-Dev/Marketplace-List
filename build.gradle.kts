@@ -1,24 +1,20 @@
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 buildscript {
     repositories {
         google()
-        mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.4.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.40.1")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
-        classpath("com.google.gms:google-services:4.3.15")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.5")
-        classpath("de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1")
+        val nav_version = "2.7.7"
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
     }
+}
+
+plugins {
+    id("com.android.application") version "8.1.2" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.21" apply false
+    id("com.google.devtools.ksp") version "1.9.21-1.0.15" apply false
+    id("com.google.dagger.hilt.android") version "2.51" apply false
+    id("com.google.gms.google-services") version "4.4.0" apply false
+    id("com.google.firebase.crashlytics") version "2.9.9" apply false
 }
 
 tasks.register("clean", Delete::class) {

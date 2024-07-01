@@ -9,7 +9,7 @@
         android:id="@+id/cartFragment"
         android:name="com.alvarengadev.marketplacelist.view.fragments.CartFragment"
         android:label="@string/fragment_title_cart"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_addFragment"
             app:destination="@id/addFragment" />
@@ -24,23 +24,23 @@
         android:id="@+id/addFragment"
         android:name="com.alvarengadev.marketplacelist.view.fragments.ItemFragment"
         android:label="@string/fragment_title_add_item"
-        tools:layout="@layout/fragment_item" >
+        tools:layout="@layout/fragment_item">
         <argument
-            android:name="ItemId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:name="itemId"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.alvarengadev.marketplacelist.view.fragments.DetailsFragment"
         android:label="@string/fragment_title_details"
         tools:layout="@layout/fragment_details">
-        <argument
-            android:name="ItemId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_detailsFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
     </fragment>
     <include app:graph="@navigation/settings_graph" />
 </navigation>
