@@ -17,8 +17,8 @@ android {
 
         minSdk = 24
         targetSdk = 34
-        versionCode = 18
-        versionName = "1.3.3b"
+        versionCode = 19
+        versionName = "1.3.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
